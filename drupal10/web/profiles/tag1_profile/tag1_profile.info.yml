@@ -1,0 +1,12 @@
+name: 'Tag1 profile'
+type: profile
+description: 'Custom installation profile for Drupal 7 to Drupal 10 migration'
+core_version_requirement: ^10
+install:
+  - node
+  - block
+  - dblog
+  - page_cache
+  - dynamic_page_cache
+themes:
+  - stark

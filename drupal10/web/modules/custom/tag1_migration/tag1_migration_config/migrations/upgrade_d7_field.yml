@@ -1,0 +1,81 @@
+id: upgrade_d7_field
+class: Drupal\migrate_drupal\Plugin\migrate\FieldMigration
+field_plugin_method: alterFieldMigration
+migration_tags:
+  - 'Drupal 7'
+  - Configuration
+  - field_storage_config
+  - tag1_configuration
+label: 'Field configuration'
+source:
+  key: migrate
+  plugin: d7_field
+  constants:
+    status: true
+    langcode: und
+process:
+  # @modified by tag1_migration_node_to_user_speaker_fields setting.
+  # @see tag1_migration_config_migrate_prepare_row
+  entity_type:
+    -
+      plugin: get
+      source: entity_type
+    -
+      plugin: static_map
+      map:
+        field_collection_item: paragraph
+        paragraphs_item: paragraph
+      bypass: true
+  status:
+    -
+      plugin: get
+      source: constants/status
+  langcode:
+    -
+      plugin: get
+      source: constants/langcode
+  field_name:
+    -
+      plugin: get
+      source: field_name
+  type:
+    -
+      plugin: process_field
+      source: type
+      method: getFieldType
+      map:
+        d7_text:
+          d7_text: d7_text
+        taxonomy_term_reference:
+          taxonomy_term_reference: taxonomy_term_reference
+        image:
+          image: image
+        email:
+          email: email
+        field_url:
+          field_url: field_url
+        addressfield:
+          addressfield: addressfield
+        telephone:
+          telephone: telephone
+        entityreference:
+          entityreference: entityreference
+        file:
+          file: file
+        list:
+          list: list
+  cardinality:
+    -
+      plugin: get
+      source: cardinality
+  settings:
+    0:
+      plugin: d7_field_settings
+    field_collection:
+      plugin: field_collection_field_settings
+destination:
+  plugin: 'entity:field_storage_config'
+migration_dependencies:
+  required: {  }
+  optional:
+    - upgrade_d7_field_collection_type

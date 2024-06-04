@@ -1,0 +1,92 @@
+id: upgrade_d7_user
+class: Drupal\user\Plugin\migrate\User
+migration_tags:
+  - 'Drupal 7'
+  - Content
+  - user
+  - tag1_content
+label: 'User accounts'
+source:
+  key: migrate
+  plugin: d7_user
+process:
+  uid:
+    -
+      plugin: get
+      source: uid
+  name:
+    -
+      plugin: get
+      source: name
+  pass:
+    -
+      plugin: get
+      source: pass
+  mail:
+    -
+      plugin: get
+      source: mail
+  created:
+    -
+      plugin: get
+      source: created
+  access:
+    -
+      plugin: get
+      source: access
+  login:
+    -
+      plugin: get
+      source: login
+  # modified
+  status:
+    -
+      plugin: skip_on_empty
+      source: status
+      method: row
+      message: 'Blocked user not migrated.'
+  timezone:
+    -
+      plugin: get
+      source: timezone
+  langcode:
+    -
+      plugin: user_langcode
+      source: entity_language
+      fallback_to_site_default: false
+  preferred_langcode:
+    -
+      plugin: user_langcode
+      source: language
+      fallback_to_site_default: true
+  preferred_admin_langcode:
+    -
+      plugin: user_langcode
+      source: language
+      fallback_to_site_default: true
+  init:
+    -
+      plugin: get
+      source: init
+  # @modified
+  roles:
+    -
+      plugin: static_map
+      source: roles
+      map:
+        3: administrator
+        4: editor
+      default_value: authenticated
+    -
+      plugin: single_value
+    -
+      plugin: callback
+      callable: array_unique
+  # @deleted user_picture
+
+destination:
+  plugin: 'entity:user'
+
+migration_dependencies:
+  required: {  }
+  optional: {  }

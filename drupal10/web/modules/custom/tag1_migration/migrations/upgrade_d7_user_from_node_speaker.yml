@@ -1,0 +1,107 @@
+id: upgrade_d7_user_from_node_speaker
+class: Drupal\migrate\Plugin\Migration
+migration_tags:
+  - 'Drupal 7'
+  - Content
+  - user
+  - tag1_content
+label: 'Nodes (Speaker)'
+source:
+  key: migrate
+  plugin: tag1_d7_node
+  node_type: speaker
+process:
+  name:
+    -
+      plugin: get
+      source: title
+  mail:
+    -
+      plugin: get
+      source: field_email/0/email
+  created:
+    - plugin: get
+      source: created
+  status:
+    -
+      plugin: default_value
+      default_value: 1
+  init: '@mail'
+  roles:
+    - plugin: default_value
+      default_value: [speaker]
+
+  # Text (plain, long)
+  field_biography:
+    -
+      plugin: get
+      source: field_biography
+
+  # Link
+  field_website:
+    -
+      plugin: sub_process
+      source: field_website
+      process:
+        uri: value
+        title: title
+
+  # Social Links
+  field_social_media_links:
+    plugin: tag1_social_links
+    source:
+      - field_drupal_org_profile
+      - field_linkedin_profile
+      - field_x_twitter_profile
+
+  # Image
+  field_profile_picture:
+    -
+      plugin: sub_process
+      source: field_profile_picture
+      process:
+        target_id: fid
+        alt: alt
+        title: title
+        width: width
+        height: height
+
+  # Entity reference revisions (paragraph:favorite_quote)
+  field_favorite_quote:
+    -
+      plugin: sub_process
+      source: field_favorite_quote
+      process:
+        target_id:
+          -
+            plugin: paragraphs_lookup
+            tags: 'Field Collection Content'
+            source: value
+          -
+            plugin: extract
+            index:
+              - id
+        target_revision_id:
+          -
+            plugin: paragraphs_lookup
+            tags:
+              - 'Field Collection Revisions Content'
+              - 'Field Collection Content'
+            tag_ids:
+              'Field Collection Revisions Content':
+                - revision_id
+              'Field Collection Content':
+                - value
+          -
+            plugin: extract
+            index:
+              - revision_id
+
+destination:
+  plugin: 'entity:user'
+
+migration_dependencies:
+  required:
+    - upgrade_d7_user
+    - upgrade_d7_field_collection_favorite_quote
+  optional: {  }

@@ -1,0 +1,32 @@
+uuid: f3e32fa6-2378-475a-8b4d-373b3bd4b2db
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.field.paragraph.favorite_quote.field_quote_message
+    - field.field.paragraph.favorite_quote.field_quote_name
+    - paragraphs.paragraphs_type.favorite_quote
+id: paragraph.favorite_quote.default
+targetEntityType: paragraph
+bundle: favorite_quote
+mode: default
+content:
+  field_quote_message:
+    type: string_textarea
+    weight: 2
+    region: content
+    settings:
+      rows: 5
+      placeholder: ''
+    third_party_settings: {  }
+  field_quote_name:
+    type: string_textfield
+    weight: 1
+    region: content
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+hidden:
+  created: true
+  status: true

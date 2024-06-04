@@ -1,0 +1,9 @@
+uuid: 3b2d8bf0-8d35-4fe2-bce0-df89cdc1a9c6
+langcode: en
+status: true
+dependencies: {  }
+name: 'Session topics'
+vid: session_topics
+description: null
+weight: 0
+new_revision: false

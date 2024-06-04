@@ -1,0 +1,52 @@
+id: upgrade_d7_taxonomy_term_from_node_sponsor
+class: Drupal\migrate\Plugin\Migration
+migration_tags:
+  - 'Drupal 7'
+  - Content
+  - taxonomy_term
+  - tag1_content
+label: 'Nodes (Sponsor)'
+source:
+  key: migrate
+  plugin: tag1_d7_node
+  node_type: sponsor
+process:
+  name:
+    -
+      plugin: get
+      source: title
+  description:
+    -
+      plugin: get
+      source: field_description
+  changed:
+    -
+      plugin: get
+      source: changed
+  langcode:
+    -
+      plugin: default_value
+      source: language
+      default_value: und
+
+  # Image
+  field_logo:
+    -
+      plugin: sub_process
+      source: field_logo
+      process:
+        target_id: fid
+        alt: alt
+        title: title
+        width: width
+        height: height
+
+destination:
+  plugin: 'entity:taxonomy_term'
+  default_bundle: sponsor
+
+migration_dependencies:
+  required:
+    - upgrade_d7_user
+    - upgrade_d7_taxonomy_term
+  optional: {  }

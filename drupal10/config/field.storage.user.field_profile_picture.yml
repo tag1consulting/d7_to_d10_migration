@@ -1,0 +1,26 @@
+uuid: b3fda753-eb19-46d3-b7f9-277423200b53
+langcode: und
+status: true
+dependencies:
+  module:
+    - file
+    - image
+    - user
+id: user.field_profile_picture
+field_name: field_profile_picture
+entity_type: user
+type: image
+settings:
+  target_type: file
+  display_field: false
+  display_default: false
+  uri_scheme: public
+  default_image:
+    uuid: ''
+module: image
+locked: false
+cardinality: 1
+translatable: true
+indexes: {  }
+persist_with_no_fields: false
+custom_storage: false

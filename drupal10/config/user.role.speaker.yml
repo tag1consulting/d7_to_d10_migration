@@ -1,0 +1,9 @@
+uuid: 858df559-7052-483d-a106-53c8d0268fc3
+langcode: en
+status: true
+dependencies: {  }
+id: speaker
+label: Speaker
+weight: 4
+is_admin: null
+permissions: {  }

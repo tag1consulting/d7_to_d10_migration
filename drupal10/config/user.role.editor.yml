@@ -1,0 +1,46 @@
+uuid: d46ec4a3-5b91-4c30-8341-fdb21854a124
+langcode: en
+status: true
+dependencies:
+  config:
+    - node.type.article
+    - node.type.event
+    - node.type.page
+    - node.type.session
+    - node.type.venue
+  module:
+    - node
+    - path
+id: editor
+label: Editor
+weight: 3
+is_admin: null
+permissions:
+  - 'access content overview'
+  - 'create article content'
+  - 'create event content'
+  - 'create page content'
+  - 'create session content'
+  - 'create url aliases'
+  - 'create venue content'
+  - 'delete any article content'
+  - 'delete any event content'
+  - 'delete any page content'
+  - 'delete any session content'
+  - 'delete any venue content'
+  - 'delete own article content'
+  - 'delete own event content'
+  - 'delete own page content'
+  - 'delete own session content'
+  - 'delete own venue content'
+  - 'edit any article content'
+  - 'edit any event content'
+  - 'edit any page content'
+  - 'edit any session content'
+  - 'edit any venue content'
+  - 'edit own article content'
+  - 'edit own event content'
+  - 'edit own page content'
+  - 'edit own session content'
+  - 'edit own venue content'
+  - 'view own unpublished content'

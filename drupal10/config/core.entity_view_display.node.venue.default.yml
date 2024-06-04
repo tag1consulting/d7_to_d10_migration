@@ -1,0 +1,59 @@
+uuid: cd164f2d-8958-46c2-998e-ac8b28572cae
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.field.node.venue.field_additional_information
+    - field.field.node.venue.field_address
+    - field.field.node.venue.field_image
+    - field.field.node.venue.field_phone
+    - node.type.venue
+  module:
+    - address
+    - image
+    - text
+    - user
+id: node.venue.default
+targetEntityType: node
+bundle: venue
+mode: default
+content:
+  field_additional_information:
+    type: text_default
+    label: above
+    settings: {  }
+    third_party_settings: {  }
+    weight: 4
+    region: content
+  field_address:
+    type: address_default
+    label: above
+    settings: {  }
+    third_party_settings: {  }
+    weight: 1
+    region: content
+  field_image:
+    type: image
+    label: above
+    settings:
+      image_link: ''
+      image_style: ''
+      image_loading:
+        attribute: lazy
+    third_party_settings: {  }
+    weight: 2
+    region: content
+  field_phone:
+    type: string
+    label: above
+    settings:
+      link_to_entity: false
+    third_party_settings: {  }
+    weight: 3
+    region: content
+  links:
+    settings: {  }
+    third_party_settings: {  }
+    weight: 100
+    region: content
+hidden: {  }

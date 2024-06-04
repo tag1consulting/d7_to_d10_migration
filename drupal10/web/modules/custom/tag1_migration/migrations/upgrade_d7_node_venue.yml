@@ -1,0 +1,108 @@
+id: upgrade_d7_node_venue
+class: Drupal\migrate\Plugin\Migration
+migration_tags:
+  - 'Drupal 7'
+  - Content
+  - node
+  - tag1_content
+label: 'Nodes (Venue)'
+
+source:
+  key: migrate
+  plugin: tag1_d7_node
+  node_type: venue
+
+process:
+  nid:
+    -
+      plugin: get
+      source: tnid
+  vid:
+    -
+      plugin: get
+      source: vid
+  langcode:
+    -
+      plugin: default_value
+      source: language
+      default_value: und
+  title:
+    -
+      plugin: get
+      source: title
+  uid:
+    -
+      plugin: get
+      source: node_uid
+  status:
+    -
+      plugin: get
+      source: status
+  created:
+    -
+      plugin: get
+      source: created
+  changed:
+    -
+      plugin: get
+      source: changed
+  promote:
+    -
+      plugin: get
+      source: promote
+  sticky:
+    -
+      plugin: get
+      source: sticky
+  revision_uid:
+    -
+      plugin: get
+      source: revision_uid
+  revision_log:
+    -
+      plugin: get
+      source: log
+  revision_timestamp:
+    -
+      plugin: get
+      source: timestamp
+  # @removed comment_node_venue
+
+  # Text (formatted, long)
+  field_additional_information:
+    -
+      plugin: get
+      source: field_additional_information
+
+  # Address
+  field_address:
+    -
+      plugin: addressfield
+      source: field_address
+
+  # Image
+  field_image:
+    -
+      plugin: sub_process
+      source: field_image
+      process:
+        target_id: fid
+        alt: alt
+        title: title
+        width: width
+        height: height
+
+  # Telephone number
+  field_phone:
+    -
+      plugin: get
+      source: field_phone
+
+destination:
+  plugin: 'entity:node'
+  default_bundle: venue
+
+migration_dependencies:
+  required:
+    - upgrade_d7_user
+  optional: {  }

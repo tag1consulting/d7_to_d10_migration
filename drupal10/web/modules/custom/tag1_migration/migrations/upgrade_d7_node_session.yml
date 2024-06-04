@@ -1,0 +1,124 @@
+id: upgrade_d7_node_session
+class: Drupal\migrate\Plugin\Migration
+migration_tags:
+  - 'Drupal 7'
+  - Content
+  - node
+  - tag1_content
+label: 'Nodes (Session)'
+
+source:
+  key: migrate
+  plugin: tag1_d7_node
+  node_type: session
+
+process:
+  nid:
+    -
+      plugin: get
+      source: tnid
+  vid:
+    -
+      plugin: get
+      source: vid
+  langcode:
+    -
+      plugin: default_value
+      source: language
+      default_value: und
+  title:
+    -
+      plugin: get
+      source: title
+  uid:
+    -
+      plugin: get
+      source: node_uid
+  status:
+    -
+      plugin: get
+      source: status
+  created:
+    -
+      plugin: get
+      source: created
+  changed:
+    -
+      plugin: get
+      source: changed
+  promote:
+    -
+      plugin: get
+      source: promote
+  sticky:
+    -
+      plugin: get
+      source: sticky
+  revision_uid:
+    -
+      plugin: get
+      source: revision_uid
+  revision_log:
+    -
+      plugin: get
+      source: log
+  revision_timestamp:
+    -
+      plugin: get
+      source: timestamp
+  # @deleted comment_node_session
+
+  # Entity reference (user)
+  field_speakers:
+    -
+      plugin: sub_process
+      source: field_speakers
+      process:
+        target_id:
+          -
+            plugin: migration_lookup
+            source: target_id
+            migration: upgrade_d7_user_from_node_speaker
+            no_stub: true
+
+  # Text (formatted, long)
+  field_description:
+    -
+      plugin: get
+      source: field_description
+
+  # @todo
+#  field_video_recording:
+#    -
+#      plugin: get
+#      source: field_video_recording
+
+  # @todo
+  # File
+  field_slides:
+    -
+      plugin: sub_process
+      source: field_slides
+      process:
+        target_id: fid
+        display: display
+        description: description
+
+  # Entity reference (taxonomy_term:session_topics)
+  field_topics:
+    -
+      plugin: sub_process
+      source: field_topics
+      process:
+        target_id: tid
+
+destination:
+  plugin: 'entity:node'
+  default_bundle: session
+
+migration_dependencies:
+  required:
+    - upgrade_d7_user
+    - upgrade_d7_user_from_node_speaker
+    - upgrade_d7_taxonomy_term
+  optional: {  }

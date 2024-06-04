@@ -1,0 +1,5 @@
+name: 'Tag1 Debug'
+type: module
+description: 'Debug'
+package: Tag1
+core_version_requirement: ^10 || ^11

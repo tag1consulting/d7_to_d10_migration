@@ -1,0 +1,131 @@
+id: upgrade_d7_field_instance
+class: Drupal\migrate_drupal\Plugin\migrate\FieldMigration
+field_plugin_method: alterFieldInstanceMigration
+migration_tags:
+  - 'Drupal 7'
+  - Configuration
+  - field_config
+  - tag1_configuration
+label: 'Field instance configuration'
+source:
+  key: migrate
+  plugin: d7_field_instance
+  constants:
+    status: true
+    comment_node: comment_node_
+process:
+  type:
+    -
+      plugin: process_field
+      source: type
+      method: getFieldType
+  # @modified by tag1_migration_node_to_user_speaker_fields setting.
+  # @see tag1_migration_config_migrate_prepare_row
+  entity_type:
+    -
+      plugin: get
+      source: entity_type
+    -
+      plugin: static_map
+      map:
+        field_collection_item: paragraph
+        paragraphs_item: paragraph
+      bypass: true
+  field_name:
+    -
+      plugin: get
+      source: field_name
+  bundle_mapped:
+    -
+      plugin: static_map
+      source: bundle
+      bypass: true
+      map:
+        comment_node_forum: comment_forum
+    -
+      plugin: paragraphs_process_on_value
+      source_value: entity_type
+      expected_value: field_collection_item
+      process:
+        plugin: paragraphs_strip_field_prefix
+  _comment_type:
+    -
+      plugin: explode
+      source: bundle
+      delimiter: comment_node_
+    -
+      plugin: extract
+      index:
+        - 1
+      default: false
+    -
+      plugin: skip_on_empty
+      method: process
+    -
+      plugin: migration_lookup
+      migration: {  }
+  # @modified by tag1_migration_node_to_user_speaker_fields setting.
+  # @see tag1_migration_config_migrate_prepare_row
+  bundle:
+    -
+      plugin: field_bundle
+      source:
+        - entity_type
+        - '@bundle_mapped'
+  label:
+    -
+      plugin: get
+      source: label
+  description:
+    -
+      plugin: get
+      source: description
+  required:
+    -
+      plugin: get
+      source: required
+  status:
+    -
+      plugin: get
+      source: constants/status
+  allowed_values:
+    -
+      plugin: sub_process
+      source: allowed_vid
+      process:
+        -
+          plugin: migration_lookup
+          migration: upgrade_d7_taxonomy_vocabulary
+          source: vid
+  settings:
+    0:
+      plugin: d7_field_instance_settings
+      source:
+        - settings
+        - widget
+        - field_definition
+    field_collection:
+      plugin: field_collection_field_instance_settings
+  default_value_function:
+    -
+      plugin: get
+      source: ''
+  default_value:
+    -
+      plugin: d7_field_instance_defaults
+      source:
+        - default_value
+        - widget
+  translatable:
+    -
+      plugin: get
+      source: translatable
+destination:
+  plugin: 'entity:field_config'
+migration_dependencies:
+  required:
+    - upgrade_d7_field
+  optional:
+    - upgrade_d7_node_type
+    - upgrade_d7_taxonomy_vocabulary
+    - upgrade_d7_field_collection_type

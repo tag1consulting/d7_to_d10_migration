@@ -1,0 +1,42 @@
+<?php
+
+/**
+ * @file
+ * Primary module hooks for Tag1 Debug module.
+ */
+
+use Drupal\Core\Database\Query\AlterableInterface;
+
+/**
+ * Implements hook_query_TAG_alter().
+ */
+function tag1_debug_query_migrate_alter(AlterableInterface $query) {
+  /** @var \Drupal\migrate\Plugin\MigrationInterface $migration */
+  $migration = $query->getMetaData('migration');
+
+  if (!in_array('Drupal 7', $migration->getMigrationTags())) {
+    return FALSE;
+  }
+
+  return;
+
+  $add_range = FALSE;
+  if ($add_range && isset($migration->getSourceConfiguration()["high_water_property"])) {
+    $query->range(0, 5);
+  }
+
+  $expand_arguments = TRUE;
+  if ($expand_arguments) {
+    $placeholders = array_keys($query->getArguments());
+    $argument_values = array_map(function ($arg) { return "'$arg'"; }, array_values($query->getArguments()));
+
+    $q = \str_replace($placeholders, $argument_values, (string) $query);
+    $q = \str_replace(['{', '}', '"', '[', ']'], '', $q);
+    var_dump('!!!!! ' . $migration->getPluginId());
+    var_dump($q);
+  }
+  else {
+    var_dump('!!!!! ' . $migration->getPluginId());
+    var_dump((string) $query);
+  }
+}

@@ -1,0 +1,130 @@
+id: upgrade_d7_node_event
+class: Drupal\migrate\Plugin\Migration
+migration_tags:
+  - 'Drupal 7'
+  - Content
+  - node
+  - tag1_content
+label: 'Nodes (Event)'
+
+source:
+  key: migrate
+  plugin: tag1_d7_node
+  node_type: event
+
+process:
+  nid:
+    -
+      plugin: get
+      source: tnid
+  vid:
+    -
+      plugin: get
+      source: vid
+  langcode:
+    -
+      plugin: default_value
+      source: language
+      default_value: und
+  title:
+    -
+      plugin: get
+      source: title
+  uid:
+    -
+      plugin: get
+      source: node_uid
+  status:
+    -
+      plugin: get
+      source: status
+  created:
+    -
+      plugin: get
+      source: created
+  changed:
+    -
+      plugin: get
+      source: changed
+  promote:
+    -
+      plugin: get
+      source: promote
+  sticky:
+    -
+      plugin: get
+      source: sticky
+  revision_uid:
+    -
+      plugin: get
+      source: revision_uid
+  revision_log:
+    -
+      plugin: get
+      source: log
+  revision_timestamp:
+    -
+      plugin: get
+      source: timestamp
+  # @deleted comment_node_event
+
+  # Date
+  field_date:
+    -
+      plugin: sub_process
+      source: field_date
+      process:
+        value:
+          plugin: format_date
+          from_format: 'Y-m-d H:i:s'
+          to_format: 'Y-m-d'
+          source: value
+
+  # Text (formatted, long)
+  field_description:
+    -
+      plugin: get
+      source: field_description
+
+  # Entity reference (node:session)
+  field_sessions:
+    -
+      plugin: get
+      source: field_sessions
+
+  # Entity reference (node:venue)
+  field_venue:
+    -
+      plugin: get
+      source: field_venue
+
+  # List (text)
+  field_type:
+    -
+      plugin: get
+      source: field_type
+
+  # Entity reference (taxonomy_term:sponsor)
+  field_sponsors:
+    -
+      plugin: sub_process
+      source: field_sponsors
+      process:
+        target_id:
+          -
+            plugin: migration_lookup
+            source: target_id
+            migration: upgrade_d7_taxonomy_term_from_node_sponsor
+            no_stub: true
+
+destination:
+  plugin: 'entity:node'
+  default_bundle: event
+
+migration_dependencies:
+  required:
+    - upgrade_d7_user
+    - upgrade_d7_node_session
+    - upgrade_d7_node_venue
+    - upgrade_d7_taxonomy_term_from_node_sponsor
+  optional: {  }
