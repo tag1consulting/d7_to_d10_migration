@@ -1,0 +1,18 @@
+uuid: 752a0303-f852-497e-bc12-2a984f99eddc
+langcode: en
+status: true
+dependencies:
+  config:
+    - node.type.venue
+id: node.venue.title
+field_name: title
+entity_type: node
+bundle: venue
+label: Name
+description: ''
+required: false
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: string
