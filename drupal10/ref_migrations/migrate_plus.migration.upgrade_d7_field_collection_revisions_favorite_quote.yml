@@ -1,0 +1,60 @@
+uuid: d21613e5-e814-4728-88a5-16c6bd8d4cf1
+langcode: en
+status: true
+dependencies: {  }
+id: upgrade_d7_field_collection_revisions_favorite_quote
+class: Drupal\migrate\Plugin\Migration
+field_plugin_method: null
+cck_plugin_method: null
+migration_tags:
+  - 'Drupal 7'
+  - Content
+  - 'Field Collection Revisions Content'
+migration_group: migrate_drupal_7
+label: 'Field Collection Revisions (Favorite quote)'
+source:
+  plugin: d7_field_collection_item_revision
+  field_name: field_favorite_quote
+process:
+  id:
+    -
+      plugin: paragraphs_lookup
+      tags:
+        - 'Field Collection Content'
+      source: item_id
+    -
+      plugin: extract
+      index:
+        - id
+  type:
+    -
+      plugin: get
+      source: bundle
+  parent_id:
+    -
+      plugin: get
+      source: parent_id
+  parent_type:
+    -
+      plugin: get
+      source: parent_type
+  parent_field_name:
+    -
+      plugin: get
+      source: field_name
+  field_quote_name:
+    -
+      plugin: get
+      source: field_quote_name
+  field_quote_message:
+    -
+      plugin: get
+      source: field_quote_message
+destination:
+  plugin: 'entity_reference_revisions:paragraph'
+  new_revisions: true
+  default_bundle: favorite_quote
+migration_dependencies:
+  required:
+    - upgrade_d7_field_collection_favorite_quote
+  optional: {  }
