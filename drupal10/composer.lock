@@ -1946,26 +1946,26 @@
         },
         {
             "name": "drupal/migrate_skip_fields",
-            "version": "1.0.0-alpha4",
+            "version": "1.0.0-alpha5",
             "source": {
                 "type": "git",
                 "url": "https://git.drupalcode.org/project/migrate_skip_fields.git",
-                "reference": "1.0.0-alpha4"
+                "reference": "1.0.0-alpha5"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://ftp.drupal.org/files/projects/migrate_skip_fields-1.0.0-alpha4.zip",
-                "reference": "1.0.0-alpha4",
-                "shasum": "5ea6402b55a3cde6f5ae2f06666adbfc257d1528"
+                "url": "https://ftp.drupal.org/files/projects/migrate_skip_fields-1.0.0-alpha5.zip",
+                "reference": "1.0.0-alpha5",
+                "shasum": "42355a7fe5255581c96c480c86bb8a9f9f6501ff"
             },
             "require": {
-                "drupal/core": "^9 || ^10"
+                "drupal/core": "^9 || ^10 || ^11"
             },
             "type": "drupal-module",
             "extra": {
                 "drupal": {
-                    "version": "1.0.0-alpha4",
-                    "datestamp": "1717493591",
+                    "version": "1.0.0-alpha5",
+                    "datestamp": "1724197580",
                     "security-coverage": {
                         "status": "not-covered",
                         "message": "Project has not opted into security advisory coverage!"
