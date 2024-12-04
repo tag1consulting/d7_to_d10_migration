@@ -1,19 +1,17 @@
-uuid: cae873b1-70c6-4843-901d-9e2f0077e73a
-langcode: en
-status: true
-dependencies: {  }
-id: upgrade_d7_taxonomy_term_session_topics
+id: upgrade_d7_taxonomy_term
 class: Drupal\migrate\Plugin\Migration
-field_plugin_method: null
-cck_plugin_method: null
 migration_tags:
   - 'Drupal 7'
   - Content
-migration_group: migrate_drupal_7
-label: 'Taxonomy terms (Session topics)'
+  - taxonomy_term
+  - tag1_content
+label: 'Taxonomy terms'
 source:
+  key: migrate
   plugin: d7_taxonomy_term
-  bundle: session_topics
+  high_water_property:
+    name: tid
+    alias: td
 process:
   tid:
     -
@@ -25,9 +23,11 @@ process:
       source: tid
   vid:
     -
-      plugin: migration_lookup
-      migration: upgrade_d7_taxonomy_vocabulary
+      plugin: static_map
       source: vid
+      map:
+        1: tags
+        2: session_topics
   name:
     -
       plugin: get
@@ -52,8 +52,7 @@ process:
     -
       plugin: migration_lookup
       migration:
-        - upgrade_d7_taxonomy_term_tags
-        - upgrade_d7_taxonomy_term_session_topics
+        - upgrade_d7_taxonomy_term
   parent:
     -
       plugin: default_value
@@ -69,10 +68,6 @@ process:
       source: language
 destination:
   plugin: 'entity:taxonomy_term'
-  default_bundle: session_topics
 migration_dependencies:
-  required:
-    - upgrade_d7_taxonomy_vocabulary
-  optional:
-    - upgrade_d7_field_instance
-    - upgrade_d7_taxonomy_vocabulary
+  required: { }
+  optional: { }
