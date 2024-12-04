@@ -1,0 +1,31 @@
+uuid: 9e496266-2363-4367-8a8c-2ae11a05919d
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.user.field_favorite_quote
+    - paragraphs.paragraphs_type.favorite_quote
+  module:
+    - entity_reference_revisions
+    - user
+id: user.user.field_favorite_quote
+field_name: field_favorite_quote
+entity_type: user
+bundle: user
+label: 'Favorite quote'
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:paragraph'
+  handler_settings:
+    target_bundles:
+      favorite_quote: favorite_quote
+    negate: 0
+    target_bundles_drag_drop:
+      favorite_quote:
+        weight: 2
+        enabled: true
+field_type: entity_reference_revisions
