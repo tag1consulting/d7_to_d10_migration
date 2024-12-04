@@ -28,6 +28,7 @@ $settings['migrate_skip_fields_by_type'] = [
 
 $settings['auto_increment_alter_content_entities'] = [
   'file' => [350], // Alter the tables for the file content entity.
+  'user' => [350], // Alter the tables for the user content entity.
 ];
 
 $settings['auto_increment_alter_tables'] = [];
