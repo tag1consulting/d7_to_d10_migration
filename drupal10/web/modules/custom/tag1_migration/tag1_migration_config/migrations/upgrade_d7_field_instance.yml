@@ -1,17 +1,14 @@
-uuid: 4e8c4b5e-989b-4830-a9d6-ed35292d2291
-langcode: en
-status: true
-dependencies: {  }
 id: upgrade_d7_field_instance
 class: Drupal\migrate_drupal\Plugin\migrate\FieldMigration
 field_plugin_method: alterFieldInstanceMigration
-cck_plugin_method: null
 migration_tags:
   - 'Drupal 7'
   - Configuration
-migration_group: migrate_drupal_7
+  - field_config
+  - tag1_configuration
 label: 'Field instance configuration'
 source:
+  key: migrate
   plugin: d7_field_instance
   constants:
     status: true
@@ -124,7 +121,7 @@ destination:
 migration_dependencies:
   required:
     - upgrade_d7_field
-  optional:
+    - upgrade_d7_field_collection_type
     - upgrade_d7_node_type
     - upgrade_d7_taxonomy_vocabulary
-    - upgrade_d7_field_collection_type
+  optional: {  }
