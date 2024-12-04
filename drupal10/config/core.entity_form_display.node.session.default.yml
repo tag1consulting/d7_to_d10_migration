@@ -49,7 +49,7 @@ content:
       placeholder: ''
     third_party_settings: {  }
   field_topics:
-    type: entity_reference_autocomplete
+    type: entity_reference_autocomplete_tags
     weight: 4
     region: content
     settings:
