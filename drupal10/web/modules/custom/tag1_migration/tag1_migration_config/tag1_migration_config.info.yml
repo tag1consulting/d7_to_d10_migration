@@ -1,0 +1,9 @@
+name: Tag1 Configuration Migration Example
+type: module
+description: Drupal 7 to Drupal 10 configuration migration example
+package: Tag1
+core_version_requirement: ^10 || ^11
+dependencies:
+  - drupal:migrate
+  - drupal:migrate_drupal
+  - migrate_plus:migrate_plus
