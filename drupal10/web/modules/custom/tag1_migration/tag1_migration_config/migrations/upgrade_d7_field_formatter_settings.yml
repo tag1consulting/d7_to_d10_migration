@@ -1,21 +1,19 @@
-uuid: 96e322a2-20b4-473f-953b-902f5a6d3503
-langcode: en
-status: true
-dependencies: {  }
 id: upgrade_d7_field_formatter_settings
 class: Drupal\migrate_drupal\Plugin\migrate\FieldMigration
 field_plugin_method: alterFieldFormatterMigration
-cck_plugin_method: null
 migration_tags:
   - 'Drupal 7'
   - Configuration
-migration_group: migrate_drupal_7
+  - component_entity_display
+  - tag1_configuration
 label: 'Field formatter configuration'
 source:
+  key: migrate
   plugin: d7_field_instance_per_view_mode
   constants:
     third_party_settings: {  }
 process:
+  # @modified
   field_type_exists:
     -
       plugin: migration_lookup
@@ -30,6 +28,7 @@ process:
     -
       plugin: skip_on_empty
       method: row
+      message: "Field storage configuration does not exist."
   entity_type:
     -
       plugin: get
@@ -172,10 +171,10 @@ destination:
   plugin: component_entity_display
 migration_dependencies:
   required:
-    - upgrade_d7_field_instance
-    - upgrade_d7_view_modes
-  optional:
-    - upgrade_d7_field_collection_type
     - upgrade_d7_field
+    - upgrade_d7_field_collection_type
     - upgrade_d7_field_instance
+    - upgrade_d7_node_type
+    - upgrade_d7_taxonomy_vocabulary
     - upgrade_d7_view_modes
+  optional: { }
