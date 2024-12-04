@@ -4,12 +4,13 @@ status: true
 dependencies:
   module:
     - node
+    - user
 id: node.field_speakers
 field_name: field_speakers
 entity_type: node
 type: entity_reference
 settings:
-  target_type: node
+  target_type: user
 module: core
 locked: false
 cardinality: -1

@@ -16,14 +16,14 @@ translatable: false
 default_value: {  }
 default_value_callback: ''
 settings:
-  handler: 'default:node'
+  handler: 'default:user'
   handler_settings:
-    target_bundles:
-      speaker: speaker
+    target_bundles: null
     sort:
-      field: title
+      field: name
       direction: ASC
-    behaviors:
-      views-select-list:
-        status: 0
+    auto_create: false
+    filter:
+      type: _none
+    include_anonymous: true
 field_type: entity_reference
