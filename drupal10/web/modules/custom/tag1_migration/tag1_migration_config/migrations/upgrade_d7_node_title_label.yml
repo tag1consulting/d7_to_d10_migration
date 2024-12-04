@@ -41,6 +41,10 @@ process:
     -
       plugin: get
       source: constants/field_name
+  required:
+    -
+      plugin: default_value
+      default_value: TRUE
 destination:
   plugin: 'entity:base_field_override'
 migration_dependencies:
