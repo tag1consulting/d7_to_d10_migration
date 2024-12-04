@@ -1,0 +1,47 @@
+<?php
+
+/**
+ * Alter AUTO_INCREMENT value for base and revision tables of content entities.
+ *
+ * This helps prevent entity ID conflicts during D7 to D10 migrations.
+ */
+function tag1_migration_table_auto_increment_alter() {
+  // Associative array whose keys represent the table name and values indicate
+  // the new auto-increment value for the table to alter.
+  $auto_increment = [
+    // Drupal 10 class: \Drupal\node\Entity\Node
+    // Drupal 7 tables: node and node_revision
+    'node' => 450,
+    'node_revision' => 1000,
+    // Drupal 10 class: \Drupal\user\Entity\User
+    // Drupal 7 tables: users
+    'users' => 350,
+    // Drupal 10 class: \Drupal\taxonomy\Entity\Term
+    // Drupal 7 tables: taxonomy_term_data
+    'taxonomy_term_data' => 200,
+    'taxonomy_term_revision' => 200,
+    // Drupal 10 class: \Drupal\path_alias\Entity\PathAlias
+    // Drupal 7 tables: url_alias, node, node_revision, users, and taxonomy_term_data
+    'path_alias' => 1000,
+    'path_alias_revision' => 1000,
+    // Drupal 10 class: \Drupal\file\Entity\File
+    // Drupal 7 tables: file_managed
+    'file_managed' => 350,
+    // Drupal 10 class: \Drupal\media\Entity\Media
+    // Drupal 7 tables: file_managed, node, and node_revision
+    'media' => 1000,
+    'media_revision' => 1000,
+    // Drupal 10 class: \Drupal\paragraphs\Entity\Paragraph
+    // Drupal 7 tables: paragraphs_item and paragraphs_item_revision
+    'paragraphs_item' => 750,
+    'paragraphs_item_revision' => 750,
+    // Drupal 10 class: \Drupal\menu_link_content\Entity\MenuLinkContent
+    // Drupal 7 tables: menu_links
+    'menu_link_content' => 500,
+    'menu_link_content_revision' => 500,
+  ];
+
+  foreach ($auto_increment as $table => $new_value) {
+    \Drupal::database()->query(\sprintf('ALTER TABLE {%s} AUTO_INCREMENT = %s;', $table, $new_value));
+  }
+}
