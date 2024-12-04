@@ -9,6 +9,7 @@ dependencies:
     - node.type.venue
   module:
     - address
+    - telephone
     - text
     - user
 id: node.venue.default
@@ -31,10 +32,10 @@ content:
     weight: 1
     region: content
   field_phone:
-    type: string
+    type: telephone_link
     label: inline
     settings:
-      link_to_entity: false
+      title: ''
     third_party_settings: {  }
     weight: 0
     region: content
