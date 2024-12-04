@@ -23,3 +23,9 @@ $settings['migrate_skip_fields_by_name'] = [
 $settings['migrate_skip_fields_by_type'] = [
   'youtube', // Changed to media reference field.
 ];
+
+// Auto-increment alter settings.
+
+$settings['auto_increment_alter_content_entities'] = [];
+
+$settings['auto_increment_alter_tables'] = [];
