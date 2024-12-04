@@ -1,25 +1,28 @@
-uuid: a3367374-077c-460d-89e6-7e1abbe94e77
-langcode: en
-status: true
-dependencies: {  }
 id: upgrade_d7_node_type
 class: Drupal\migrate\Plugin\Migration
-field_plugin_method: null
-cck_plugin_method: null
 migration_tags:
   - 'Drupal 7'
   - Configuration
-migration_group: migrate_drupal_7
+  - node_type
+  - tag1_configuration
 label: 'Node type configuration'
 source:
+  key: migrate
   plugin: d7_node_type
   constants:
     preview: 1
 process:
+  # @modified
   type:
     -
-      plugin: get
+      plugin: skip_on_value
       source: type
+      value:
+        - speaker
+        - sponsor
+        - swag
+      method: row
+      message: 'Content type not needed in new site.'
   name:
     -
       plugin: get
