@@ -20,7 +20,7 @@ content:
     settings:
       trim_length: 600
     third_party_settings: {  }
-    weight: 101
+    weight: 0
     region: content
   links:
     settings: {  }

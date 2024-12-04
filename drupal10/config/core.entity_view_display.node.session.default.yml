@@ -1,0 +1,56 @@
+uuid: 8fc0ab51-80cc-4784-b80c-6b6879b2b021
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.field.node.session.field_description
+    - field.field.node.session.field_slides
+    - field.field.node.session.field_speakers
+    - field.field.node.session.field_topics
+    - node.type.session
+  module:
+    - file
+    - text
+    - user
+id: node.session.default
+targetEntityType: node
+bundle: session
+mode: default
+content:
+  field_description:
+    type: text_default
+    label: hidden
+    settings: {  }
+    third_party_settings: {  }
+    weight: 4
+    region: content
+  field_slides:
+    type: file_default
+    label: above
+    settings:
+      use_description_as_link_text: true
+    third_party_settings: {  }
+    weight: 2
+    region: content
+  field_speakers:
+    type: entity_reference_label
+    label: above
+    settings:
+      link: true
+    third_party_settings: {  }
+    weight: 1
+    region: content
+  field_topics:
+    type: entity_reference_label
+    label: inline
+    settings:
+      link: true
+    third_party_settings: {  }
+    weight: 0
+    region: content
+  links:
+    settings: {  }
+    third_party_settings: {  }
+    weight: 100
+    region: content
+hidden: {  }

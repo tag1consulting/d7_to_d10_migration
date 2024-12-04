@@ -1,0 +1,46 @@
+uuid: 3a28c042-23fc-48ff-98e0-3674d9fff425
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.field.node.venue.field_additional_information
+    - field.field.node.venue.field_address
+    - field.field.node.venue.field_phone
+    - node.type.venue
+  module:
+    - address
+    - text
+    - user
+id: node.venue.default
+targetEntityType: node
+bundle: venue
+mode: default
+content:
+  field_additional_information:
+    type: text_default
+    label: hidden
+    settings: {  }
+    third_party_settings: {  }
+    weight: 3
+    region: content
+  field_address:
+    type: address_default
+    label: above
+    settings: {  }
+    third_party_settings: {  }
+    weight: 1
+    region: content
+  field_phone:
+    type: string
+    label: inline
+    settings:
+      link_to_entity: false
+    third_party_settings: {  }
+    weight: 0
+    region: content
+  links:
+    settings: {  }
+    third_party_settings: {  }
+    weight: 100
+    region: content
+hidden: {  }

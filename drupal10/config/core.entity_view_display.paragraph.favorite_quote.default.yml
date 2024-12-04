@@ -1,0 +1,29 @@
+uuid: e423ba35-a294-494c-a657-2d659d46c598
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.field.paragraph.favorite_quote.field_quote_message
+    - field.field.paragraph.favorite_quote.field_quote_name
+    - paragraphs.paragraphs_type.favorite_quote
+id: paragraph.favorite_quote.default
+targetEntityType: paragraph
+bundle: favorite_quote
+mode: default
+content:
+  field_quote_message:
+    type: basic_string
+    label: hidden
+    settings: {  }
+    third_party_settings: {  }
+    weight: 0
+    region: content
+  field_quote_name:
+    type: string
+    label: inline
+    settings:
+      link_to_entity: false
+    third_party_settings: {  }
+    weight: 1
+    region: content
+hidden: {  }
