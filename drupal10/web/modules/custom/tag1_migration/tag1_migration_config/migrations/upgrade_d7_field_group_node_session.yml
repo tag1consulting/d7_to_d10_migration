@@ -1,17 +1,13 @@
-uuid: 74cd412f-588d-41f7-830a-3f69085156c0
-langcode: en
-status: true
-dependencies: {  }
 id: upgrade_d7_field_group_node_session
 class: Drupal\migrate\Plugin\Migration
-field_plugin_method: null
-cck_plugin_method: null
 migration_tags:
   - 'Drupal 7'
   - Configuration
-migration_group: migrate_drupal_7
+  - d7_field_group
+  - tag1_configuration
 label: 'Field groups of node (bundle: session)'
 source:
+  key: migrate
   plugin: d7_field_group
   entity_type: node
   bundle: session
@@ -56,6 +52,6 @@ destination:
   plugin: d7_field_group
 migration_dependencies:
   required:
+    - upgrade_d7_node_type
     - upgrade_d7_view_modes
-  optional:
-    - upgrade_d7_field_collection_type
+  optional: {  }
