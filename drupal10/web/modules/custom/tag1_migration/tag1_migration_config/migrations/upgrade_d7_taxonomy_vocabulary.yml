@@ -1,17 +1,13 @@
-uuid: f39226da-7e91-430c-91ca-438aa6005c66
-langcode: en
-status: true
-dependencies: {  }
 id: upgrade_d7_taxonomy_vocabulary
 class: Drupal\migrate\Plugin\Migration
-field_plugin_method: null
-cck_plugin_method: null
 migration_tags:
   - 'Drupal 7'
   - Configuration
-migration_group: migrate_drupal_7
+  - taxonomy_vocabulary
+  - tag1_configuration
 label: 'Taxonomy vocabularies'
 source:
+  key: migrate
   plugin: d7_taxonomy_vocabulary
 process:
   vid:
