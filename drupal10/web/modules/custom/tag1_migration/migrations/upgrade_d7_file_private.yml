@@ -1,21 +1,21 @@
-uuid: a2400a4c-970d-436b-9302-fdf6c159d947
-langcode: en
-status: true
-dependencies: {  }
 id: upgrade_d7_file_private
 class: Drupal\migrate\Plugin\Migration
-field_plugin_method: null
-cck_plugin_method: null
 migration_tags:
   - 'Drupal 7'
   - Content
-migration_group: migrate_drupal_7
+  - file
+  - tag1_content
 label: 'Private files'
 source:
+  key: migrate
   plugin: d7_file
   scheme: private
+  high_water_property:
+    name: fid
+    alias: f
   constants:
-    source_base_path: 'http://ddev-migration-drupal7-web/'
+    source_base_path: '/var/www/html/private_files'
+    new_base_path: '/var/www/html/d7_private_files'
 process:
   fid:
     -
@@ -30,7 +30,7 @@ process:
       plugin: concat
       delimiter: /
       source:
-        - constants/source_base_path
+        - constants/new_base_path
         - filepath
   uri:
     -
