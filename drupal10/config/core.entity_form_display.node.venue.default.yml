@@ -5,10 +5,12 @@ dependencies:
   config:
     - field.field.node.venue.field_additional_information
     - field.field.node.venue.field_address
+    - field.field.node.venue.field_media_image
     - field.field.node.venue.field_phone
     - node.type.venue
   module:
     - address
+    - media_library
     - path
     - telephone
     - text
@@ -37,6 +39,13 @@ content:
     region: content
     settings:
       wrapper_type: fieldset
+    third_party_settings: {  }
+  field_media_image:
+    type: media_library_widget
+    weight: 121
+    region: content
+    settings:
+      media_types: {  }
     third_party_settings: {  }
   field_phone:
     type: telephone_default
