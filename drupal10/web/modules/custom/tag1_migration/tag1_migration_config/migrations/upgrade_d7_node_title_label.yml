@@ -1,17 +1,13 @@
-uuid: bd82e607-d0d8-46b6-b741-5f8fa8628469
-langcode: en
-status: true
-dependencies: {  }
 id: upgrade_d7_node_title_label
 class: Drupal\migrate\Plugin\Migration
-field_plugin_method: null
-cck_plugin_method: null
 migration_tags:
   - 'Drupal 7'
   - Configuration
-migration_group: migrate_drupal_7
+  - base_field_override
+  - tag1_configuration
 label: 'Node title label'
 source:
+  key: migrate
   plugin: d7_node_type
   constants:
     entity_type: node
