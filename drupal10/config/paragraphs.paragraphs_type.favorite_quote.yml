@@ -1,0 +1,10 @@
+uuid: 2269f865-8b36-46ef-8574-a8017135037c
+langcode: en
+status: true
+dependencies: {  }
+id: favorite_quote
+label: 'Favorite quote'
+icon_uuid: null
+icon_default: null
+description: 'Migrated from field_collection field_favorite_quote'
+behavior_plugins: {  }
