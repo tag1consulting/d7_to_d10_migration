@@ -1,33 +1,62 @@
-uuid: c5025c00-800b-446b-9792-fa5a6a2aafe5
+uuid: 518dd27f-0140-483f-ad57-d7969b5f7d8c
 langcode: en
 status: true
 dependencies:
   config:
-    - field.field.node.page.body
-    - node.type.page
+    - field.field.node.session.field_description
+    - field.field.node.session.field_slides
+    - field.field.node.session.field_speakers
+    - field.field.node.session.field_topics
+    - node.type.session
   module:
+    - file
     - path
     - text
-id: node.page.default
+id: node.session.default
 targetEntityType: node
-bundle: page
+bundle: session
 mode: default
 content:
-  body:
-    type: text_textarea_with_summary
-    weight: -4
-    region: content
-    settings:
-      rows: 9
-      summary_rows: 3
-      placeholder: ''
-      show_summary: false
-    third_party_settings: {  }
   created:
     type: datetime_timestamp
     weight: 10
     region: content
     settings: {  }
+    third_party_settings: {  }
+  field_description:
+    type: text_textarea
+    weight: 3
+    region: content
+    settings:
+      rows: 5
+      placeholder: ''
+    third_party_settings: {  }
+  field_slides:
+    type: file_generic
+    weight: 5
+    region: content
+    settings:
+      progress_indicator: throbber
+    third_party_settings: {  }
+  field_speakers:
+    type: entity_reference_autocomplete_tags
+    weight: 2
+    region: content
+    settings:
+      match_operator: CONTAINS
+      match_limit: 10
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+  field_topics:
+    type: entity_reference_autocomplete
+    weight: 4
+    region: content
+    settings:
+      match_operator: CONTAINS
+      match_limit: 10
+      size: 60
+      placeholder: ''
     third_party_settings: {  }
   path:
     type: path

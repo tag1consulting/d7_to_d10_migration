@@ -1,33 +1,49 @@
-uuid: c5025c00-800b-446b-9792-fa5a6a2aafe5
+uuid: c5c0f029-49ca-4386-9615-1f379835cc06
 langcode: en
 status: true
 dependencies:
   config:
-    - field.field.node.page.body
-    - node.type.page
+    - field.field.node.venue.field_additional_information
+    - field.field.node.venue.field_address
+    - field.field.node.venue.field_phone
+    - node.type.venue
   module:
+    - address
     - path
+    - telephone
     - text
-id: node.page.default
+id: node.venue.default
 targetEntityType: node
-bundle: page
+bundle: venue
 mode: default
 content:
-  body:
-    type: text_textarea_with_summary
-    weight: -4
-    region: content
-    settings:
-      rows: 9
-      summary_rows: 3
-      placeholder: ''
-      show_summary: false
-    third_party_settings: {  }
   created:
     type: datetime_timestamp
     weight: 10
     region: content
     settings: {  }
+    third_party_settings: {  }
+  field_additional_information:
+    type: text_textarea
+    weight: 38
+    region: content
+    settings:
+      rows: 5
+      placeholder: ''
+    third_party_settings: {  }
+  field_address:
+    type: address_default
+    weight: 33
+    region: content
+    settings:
+      wrapper_type: fieldset
+    third_party_settings: {  }
+  field_phone:
+    type: telephone_default
+    weight: 37
+    region: content
+    settings:
+      placeholder: ''
     third_party_settings: {  }
   path:
     type: path
