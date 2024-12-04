@@ -1,17 +1,13 @@
-uuid: 47e53956-945c-4d0e-afb0-5f19f1b35525
-langcode: en
-status: true
-dependencies: {  }
 id: upgrade_d7_view_modes
 class: Drupal\migrate\Plugin\Migration
-field_plugin_method: null
-cck_plugin_method: null
 migration_tags:
   - 'Drupal 7'
   - Configuration
-migration_group: migrate_drupal_7
+  - entity_view_mode
+  - tag1_configuration
 label: 'View modes'
 source:
+  key: migrate
   plugin: d7_view_mode
 process:
   mode:
@@ -47,6 +43,8 @@ process:
 destination:
   plugin: 'entity:entity_view_mode'
 migration_dependencies:
-  required: {  }
-  optional:
+  required:
     - upgrade_d7_field_collection_type
+    - upgrade_d7_node_type
+    - upgrade_d7_taxonomy_vocabulary
+  optional: {  }
