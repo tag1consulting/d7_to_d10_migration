@@ -1,0 +1,14 @@
+uuid: 1b135e21-2364-4740-8d89-0c763aecb31f
+langcode: en
+status: true
+dependencies:
+  module:
+    - node
+    - system
+id: content_editor
+label: 'Content editor'
+weight: 2
+is_admin: false
+permissions:
+  - 'access administration pages'
+  - 'view own unpublished content'
