@@ -1,0 +1,30 @@
+uuid: 3ac12a0b-748e-4241-bb95-066cc9f0b218
+langcode: und
+status: true
+dependencies:
+  module:
+    - node
+    - options
+id: node.field_type
+field_name: field_type
+entity_type: node
+type: list_string
+settings:
+  allowed_values:
+    -
+      value: in_person
+      label: 'In person'
+    -
+      value: online
+      label: Online
+    -
+      value: hybrid
+      label: 'In person + Online'
+  allowed_values_function: ''
+module: options
+locked: false
+cardinality: 1
+translatable: true
+indexes: {  }
+persist_with_no_fields: false
+custom_storage: false
