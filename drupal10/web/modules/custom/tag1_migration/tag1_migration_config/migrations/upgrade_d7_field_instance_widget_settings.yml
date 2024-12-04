@@ -1,22 +1,20 @@
-uuid: 25b78f74-36a9-4491-91de-b4c46de87752
-langcode: en
-status: true
-dependencies: {  }
 id: upgrade_d7_field_instance_widget_settings
 class: Drupal\migrate_drupal\Plugin\migrate\FieldMigration
 field_plugin_method: alterFieldWidgetMigration
-cck_plugin_method: null
 migration_tags:
   - 'Drupal 7'
   - Configuration
-migration_group: migrate_drupal_7
+  - component_entity_form_display
+  - tag1_configuration
 label: 'Field instance widget configuration'
 source:
+  key: migrate
   plugin: d7_field_instance_per_form_display
   constants:
     form_mode: default
     third_party_settings: {  }
 process:
+  # @modified
   field_type_exists:
     -
       plugin: migration_lookup
@@ -31,6 +29,7 @@ process:
     -
       plugin: skip_on_empty
       method: row
+      message: "Field storage configuration does not exist."
   bundle:
     -
       plugin: migration_lookup
@@ -117,8 +116,9 @@ destination:
   plugin: component_entity_form_display
 migration_dependencies:
   required:
-    - upgrade_d7_field_instance
-  optional:
-    - upgrade_d7_field_collection_type
     - upgrade_d7_field
+    - upgrade_d7_field_collection_type
     - upgrade_d7_field_instance
+    - upgrade_d7_node_type
+    - upgrade_d7_taxonomy_vocabulary
+  optional: {  }
