@@ -1,0 +1,19 @@
+uuid: 28de3613-6dea-460c-a347-fd8dd7c44019
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.paragraph.field_quote_message
+    - paragraphs.paragraphs_type.favorite_quote
+id: paragraph.favorite_quote.field_quote_message
+field_name: field_quote_message
+entity_type: paragraph
+bundle: favorite_quote
+label: Message
+description: ''
+required: true
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: string_long

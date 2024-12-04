@@ -1,0 +1,19 @@
+uuid: 5cc09fe5-dc30-4b19-88bb-5f1f13e2a940
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.paragraph.field_quote_name
+    - paragraphs.paragraphs_type.favorite_quote
+id: paragraph.favorite_quote.field_quote_name
+field_name: field_quote_name
+entity_type: paragraph
+bundle: favorite_quote
+label: Name
+description: ''
+required: true
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: string
