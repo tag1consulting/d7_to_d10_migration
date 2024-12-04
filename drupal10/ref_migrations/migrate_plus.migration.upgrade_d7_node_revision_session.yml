@@ -1,0 +1,114 @@
+uuid: 160ea61b-038a-4b00-8b88-6ddc90e21b64
+langcode: en
+status: true
+dependencies: {  }
+id: upgrade_d7_node_revision_session
+class: Drupal\migrate\Plugin\Migration
+field_plugin_method: null
+cck_plugin_method: null
+migration_tags:
+  - 'Drupal 7'
+  - Content
+migration_group: migrate_drupal_7
+label: 'Node revisions (Session)'
+source:
+  plugin: d7_node_revision
+  node_type: session
+process:
+  nid:
+    -
+      plugin: get
+      source: nid
+  vid:
+    -
+      plugin: get
+      source: vid
+  langcode:
+    -
+      plugin: default_value
+      source: language
+      default_value: und
+  title:
+    -
+      plugin: get
+      source: title
+  uid:
+    -
+      plugin: get
+      source: node_uid
+  status:
+    -
+      plugin: get
+      source: status
+  created:
+    -
+      plugin: get
+      source: created
+  changed:
+    -
+      plugin: get
+      source: changed
+  promote:
+    -
+      plugin: get
+      source: promote
+  sticky:
+    -
+      plugin: get
+      source: sticky
+  revision_uid:
+    -
+      plugin: get
+      source: revision_uid
+  revision_log:
+    -
+      plugin: get
+      source: log
+  revision_timestamp:
+    -
+      plugin: get
+      source: timestamp
+  comment_node_session/0/status:
+    -
+      plugin: get
+      source: comment
+  field_speakers:
+    -
+      plugin: get
+      source: field_speakers
+  field_description:
+    -
+      plugin: get
+      source: field_description
+  field_video_recording:
+    -
+      plugin: get
+      source: field_video_recording
+  field_slides:
+    -
+      plugin: sub_process
+      source: field_slides
+      process:
+        target_id: fid
+        display: display
+        description: description
+  field_topics:
+    -
+      plugin: sub_process
+      source: field_topics
+      process:
+        target_id: tid
+destination:
+  plugin: 'entity_revision:node'
+  default_bundle: session
+migration_dependencies:
+  required:
+    - upgrade_d7_node_article
+    - upgrade_d7_node_event
+    - upgrade_d7_node_page
+    - upgrade_d7_node_session
+    - upgrade_d7_node_speaker
+    - upgrade_d7_node_sponsor
+    - upgrade_d7_node_swag
+    - upgrade_d7_node_venue
+  optional: {  }

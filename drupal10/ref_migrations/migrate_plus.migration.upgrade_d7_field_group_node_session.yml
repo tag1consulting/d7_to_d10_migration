@@ -1,0 +1,61 @@
+uuid: 74cd412f-588d-41f7-830a-3f69085156c0
+langcode: en
+status: true
+dependencies: {  }
+id: upgrade_d7_field_group_node_session
+class: Drupal\migrate\Plugin\Migration
+field_plugin_method: null
+cck_plugin_method: null
+migration_tags:
+  - 'Drupal 7'
+  - Configuration
+migration_group: migrate_drupal_7
+label: 'Field groups of node (bundle: session)'
+source:
+  plugin: d7_field_group
+  entity_type: node
+  bundle: session
+process:
+  entity_type:
+    -
+      plugin: get
+      source: entity_type
+    -
+      plugin: static_map
+      map:
+        field_collection_item: paragraph
+        paragraphs_item: paragraph
+      bypass: true
+  bundle:
+    -
+      plugin: get
+      source: bundle
+  mode:
+    -
+      plugin: static_map
+      source: mode
+      bypass: true
+      map:
+        form: default
+  type:
+    -
+      plugin: static_map
+      source: mode
+      default_value: entity_view_display
+      map:
+        form: entity_form_display
+  group_name:
+    -
+      plugin: get
+      source: group_name
+  settings:
+    -
+      plugin: get
+      source: settings
+destination:
+  plugin: d7_field_group
+migration_dependencies:
+  required:
+    - upgrade_d7_view_modes
+  optional:
+    - upgrade_d7_field_collection_type

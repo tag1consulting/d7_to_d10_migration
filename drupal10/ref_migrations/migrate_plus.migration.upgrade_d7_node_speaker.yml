@@ -1,0 +1,149 @@
+uuid: 4c720324-2bbe-41fd-8573-07a84ac85e3c
+langcode: en
+status: true
+dependencies: {  }
+id: upgrade_d7_node_speaker
+class: Drupal\migrate\Plugin\Migration
+field_plugin_method: null
+cck_plugin_method: null
+migration_tags:
+  - 'Drupal 7'
+  - Content
+migration_group: migrate_drupal_7
+label: 'Nodes (Speaker)'
+source:
+  plugin: d7_node
+  node_type: speaker
+process:
+  nid:
+    -
+      plugin: get
+      source: tnid
+  vid:
+    -
+      plugin: get
+      source: vid
+  langcode:
+    -
+      plugin: default_value
+      source: language
+      default_value: und
+  title:
+    -
+      plugin: get
+      source: title
+  uid:
+    -
+      plugin: get
+      source: node_uid
+  status:
+    -
+      plugin: get
+      source: status
+  created:
+    -
+      plugin: get
+      source: created
+  changed:
+    -
+      plugin: get
+      source: changed
+  promote:
+    -
+      plugin: get
+      source: promote
+  sticky:
+    -
+      plugin: get
+      source: sticky
+  revision_uid:
+    -
+      plugin: get
+      source: revision_uid
+  revision_log:
+    -
+      plugin: get
+      source: log
+  revision_timestamp:
+    -
+      plugin: get
+      source: timestamp
+  comment_node_speaker/0/status:
+    -
+      plugin: get
+      source: comment
+  field_biography:
+    -
+      plugin: get
+      source: field_biography
+  field_email:
+    -
+      plugin: sub_process
+      source: field_email
+      process:
+        value: email
+  field_linkedin_profile:
+    -
+      plugin: get
+      source: field_linkedin_profile
+  field_website:
+    -
+      plugin: get
+      source: field_website
+  field_x_twitter_profile:
+    -
+      plugin: get
+      source: field_x_twitter_profile
+  field_drupal_org_profile:
+    -
+      plugin: get
+      source: field_drupal_org_profile
+  field_profile_picture:
+    -
+      plugin: sub_process
+      source: field_profile_picture
+      process:
+        target_id: fid
+        alt: alt
+        title: title
+        width: width
+        height: height
+  field_favorite_quote:
+    -
+      plugin: sub_process
+      source: field_favorite_quote
+      process:
+        target_id:
+          -
+            plugin: paragraphs_lookup
+            tags: 'Field Collection Content'
+            source: value
+          -
+            plugin: extract
+            index:
+              - id
+        target_revision_id:
+          -
+            plugin: paragraphs_lookup
+            tags:
+              - 'Field Collection Revisions Content'
+              - 'Field Collection Content'
+            tag_ids:
+              'Field Collection Revisions Content':
+                - revision_id
+              'Field Collection Content':
+                - value
+          -
+            plugin: extract
+            index:
+              - revision_id
+destination:
+  plugin: 'entity:node'
+  default_bundle: speaker
+migration_dependencies:
+  required:
+    - upgrade_d7_user
+    - upgrade_d7_node_type
+    - upgrade_d7_field_collection_favorite_quote
+  optional:
+    - upgrade_d7_field_instance

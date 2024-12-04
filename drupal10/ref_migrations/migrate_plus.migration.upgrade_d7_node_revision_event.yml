@@ -1,0 +1,118 @@
+uuid: 6108b6a0-d144-407c-aac3-511610ebd156
+langcode: en
+status: true
+dependencies: {  }
+id: upgrade_d7_node_revision_event
+class: Drupal\migrate\Plugin\Migration
+field_plugin_method: null
+cck_plugin_method: null
+migration_tags:
+  - 'Drupal 7'
+  - Content
+migration_group: migrate_drupal_7
+label: 'Node revisions (Event)'
+source:
+  plugin: d7_node_revision
+  node_type: event
+process:
+  nid:
+    -
+      plugin: get
+      source: nid
+  vid:
+    -
+      plugin: get
+      source: vid
+  langcode:
+    -
+      plugin: default_value
+      source: language
+      default_value: und
+  title:
+    -
+      plugin: get
+      source: title
+  uid:
+    -
+      plugin: get
+      source: node_uid
+  status:
+    -
+      plugin: get
+      source: status
+  created:
+    -
+      plugin: get
+      source: created
+  changed:
+    -
+      plugin: get
+      source: changed
+  promote:
+    -
+      plugin: get
+      source: promote
+  sticky:
+    -
+      plugin: get
+      source: sticky
+  revision_uid:
+    -
+      plugin: get
+      source: revision_uid
+  revision_log:
+    -
+      plugin: get
+      source: log
+  revision_timestamp:
+    -
+      plugin: get
+      source: timestamp
+  comment_node_event/0/status:
+    -
+      plugin: get
+      source: comment
+  field_description:
+    -
+      plugin: get
+      source: field_description
+  field_sessions:
+    -
+      plugin: get
+      source: field_sessions
+  field_venue:
+    -
+      plugin: get
+      source: field_venue
+  field_type:
+    -
+      plugin: get
+      source: field_type
+  field_sponsors:
+    -
+      plugin: get
+      source: field_sponsors
+  field_date:
+    -
+      plugin: sub_process
+      source: field_date
+      process:
+        value:
+          plugin: format_date
+          from_format: 'Y-m-d H:i:s'
+          to_format: Y-m-d
+          source: value
+destination:
+  plugin: 'entity_revision:node'
+  default_bundle: event
+migration_dependencies:
+  required:
+    - upgrade_d7_node_article
+    - upgrade_d7_node_event
+    - upgrade_d7_node_page
+    - upgrade_d7_node_session
+    - upgrade_d7_node_speaker
+    - upgrade_d7_node_sponsor
+    - upgrade_d7_node_swag
+    - upgrade_d7_node_venue
+  optional: {  }
