@@ -17,7 +17,7 @@
         });
       }
 
-      $('a.views-remove-link').once('views-processed').click(function(event) {
+      $('a.views-remove-link').once('views-processed').click(function (event) {
         var id = $(this).attr('id').replace('views-remove-link-', '');
         $('#views-row-' + id).hide();
         $('#views-removed-' + id).get(0).checked = true;
@@ -27,7 +27,7 @@
       // (checking in the hidden checkbox and hiding out the row).
       $('a.display-remove-link')
         .addClass('display-processed')
-        .click(function() {
+        .click(function () {
           var id = $(this).attr('id').replace('display-remove-link-', '');
           $('#display-row-' + id).hide();
           $('#display-removed-' + id).get(0).checked = true;

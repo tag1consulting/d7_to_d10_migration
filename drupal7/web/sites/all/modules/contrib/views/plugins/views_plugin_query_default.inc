@@ -92,13 +92,13 @@ class views_plugin_query_default extends views_plugin_query {
   public $pager = NULL;
 
   /**
-    * An array mapping table aliases and field names to field aliases.
-    */
+   * An array mapping table aliases and field names to field aliases.
+   */
   public $field_aliases = array();
 
   /**
-    * Query tags which will be passed over to the dbtng query object.
-    */
+   * Query tags which will be passed over to the dbtng query object.
+   */
   public $tags = array();
 
   /**
@@ -153,8 +153,7 @@ class views_plugin_query_default extends views_plugin_query {
     //     'field' => $base_field,
     //     'alias' => $base_field,
     //   );
-    // }
-
+    // }.
     $this->count_field = array(
       'table' => $base_table,
       'field' => $base_field,
@@ -263,8 +262,8 @@ class views_plugin_query_default extends views_plugin_query {
           '#type' => 'checkbox',
           '#default_value' => $disable_rewrite,
           '#suffix' => '<div class="messages warning sql-rewrite-warning' . ($disable_rewrite ? '' : ' js-hide') . '">'
-            . t('WARNING: Disabling access checks means that %access_tag security is disabled. This may allow users to see data they should not be able to see if your view is misconfigured. Please use this option only if you understand and accept this security risk.', array('%access_tag' => $access_tag))
-            . '</div>',
+          . t('WARNING: Disabling access checks means that %access_tag security is disabled. This may allow users to see data they should not be able to see if your view is misconfigured. Please use this option only if you understand and accept this security risk.', array('%access_tag' => $access_tag))
+          . '</div>',
         );
       }
     }
@@ -306,10 +305,16 @@ class views_plugin_query_default extends views_plugin_query {
    * Special submit handling.
    */
   public function options_submit(&$form, &$form_state) {
+    parent::options_submit($form, $form_state);
+
     $element = array('#parents' => array('query', 'options', 'query_tags'));
-    $value = explode(',', drupal_array_get_nested_value($form_state['values'], $element['#parents']));
-    $value = array_filter(array_map('trim', $value));
-    form_set_value($element, $value, $form_state);
+    $query_tags = drupal_array_get_nested_value($form_state['values'], $element['#parents']);
+    // Check if we need to convert query tags string into an array.
+    if (!is_array($query_tags)) {
+      $value = explode(',', $query_tags);
+      $value = array_filter(array_map('trim', $value));
+      form_set_value($element, $value, $form_state);
+    }
   }
 
   /**
@@ -877,8 +882,8 @@ class views_plugin_query_default extends views_plugin_query {
    *   an array = otherwise. If $field is a string you have to use 'formula'
    *   here.
    *
-   * The $field, $value and $operator arguments can also be passed in with a
-   * single DatabaseCondition object, like this:
+   *   The $field, $value and $operator arguments can also be passed in with a
+   *   single DatabaseCondition object, like this:
    *
    * @code
    *   $this->query->add_where(
@@ -1007,7 +1012,7 @@ class views_plugin_query_default extends views_plugin_query {
    *   group does not yet exist it will be created as an AND group.
    * @param string $snippet
    *   The snippet to check. This can be either a column or a complex
-   *   expression like "COUNT(table.field) > 3"
+   *   expression like "COUNT(table.field) > 3".
    * @param array $args
    *   An associative array of arguments.
    *
@@ -1144,10 +1149,9 @@ class views_plugin_query_default extends views_plugin_query {
     $filter_group = $this->group_operator == 'OR' ? db_or() : db_and();
 
     foreach ($this->$where as $group => $info) {
-
       if (!empty($info['conditions'])) {
         $sub_group = $info['type'] == 'OR' ? db_or() : db_and();
-        foreach ($info['conditions'] as $key => $clause) {
+        foreach ($info['conditions'] as $clause) {
           // DBTNG doesn't support to add the same subquery twice to the main
           // query and the count query, so clone the subquery to have two
           // instances of the same object.
@@ -1237,7 +1241,9 @@ class views_plugin_query_default extends views_plugin_query {
 
       elseif ($this->distinct && !in_array($fieldname, $this->groupby)) {
         // d7cx: This code was there, apparently needed for PostgreSQL
+        // @code
         // $string = db_driver() == 'pgsql' ? "FIRST($string)" : $string;
+        // @endcode
         if (Database::getConnection()->databaseType() == 'pgsql' && !in_array($string, $non_aggregates)) {
           $non_aggregates[] = $string;
         }
@@ -1320,7 +1326,7 @@ class views_plugin_query_default extends views_plugin_query {
 
     if (!empty($this->options['slave'])) {
       $target = 'slave';
-    // Set the replica target if the replica option is set.
+      // Set the replica target if the replica option is set.
     }
 
     // Go ahead and build the query. db_select doesn't support to specify the
@@ -1339,9 +1345,6 @@ class views_plugin_query_default extends views_plugin_query {
       $query->distinct();
     }
 
-    $joins = $where = $having = $orderby = $groupby = '';
-    $fields = $distinct = array();
-
     // Add all the tables to the query via joins. We assume all LEFT joins.
     foreach ($this->table_queue as $table) {
       if (is_object($table['join'])) {
@@ -1350,7 +1353,6 @@ class views_plugin_query_default extends views_plugin_query {
     }
 
     $this->has_aggregate = FALSE;
-    $non_aggregates = array();
 
     list($non_aggregates) = $this->compile_fields($fields_array, $query);
 
@@ -1423,10 +1425,10 @@ class views_plugin_query_default extends views_plugin_query {
    */
   public function get_where_args() {
     $args = array();
-    foreach ($this->where as $group => $where) {
+    foreach ($this->where as $where) {
       $args = array_merge($args, $where['args']);
     }
-    foreach ($this->having as $group => $having) {
+    foreach ($this->having as $having) {
       $args = array_merge($args, $having['args']);
     }
     return $args;
@@ -1472,7 +1474,6 @@ class views_plugin_query_default extends views_plugin_query {
    */
   public function execute(&$view) {
     // Whether this query will run against an external database.
-    $external = FALSE;
     $query = $view->build_info['query'];
     $count_query = $view->build_info['count_query'];
 
@@ -1488,7 +1489,6 @@ class views_plugin_query_default extends views_plugin_query {
       }
     }
 
-    $items = array();
     if ($query) {
       $additional_arguments = module_invoke_all('views_query_substitutions', $view);
 

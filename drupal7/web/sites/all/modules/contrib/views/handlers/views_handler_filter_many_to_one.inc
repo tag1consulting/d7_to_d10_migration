@@ -88,7 +88,7 @@ class views_handler_filter_many_to_one extends views_handler_filter_in_operator 
         'ensure_my_table' => 'helper',
       ),
     );
-    // if the definition allows for the empty operator, add it.
+    // If the definition allows for the empty operator, add it.
     if (!empty($this->definition['allow empty'])) {
       $operators += array(
         'empty' => array(

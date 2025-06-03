@@ -72,7 +72,7 @@ class views_handler_argument_node_created_year_month extends views_handler_argum
   }
 
   /**
-   * Provide a link to the next level of the view
+   * Provide a link to the next level of the view.
    */
   public function summary_name($data) {
     $created = $data->{$this->name_alias};
@@ -80,7 +80,7 @@ class views_handler_argument_node_created_year_month extends views_handler_argum
   }
 
   /**
-   * Provide a link to the next level of the view
+   * Provide a link to the next level of the view.
    */
   public function title() {
     $timestamp = strtotime($this->argument . "15" . " 00:00:00 UTC");
@@ -107,15 +107,15 @@ class views_handler_argument_node_created_month extends views_handler_argument_d
   }
 
   /**
-   * Provide a link to the next level of the view
+   * Provide a link to the next level of the view.
    */
   public function summary_name($data) {
     $month = str_pad($data->{$this->name_alias}, 2, '0', STR_PAD_LEFT);
-    return format_date(strtotime("2005" . $month . "15" . " 00:00:00 UTC" ), 'custom', $this->format, 'UTC');
+    return format_date(strtotime("2005" . $month . "15" . " 00:00:00 UTC"), 'custom', $this->format, 'UTC');
   }
 
   /**
-   * Provide a link to the next level of the view
+   * Provide a link to the next level of the view.
    */
   public function title() {
     $month = str_pad($this->argument, 2, '0', STR_PAD_LEFT);

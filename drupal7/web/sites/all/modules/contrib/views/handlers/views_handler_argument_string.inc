@@ -125,7 +125,7 @@ class views_handler_argument_string extends views_handler_argument {
       );
     }
 
-    // allow + for or, , for and
+    // Allow + for or, , for and.
     $form['break_phrase'] = array(
       '#type' => 'checkbox',
       '#title' => t('Allow multiple values'),
@@ -179,7 +179,7 @@ class views_handler_argument_string extends views_handler_argument {
   }
 
   /**
-   * Build the query based upon the formula
+   * Build the query based upon the formula.
    */
   public function query($group_by = FALSE) {
     $argument = $this->argument;

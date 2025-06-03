@@ -49,7 +49,7 @@ class views_plugin_style extends views_plugin {
     $this->view = &$view;
     $this->display = &$display;
 
-    // Overlay incoming options on top of defaults
+    // Overlay incoming options on top of defaults.
     $this->unpack_options($this->options, isset($options) ? $options : $display->handler->get_option('style_options'));
 
     if ($this->uses_row_plugin() && $display->handler->get_option('row_plugin')) {
@@ -143,10 +143,11 @@ class views_plugin_style extends views_plugin {
         $classes = explode(' ', $class);
       }
 
-      // Convert whatever the result is to a nice clean class name
+      // Convert whatever the result is to a nice clean class name.
       foreach ($classes as &$class) {
         $class = drupal_clean_css_identifier($class);
       }
+      unset($class);
       return implode(' ', $classes);
     }
   }
@@ -159,11 +160,6 @@ class views_plugin_style extends views_plugin {
       $value = '';
     }
     if (strpos($value, '[') !== FALSE || strpos($value, '!') !== FALSE || strpos($value, '%') !== FALSE) {
-      $fake_item = array(
-        'alter_text' => TRUE,
-        'text' => $value,
-      );
-
       // Row tokens might be empty, for example for node row style.
       $tokens = isset($this->row_tokens[$row_index]) ? $this->row_tokens[$row_index] : array();
       if (!empty($this->view->build_info['substitutions'])) {
@@ -247,7 +243,7 @@ class views_plugin_style extends views_plugin {
             '#description' => t('If enabled the rendered output of the grouping field is used to group the rows.'),
             '#dependency' => array(
               'edit-style-options-grouping-' . $i . '-field' => array_keys($field_labels),
-            )
+            ),
           );
           $form['grouping'][$i]['rendered_strip'] = array(
             '#type' => 'checkbox',
@@ -256,7 +252,7 @@ class views_plugin_style extends views_plugin {
             '#description' => t('Some modules add HTML to the rendered output and prevent the rows from grouping correctly. Stripping the HTML tags should correct this.'),
             '#dependency' => array(
               'edit-style-options-grouping-' . $i . '-field' => array_keys($field_labels),
-            )
+            ),
           );
         }
       }
@@ -387,7 +383,8 @@ class views_plugin_style extends views_plugin {
             'grouping' => $this->options['grouping'][$level],
             'grouping_level' => $level,
             'rows' => $set['rows'],
-            'title' => $set['group'])
+            'title' => $set['group'],
+          )
         );
       }
       // Render as a record set.
@@ -405,7 +402,8 @@ class views_plugin_style extends views_plugin {
             'options' => $this->options,
             'grouping_level' => $level,
             'rows' => $set['rows'],
-            'title' => $set['group'])
+            'title' => $set['group'],
+          )
         );
       }
     }
@@ -461,7 +459,7 @@ class views_plugin_style extends views_plugin {
       $groupings = array(array('field' => $groupings, 'rendered' => $rendered));
     }
 
-    // Make sure fields are rendered
+    // Make sure fields are rendered.
     $this->render_fields($this->view->result);
     $sets = array();
     if ($groupings) {
@@ -487,7 +485,7 @@ class views_plugin_style extends views_plugin {
             if ($rendered) {
               $grouping = $group_content;
               if ($rendered_strip) {
-                $group_content = $grouping = strip_tags(htmlspecialchars_decode((string) $group_content));
+                $group_content = $grouping = strip_tags(htmlspecialchars_decode((string) $group_content, ENT_COMPAT));
               }
             }
             else {
@@ -542,7 +540,7 @@ class views_plugin_style extends views_plugin {
    * Render all of the fields for a given style and store them on the object.
    *
    * @param array $result
-   *   The result array from $view->result
+   *   The result array from $view->result.
    */
   public function render_fields($result) {
     if (!$this->uses_fields()) {
@@ -578,7 +576,7 @@ class views_plugin_style extends views_plugin {
    * @param int $index
    *   The index count of the row.
    * @param string $field
-   *    The id of the field.
+   *   The id of the field.
    */
   public function get_field($index, $field) {
     if (!isset($this->rendered_fields)) {
@@ -591,13 +589,13 @@ class views_plugin_style extends views_plugin {
   }
 
   /**
-  * Get the raw field value.
-  *
-  * @param int $index
-  *   The index count of the row.
-  * @param string $field
-  *    The id of the field.
-  */
+   * Get the raw field value.
+   *
+   * @param int $index
+   *   The index count of the row.
+   * @param string $field
+   *   The id of the field.
+   */
   public function get_field_value($index, $field) {
     $this->view->row_index = $index;
     $value = $this->view->field[$field]->get_value($this->view->result[$index]);

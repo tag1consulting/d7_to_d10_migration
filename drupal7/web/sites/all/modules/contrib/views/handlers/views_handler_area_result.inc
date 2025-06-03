@@ -76,7 +76,7 @@ class views_handler_area_result extends views_handler_area {
         '@per_page',
         '@current_page',
         '@current_record_count',
-        '@page_count'
+        '@page_count',
       )),
       '#dependency' => array('edit-options-format-plural' => array(TRUE)),
     );
@@ -135,12 +135,12 @@ class views_handler_area_result extends views_handler_area {
     );
     $replacements = array();
     foreach ($items as $item) {
-      $replacements["@$item"] = ${$item};
+      $replacements["@$item"] = $$item;
     }
-    // If the format_plural option is selected,
+    // If the format_plural option is selected..
     if (
       !empty($this->options['format_plural'])
-      // and the format_plural_count token is not "@end":
+      // And the format_plural_count token is not "@end":
       && $replacements[$this->options['format_plural_count']] != 1
     ) {
       $format = $this->options['format_plural_plural'];

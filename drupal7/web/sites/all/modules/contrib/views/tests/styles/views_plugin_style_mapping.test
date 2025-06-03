@@ -10,6 +10,9 @@
  */
 class ViewsPluginStyleMappingTest extends ViewsPluginStyleTestBase {
 
+  /**
+   *
+   */
   public static function getInfo() {
     return array(
       'name' => 'Style: Mapping',
@@ -28,6 +31,9 @@ class ViewsPluginStyleMappingTest extends ViewsPluginStyleTestBase {
     views_fetch_plugin_data(NULL, NULL, TRUE);
   }
 
+  /**
+   *
+   */
   protected function viewsPlugins() {
     return array(
       'style' => array(

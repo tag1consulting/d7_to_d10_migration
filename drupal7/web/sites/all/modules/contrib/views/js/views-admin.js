@@ -102,8 +102,12 @@ Drupal.viewsUi.FormFieldFiller = function ($target, exclude, replace, suffix) {
   // one bound version of an object method, whereas we need one version per
   // object instance.
   var self = this;
-  this.populate = function () {return self._populate.call(self);};
-  this.unbind = function () {return self._unbind.call(self);};
+  this.populate = function () {
+    return self._populate.call(self);
+  };
+  this.unbind = function () {
+    return self._unbind.call(self);
+  };
 
   this.bind();
   // Object constructor; no return value.
@@ -167,7 +171,7 @@ Drupal.behaviors.addItemForm.attach = function (context) {
   }
 }
 
-Drupal.viewsUi.addItemForm = function($form) {
+Drupal.viewsUi.addItemForm = function ($form) {
   this.$form = $form;
   this.$form.find('.views-filterable-options :checkbox').click(jQuery.proxy(this.handleCheck, this));
   // Find the wrapper of the displayed text.
@@ -208,7 +212,7 @@ Drupal.viewsUi.addItemForm.prototype.handleCheck = function (event) {
 /**
  * Refresh the display of the checked items.
  */
-Drupal.viewsUi.addItemForm.prototype.refreshCheckedItems = function() {
+Drupal.viewsUi.addItemForm.prototype.refreshCheckedItems = function () {
   // Perhaps we should precache the text div, too.
   this.$selected_div.find('.views-selected-options').html(Drupal.checkPlain(this.checkedItems.join(', ')));
   Drupal.viewsUi.resizeModal('', true);
@@ -310,7 +314,7 @@ Drupal.viewsUi.OptionsSearch = function ($form) {
   // Restripe on initial loading.
   this.handleKeyup();
   // Trap the ENTER key in the search box so that it doesn't submit the form.
-  this.$searchBox.keypress(function(event) {
+  this.$searchBox.keypress(function (event) {
     if (event.which == 13) {
       event.preventDefault();
     }
@@ -764,23 +768,23 @@ Drupal.behaviors.viewsFilterConfigSelectAll = {};
 /**
  * Add a select all checkbox, which checks each checkbox at once.
  */
-Drupal.behaviors.viewsFilterConfigSelectAll.attach = function(context) {
+Drupal.behaviors.viewsFilterConfigSelectAll.attach = function (context) {
   var $ = jQuery;
   // Show the select all checkbox.
-  $('#views-ui-config-item-form div.form-item-options-value-all', context).once(function() {
+  $('#views-ui-config-item-form div.form-item-options-value-all', context).once(function () {
     $(this).show();
   })
     .find('input[type=checkbox]')
-    .click(function() {
+    .click(function () {
       var checked = $(this).is(':checked');
       // Update all checkbox beside the select all checkbox.
-      $(this).parents('.form-checkboxes').find('input[type=checkbox]').each(function() {
+      $(this).parents('.form-checkboxes').find('input[type=checkbox]').each(function () {
         $(this).get(0).checked = true;
       });
     });
   // Uncheck the select all checkbox if any of the others are unchecked.
-  $('#views-ui-config-item-form div.form-type-checkbox').not($('.form-item-options-value-all')).find('input[type=checkbox]').each(function() {
-    $(this).click(function() {
+  $('#views-ui-config-item-form div.form-type-checkbox').not($('.form-item-options-value-all')).find('input[type=checkbox]').each(function () {
+    $(this).click(function () {
       if ($(this).is('checked') == 0 && $('#edit-options-value-all').length) {
         $('#edit-options-value-all').get(0).checked = false;
       }
@@ -796,8 +800,8 @@ Drupal.behaviors.viewsFilterConfigSelectAll.attach = function(context) {
 Drupal.behaviors.viewsImplicitFormSubmission = {};
 Drupal.behaviors.viewsImplicitFormSubmission.attach = function (context, settings) {
   var $ = jQuery;
-  $(':text, :password, :radio, :checkbox', context).once('viewsImplicitFormSubmission', function() {
-    $(this).keypress(function(event) {
+  $(':text, :password, :radio, :checkbox', context).once('viewsImplicitFormSubmission', function () {
+    $(this).keypress(function (event) {
       if (event.which == 13) {
         var formId = this.form.id;
         if (formId && settings.viewsImplicitFormSubmission && settings.viewsImplicitFormSubmission[formId] && settings.viewsImplicitFormSubmission[formId].defaultButton) {
@@ -865,7 +869,7 @@ Drupal.behaviors.viewsUiChangeDefaultWidget.attach = function (context, settings
     }
   }
   // Update on widget change.
-  $('input[name="options[group_info][multiple]"]').change(function() {
+  $('input[name="options[group_info][multiple]"]').change(function () {
     change_default_widget($(this).get(0).checked);
   });
   // Update the first time the form is rendered.
@@ -905,18 +909,18 @@ Drupal.viewsUi.Checkboxifier.prototype.clickHandler = function (e) {
 Drupal.behaviors.viewsUiOverrideSelect = {};
 Drupal.behaviors.viewsUiOverrideSelect.attach = function (context, settings) {
   var $ = jQuery;
-  $('#edit-override-dropdown', context).once('views-ui-override-button-text', function() {
+  $('#edit-override-dropdown', context).once('views-ui-override-button-text', function () {
     // Closures! :(
     var $submit = $('#edit-submit', context);
     var old_value = $submit.val();
 
     $submit.once('views-ui-override-button-text')
-      .bind('mouseup', function() {
+      .bind('mouseup', function () {
         $(this).val(old_value);
         return true;
       });
 
-    $(this).bind('change', function() {
+    $(this).bind('change', function () {
       if ($(this).val() == 'default') {
         $submit.val(Drupal.t('Apply (all displays)'));
       }
@@ -968,7 +972,7 @@ Drupal.viewsUi.resizeModal = function (e, no_shrink) {
   scrollHeight += parseInt($scroll.css('padding-top'));
   scrollHeight += parseInt($scroll.css('padding-bottom'));
 
-  $scroll.children().each(function() {
+  $scroll.children().each(function () {
     var w = $(this).innerWidth();
     if (w > width) {
       width = w;
@@ -1023,7 +1027,7 @@ Drupal.viewsUi.resizeModal = function (e, no_shrink) {
 
 };
 
-jQuery(function() {
+jQuery(function () {
   jQuery(window).bind('resize', Drupal.viewsUi.resizeModal);
   jQuery(window).bind('scroll', Drupal.viewsUi.resizeModal);
 });

@@ -65,7 +65,7 @@ class views_handler_argument_many_to_one extends views_handler_argument {
   public function options_form(&$form, &$form_state) {
     parent::options_form($form, $form_state);
 
-    // allow + for or, , for and
+    // Allow + for or, , for and.
     if (!empty($this->definition['numeric'])) {
       $form['break_phrase'] = array(
         '#type' => 'checkbox',
@@ -150,8 +150,7 @@ class views_handler_argument_many_to_one extends views_handler_argument {
       $this->operator = 'or';
     }
 
-    // @todo -- both of these should check definition for alternate keywords.
-
+    // @todo Both of these should check definition for alternate keywords.
     if (empty($this->value)) {
       return !empty($this->definition['empty field name']) ? $this->definition['empty field name'] : t('Uncategorized');
     }

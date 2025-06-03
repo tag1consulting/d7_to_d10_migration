@@ -11,6 +11,10 @@
  *
  */
 class ViewsBasicTest extends ViewsSqlTest {
+
+  /**
+   *
+   */
   public static function getInfo() {
     return array(
       'name' => 'Basic query test',

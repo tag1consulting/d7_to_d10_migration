@@ -58,11 +58,11 @@ class views_handler_argument_field_list extends views_handler_argument_numeric {
    */
   public function summary_name($data) {
     $value = $data->{$this->name_alias};
-    // If the list element has a human readable name show it,
+    // If the list element has a human readable name then show it.
     if (isset($this->allowed_values[$value]) && !empty($this->options['summary']['human'])) {
       return field_filter_xss($this->allowed_values[$value]);
     }
-    // Else fallback to the key.
+    // Otherwise, fallback to the key.
     else {
       return check_plain($value);
     }

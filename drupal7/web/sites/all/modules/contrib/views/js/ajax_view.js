@@ -8,9 +8,9 @@
    * Attaches the AJAX behavior to exposed filter forms and key views links.
    */
   Drupal.behaviors.ViewsAjaxView = {};
-  Drupal.behaviors.ViewsAjaxView.attach = function() {
+  Drupal.behaviors.ViewsAjaxView.attach = function () {
     if (Drupal.settings && Drupal.settings.views && Drupal.settings.views.ajaxViews) {
-      $.each(Drupal.settings.views.ajaxViews, function(i, settings) {
+      $.each(Drupal.settings.views.ajaxViews, function (i, settings) {
         Drupal.views.instances[i] = new Drupal.views.ajaxView(settings);
       });
     }
@@ -22,7 +22,7 @@
   /**
    * JavaScript object for a certain view.
    */
-  Drupal.views.ajaxView = function(settings) {
+  Drupal.views.ajaxView = function (settings) {
     var selector = '.view-dom-id-' + settings.view_dom_id;
     this.$view = $(selector);
 
@@ -91,7 +91,7 @@
     });
   };
 
-  Drupal.views.ajaxView.prototype.attachExposedFormAjax = function() {
+  Drupal.views.ajaxView.prototype.attachExposedFormAjax = function () {
     var button = $('input[type=submit], button[type=submit], input[type=image]', this.$exposed_form);
     button = button[0];
 
@@ -108,7 +108,7 @@
   /**
    * Attach the ajax behavior to each link.
    */
-  Drupal.views.ajaxView.prototype.attachPagerAjax = function() {
+  Drupal.views.ajaxView.prototype.attachPagerAjax = function () {
     this.$view.find('ul.pager > li > a, ol.pager > li > a, th.views-field a, .attachment .views-summary a')
       .each(jQuery.proxy(this.attachPagerLinkAjax, this));
   };
@@ -116,7 +116,7 @@
   /**
    * Attach the ajax behavior to a single link.
    */
-  Drupal.views.ajaxView.prototype.attachPagerLinkAjax = function(id, link) {
+  Drupal.views.ajaxView.prototype.attachPagerLinkAjax = function (id, link) {
     var $link = $(link);
     var viewData = {};
     var href = $link.attr('href');

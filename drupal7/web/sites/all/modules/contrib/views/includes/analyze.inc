@@ -106,7 +106,7 @@ function views_ui_views_analyze($view) {
   // You can give a page display the same path as an alias existing in the
   // system, so the alias will not work anymore. Report this to the user,
   // because they probably wanted something else.
-  foreach ($view->display as $id => $display) {
+  foreach ($view->display as $display) {
     if (empty($display->handler)) {
       continue;
     }

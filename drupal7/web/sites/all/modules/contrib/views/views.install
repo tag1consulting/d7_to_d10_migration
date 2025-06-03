@@ -102,9 +102,9 @@ function views_schema_6000() {
         'current_version' => '3.0',
       ),
       'object' => 'view',
-      // the callback to load the displays.
+      // The callback to load the displays.
       'subrecords callback' => 'views_load_display_records',
-      // the variable that holds enabled/disabled status.
+      // The variable that holds enabled/disabled status.
       'status' => 'views_defaults',
       // CRUD callbacks.
       'create callback' => 'views_new_view',
@@ -149,7 +149,7 @@ function views_schema_6000() {
       'base_table' => array(
         'type' => 'varchar',
         'length' => '32',
-  // Updated to '64' in views_schema_6005()
+    // Updated to '64' in views_schema_6005()
         'default' => '',
         'not null' => TRUE,
         'description' => 'What table this view is based on, such as node, user, comment, or term.',
@@ -204,7 +204,7 @@ function views_schema_6000() {
         'description' => 'The order in which this display is loaded.',
       ),
       'display_options' => array(
-        // Type corrected in update 6009
+        // Type corrected in update 6009.
         'type' => 'blob',
         'description' => 'A serialized array of options for this display; it contains options that are generally only pertinent to that display plugin type.',
         'serialize' => TRUE,
@@ -244,7 +244,7 @@ function views_schema_6000() {
       ),
       'data' => array(
         'type' => 'blob',
-  // Updated to 'text' (with size => 'big') in views_schema_6004()
+    // Updated to 'text' (with size => 'big') in views_schema_6004()
         'description' => 'Serialized data being stored.',
         'serialize' => TRUE,
       ),
@@ -311,6 +311,10 @@ function views_schema_6003() {
   unset($schema['views_view']['unique key']);
   return $schema;
 }
+
+/**
+ *
+ */
 function views_update_6003() {
   db_add_unique_key('views_view', 'name', array('name'));
 }
@@ -325,6 +329,10 @@ function views_schema_6004() {
   $schema['views_object_cache']['fields']['data']['size'] = 'big';
   return $schema;
 }
+
+/**
+ *
+ */
 function views_update_6004() {
   $new_field = array(
     'type' => 'text',
@@ -347,6 +355,10 @@ function views_schema_6005() {
   $schema['views_view']['fields']['base_table']['length'] = 64;
   return $schema;
 }
+
+/**
+ *
+ */
 function views_update_6005() {
   $new_field = array(
     'type' => 'varchar',
@@ -368,6 +380,10 @@ function views_schema_6006() {
   $schema['cache_views_data']['fields']['serialized']['default'] = 1;
   return $schema;
 }
+
+/**
+ *
+ */
 function views_update_6006() {
   $table = drupal_get_schema_unprocessed('system', 'cache');
   $table['description'] = 'Cache table for views to store pre-rendered queries, results, and display output.';
@@ -420,6 +436,9 @@ function views_schema_6009() {
   return $schema;
 }
 
+/**
+ *
+ */
 function views_update_6009() {
   $schema = views_schema_6009();
 
@@ -497,7 +516,6 @@ function views_update_6012() {
     ->fields(array('cache' => DRUPAL_NO_CACHE));
 }
 
-
 /**
  * Add a human readable name.
  */
@@ -512,6 +530,9 @@ function views_schema_6013() {
   return $schema;
 }
 
+/**
+ *
+ */
 function views_update_6013() {
   // Check because D6 installs may already have added this.
   if (!db_field_exists('views_view', 'human_name')) {
@@ -527,6 +548,9 @@ function views_update_6013() {
   }
 }
 
+/**
+ *
+ */
 function views_schema_6014() {
   $schema = views_schema(__FUNCTION__);
   $schema['views_view']['fields']['core'] = array(
@@ -599,9 +623,13 @@ function views_update_7001() {
   }
 }
 
+/**
+ *
+ */
 function views_schema_7300() {
   return views_schema_6013();
 }
+
 /**
  * Make sure the human_name field is added to the views_view table.
  *
@@ -615,6 +643,9 @@ function views_update_7300() {
   views_update_6013();
 }
 
+/**
+ *
+ */
 function views_schema_7301() {
   $schema = views_schema(__FUNCTION__);
   $schema['views_view']['fields']['name']['length'] = 128;

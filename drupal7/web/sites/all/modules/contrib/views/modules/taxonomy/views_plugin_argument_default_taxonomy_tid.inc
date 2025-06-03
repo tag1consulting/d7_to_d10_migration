@@ -60,7 +60,7 @@ class views_plugin_argument_default_taxonomy_tid extends views_plugin_argument_d
     $form['limit'] = array(
       '#type' => 'checkbox',
       '#title' => t('Limit terms by vocabulary'),
-      '#default_value'=> $this->options['limit'],
+      '#default_value' => $this->options['limit'],
       '#process' => array('form_process_checkbox', 'ctools_dependent_process'),
       '#dependency' => array(
         'edit-options-argument-default-taxonomy-tid-node' => array(1),
@@ -90,7 +90,7 @@ class views_plugin_argument_default_taxonomy_tid extends views_plugin_argument_d
     $form['anyall'] = array(
       '#type' => 'radios',
       '#title' => t('Multiple-value handling'),
-      '#default_value'=> $this->options['anyall'],
+      '#default_value' => $this->options['anyall'],
       '#process' => array('form_process_radios', 'ctools_dependent_process'),
       '#options' => array(
         ',' => t('Filter to items that share all terms'),
@@ -145,7 +145,7 @@ class views_plugin_argument_default_taxonomy_tid extends views_plugin_argument_d
         }
         if (!empty($this->options['limit'])) {
           $tids = array();
-          // filter by vocabulary
+          // Filter by vocabulary.
           foreach ($taxonomy as $tid => $vocab) {
             if (!empty($this->options['vocabularies'][$vocab])) {
               $tids[] = $tid;

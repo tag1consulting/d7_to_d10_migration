@@ -42,7 +42,7 @@ class view extends views_db_object {
   /**
    * The id of the view, which is used only for views in the database.
    *
-   * @var number
+   * @var int
    */
   public $vid;
 
@@ -134,29 +134,43 @@ class view extends views_db_object {
    */
   public $result = array();
 
-  // May be used to override the current pager info.
+  /**
+   * May be used to override the current pager info.
+   */
   public $current_page = NULL;
   public $items_per_page = NULL;
   public $offset = NULL;
   public $total_rows = NULL;
 
-  // Places to put attached renderings.
+  /**
+   * Places to put attached renderings.
+   */
   public $attachment_before = '';
   public $attachment_after = '';
 
-  // Exposed widget input.
+  /**
+   * Exposed widget input.
+   */
   public $exposed_data = array();
   public $exposed_input = array();
-  // Exposed widget input directly from the $form_state['values'].
+  /**
+   * Exposed widget input directly from the $form_state['values'].
+   */
   public $exposed_raw_input = array();
 
-  // Used to store views that were previously running if we recurse.
+  /**
+   * Used to store views that were previously running if we recurse.
+   */
   public $old_view = array();
 
-  // To avoid recursion in views embedded into areas.
+  /**
+   * To avoid recursion in views embedded into areas.
+   */
   public $parent_views = array();
 
-  // Is the current stored view runned as an attachment to another view.
+  /**
+   * Is the current stored view runned as an attachment to another view.
+   */
   public $is_attachment = NULL;
 
   // Stores the next steps of form items to handle.
@@ -331,7 +345,7 @@ class view extends views_db_object {
    * Returns the complete list of dependent objects in a view, for the purpose
    * of initialization and loading/saving to/from the database.
    */
-  static function db_objects() {
+  public static function db_objects() {
     return array('display');
   }
 
@@ -638,7 +652,7 @@ class view extends views_db_object {
 
     // For each relationship we have, make sure we mark the base it provides as
     // available.
-    foreach ($this->display_handler->get_option('relationships') as $id => $options) {
+    foreach ($this->display_handler->get_option('relationships') as $options) {
       $options['table'] = views_move_table($options['table']);
       $data = views_fetch_data($options['table'], FALSE);
       if (isset($data[$options['field']]['relationship']['base'])) {
@@ -821,7 +835,7 @@ class view extends views_db_object {
       return TRUE;
     }
 
-    // build arguments.
+    // Build arguments.
     $position = -1;
 
     // Create a title for use in the breadcrumb trail.
@@ -854,7 +868,7 @@ class view extends views_db_object {
       if (isset($arg) || $argument->has_default_argument()) {
         if (!isset($arg)) {
           $arg = $argument->get_default_argument();
-          // make sure default args get put back.
+          // Make sure default args get put back.
           if (isset($arg)) {
             $this->args[$position] = $arg;
           }
@@ -905,7 +919,7 @@ class view extends views_db_object {
         $breadcrumb_args[] = $arg;
       }
       else {
-        // determine default condition and handle.
+        // Determine default condition and handle.
         $status = $argument->default_action();
         break;
       }
@@ -914,7 +928,7 @@ class view extends views_db_object {
       unset($argument);
     }
 
-    // set the title in the build info.
+    // Set the title in the build info.
     if (!empty($title)) {
       $this->build_info['title'] = $title;
     }
@@ -932,7 +946,7 @@ class view extends views_db_object {
     if (!empty($this->query)) {
       $class = get_class($this->query);
       if ($class && $class != 'stdClass') {
-        // return if query is already initialized.
+        // Return if query is already initialized.
         return TRUE;
       }
     }
@@ -1070,7 +1084,7 @@ class view extends views_db_object {
       if ($this->style_plugin->build_sort()) {
         $this->_build('sort');
       }
-      // allow the plugin to build second sorts as well.
+      // Allow the plugin to build second sorts as well.
       $this->style_plugin->build_sort_post();
     }
 
@@ -1122,13 +1136,12 @@ class view extends views_db_object {
    * Internal method to build an individual set of handlers.
    *
    * @param string $key
-   *    The type of handlers (filter etc.) which should be iterated over to
+   *   The type of handlers (filter etc.) which should be iterated over to
    *    build the relationship and query information.
    */
   public function _build($key) {
     $handlers = &$this->$key;
     foreach ($handlers as $id => $data) {
-
       if (!empty($handlers[$id]) && is_object($handlers[$id])) {
         $multiple_exposed_input = array(0 => NULL);
         if ($handlers[$id]->multiple_exposed_input()) {
@@ -1460,7 +1473,7 @@ class view extends views_db_object {
    * Unset the current view, mostly.
    */
   public function post_execute() {
-    // unset current view so we can be properly destructed later on.
+    // Unset current view so we can be properly destructed later on.
     // Return the previous value in case we're an attachment.
     if ($this->old_view) {
       $old_view = array_pop($this->old_view);
@@ -1648,7 +1661,7 @@ class view extends views_db_object {
       // Exclude arguments that were computed, not passed on the URL.
       $position = 0;
       if (!empty($this->argument)) {
-        foreach ($this->argument as $argument_id => $argument) {
+        foreach ($this->argument as $argument) {
           if (!empty($argument->options['default_argument_skip_url'])) {
             unset($args[$position]);
           }
@@ -1814,7 +1827,7 @@ class view extends views_db_object {
    * views::load(), that would be very slow.  Buiding the views externally from
    * unified queries is much faster.
    */
-  static function load_views() {
+  public static function load_views() {
     $result = db_query("SELECT DISTINCT v.* FROM {views_view} v");
     $views = array();
 
@@ -1885,7 +1898,7 @@ class view extends views_db_object {
     try {
       // If we have no vid or our vid is a string, this is a new view.
       if (!empty($this->vid)) {
-        // remove existing table entries.
+        // Remove existing table entries.
         foreach ($this->db_objects() as $key) {
           db_delete('views_' . $key)
             ->condition('vid', $this->vid)
@@ -1919,11 +1932,11 @@ class view extends views_db_object {
   /**
    * Save a row to the database for the given key.
    *
-   * i.e. one of the keys from view::db_objects().
+   * I.e. one of the keys from view::db_objects().
    */
   public function _save_rows($key) {
     $count = 0;
-    foreach ($this->$key as $position => $object) {
+    foreach ($this->$key as $object) {
       $object->position = ++$count;
       $object->vid = $this->vid;
       $object->save_row();
@@ -1998,7 +2011,7 @@ class view extends views_db_object {
   }
 
   /**
-   * Make a copy of this view with IDs, handlers sanitized
+   * Make a copy of this view with IDs, handlers sanitized.
    *
    * I'd call this clone() but it's reserved.
    */
@@ -2019,7 +2032,7 @@ class view extends views_db_object {
    * This will completely wipe a view clean so it can be considered fresh.
    *
    * @return view
-   *    The cloned view.
+   *   The cloned view.
    */
   public function clone_view() {
     $clone = clone $this;
@@ -2539,15 +2552,6 @@ class views_db_object {
       'field' => $field,
     ) + $options;
 
-    if (!empty($types[$type]['type'])) {
-      $handler_type = $types[$type]['type'];
-    }
-    else {
-      $handler_type = $type;
-    }
-
-    $handler = views_get_handler($table, $field, $handler_type);
-
     $fields[$id] = $new_item;
     $this->display[$display_id]->handler->set_option($types[$type]['plural'], $fields);
 
@@ -2646,6 +2650,7 @@ class views_display extends views_db_object {
   public $display_options;
 
   public $db_table = 'views_display';
+
   public function __construct($init = TRUE) {
     parent::init($init);
   }

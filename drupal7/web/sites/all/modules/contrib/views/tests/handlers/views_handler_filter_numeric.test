@@ -9,8 +9,11 @@
  * Tests the numeric filter handler.
  */
 class ViewsHandlerFilterNumericTest extends ViewsSqlTest {
-  var $column_map = array();
+  public $column_map = array();
 
+  /**
+   *
+   */
   public static function getInfo() {
     return array(
       'name' => 'Filter: Numeric',
@@ -28,7 +31,7 @@ class ViewsHandlerFilterNumericTest extends ViewsSqlTest {
       'name' => 'Charles',
       'age' => NULL,
       'job' => 'Bassist',
-        'created' => gmmktime(6, 30, 10, 1, 1, 2001),
+      'created' => gmmktime(6, 30, 10, 1, 1, 2001),
     );
     return $data_set;
   }
@@ -55,7 +58,10 @@ class ViewsHandlerFilterNumericTest extends ViewsSqlTest {
     );
   }
 
-  function viewsData() {
+  /**
+   *
+   */
+  public function viewsData() {
     $data = parent::viewsData();
     $data['views_test']['age']['filter']['allow empty'] = TRUE;
     $data['views_test']['id']['filter']['allow empty'] = FALSE;
@@ -63,6 +69,9 @@ class ViewsHandlerFilterNumericTest extends ViewsSqlTest {
     return $data;
   }
 
+  /**
+   *
+   */
   public function testFilterNumericSimple() {
     $view = $this->getBasicView();
 
@@ -88,11 +97,14 @@ class ViewsHandlerFilterNumericTest extends ViewsSqlTest {
     $this->assertIdenticalResultset($view, $resultset, $this->column_map);
   }
 
+  /**
+   *
+   */
   public function testFilterNumericExposedGroupedSimple() {
     $filters = $this->getGroupedExposedFilters();
     $view = $this->getBasicPageView();
 
-    // Filter: Age, Operator: =, Value: 28
+    // Filter: Age, Operator: =, Value: 28.
     $filters['age']['group_info']['default_group'] = 1;
     $view->set_display('page_1');
     $view->display['page_1']->handler->override_option('filters', $filters);
@@ -107,6 +119,9 @@ class ViewsHandlerFilterNumericTest extends ViewsSqlTest {
     $this->assertIdenticalResultset($view, $resultset, $this->column_map);
   }
 
+  /**
+   *
+   */
   public function testFilterNumericBetween() {
     $view = $this->getBasicView();
 
@@ -179,11 +194,14 @@ class ViewsHandlerFilterNumericTest extends ViewsSqlTest {
     $this->assertIdenticalResultset($view, $resultset, $this->column_map);
   }
 
+  /**
+   *
+   */
   public function testFilterNumericExposedGroupedBetween() {
     $filters = $this->getGroupedExposedFilters();
     $view = $this->getBasicPageView();
 
-    // Filter: Age, Operator: between, Value: 26 and 29
+    // Filter: Age, Operator: between, Value: 26 and 29.
     $filters['age']['group_info']['default_group'] = 2;
     $view->set_display('page_1');
     $view->display['page_1']->handler->override_option('filters', $filters);
@@ -206,11 +224,14 @@ class ViewsHandlerFilterNumericTest extends ViewsSqlTest {
     $this->assertIdenticalResultset($view, $resultset, $this->column_map);
   }
 
+  /**
+   *
+   */
   public function testFilterNumericExposedGroupedNotBetween() {
     $filters = $this->getGroupedExposedFilters();
     $view = $this->getBasicPageView();
 
-    // Filter: Age, Operator: not between, Value: 26 and 29
+    // Filter: Age, Operator: not between, Value: 26 and 29.
     $filters['age']['group_info']['default_group'] = 3;
     $view->set_display('page_1');
     $view->display['page_1']->handler->override_option('filters', $filters);
@@ -233,7 +254,9 @@ class ViewsHandlerFilterNumericTest extends ViewsSqlTest {
     $this->assertIdenticalResultset($view, $resultset, $this->column_map);
   }
 
-
+  /**
+   *
+   */
   public function testFilterNumericEmpty() {
     $view = $this->getBasicView();
 
@@ -297,7 +320,9 @@ class ViewsHandlerFilterNumericTest extends ViewsSqlTest {
     $this->assertIdenticalResultset($view, $resultset, $this->column_map);
   }
 
-
+  /**
+   *
+   */
   public function testFilterNumericExposedGroupedEmpty() {
     $filters = $this->getGroupedExposedFilters();
     $view = $this->getBasicPageView();
@@ -317,6 +342,9 @@ class ViewsHandlerFilterNumericTest extends ViewsSqlTest {
     $this->assertIdenticalResultset($view, $resultset, $this->column_map);
   }
 
+  /**
+   *
+   */
   public function testFilterNumericExposedGroupedNotEmpty() {
     $filters = $this->getGroupedExposedFilters();
     $view = $this->getBasicPageView();
@@ -367,7 +395,6 @@ class ViewsHandlerFilterNumericTest extends ViewsSqlTest {
     );
 
     $view->display['default']->handler->override_option('filters', $filters);
-
 
     $this->executeView($view);
 
@@ -617,6 +644,9 @@ class ViewsHandlerFilterNumericTest extends ViewsSqlTest {
     $this->assertIdenticalResultset($view, $resultset, $this->column_map, 'Identical result set for ' . $operator . ' with leftover values from previous operation.');
   }
 
+  /**
+   *
+   */
   public function testAllowEmpty() {
     $view = $this->getBasicView();
 
@@ -647,6 +677,9 @@ class ViewsHandlerFilterNumericTest extends ViewsSqlTest {
     $this->assertTrue(isset($age_operators['not empty']));
   }
 
+  /**
+   *
+   */
   protected function getGroupedExposedFilters() {
     $filters = array(
       'age' => array(

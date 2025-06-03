@@ -9,6 +9,10 @@
  * Tests abstract handlers of views.
  */
 class ViewsHandlersTest extends ViewsSqlTest {
+
+  /**
+   *
+   */
   public static function getInfo() {
     return array(
       'name' => 'Handlers test',
@@ -17,7 +21,10 @@ class ViewsHandlersTest extends ViewsSqlTest {
     );
   }
 
-  function testFilterInOperatorUi() {
+  /**
+   *
+   */
+  public function testFilterInOperatorUi() {
     $admin_user = $this->drupalCreateUser(array('administer views', 'administer site configuration'));
     $this->drupalLogin($admin_user);
     menu_rebuild();
@@ -37,19 +44,19 @@ class ViewsHandlersTest extends ViewsSqlTest {
   /**
    * Tests views_break_phrase_string function.
    */
-  function test_views_break_phrase_string() {
+  public function test_views_break_phrase_string() {
     $empty_stdclass = new stdClass();
     $empty_stdclass->operator = 'or';
     $empty_stdclass->value = array();
 
     $null = NULL;
-    // check defaults.
+    // Check defaults.
     $this->assertEqual($empty_stdclass, views_break_phrase_string('', $null));
 
     $handler = views_get_handler('node', 'title', 'argument');
     $this->assertEqual($handler, views_break_phrase_string('', $handler));
 
-    // test ors.
+    // Test ors.
     $handler = views_break_phrase_string('word1 word2+word');
     $this->assertEqualValue(array('word1', 'word2', 'word'), $handler);
     $this->assertEqual('or', $handler->operator);
@@ -66,7 +73,7 @@ class ViewsHandlersTest extends ViewsSqlTest {
     $this->assertEqualValue(array('wõrd1', 'wõrd2', 'wõrd'), $handler);
     $this->assertEqual('or', $handler->operator);
 
-    // test ands.
+    // Test ands.
     $handler = views_break_phrase_string('word1,word2,word');
     $this->assertEqualValue(array('word1', 'word2', 'word'), $handler);
     $this->assertEqual('and', $handler->operator);
@@ -83,7 +90,7 @@ class ViewsHandlersTest extends ViewsSqlTest {
     $this->assertEqualValue(array('wõrd1', 'wõrd2', 'wõrd'), $handler);
     $this->assertEqual('and', $handler->operator);
 
-    // test a single word.
+    // Test a single word.
     $handler = views_break_phrase_string('word');
     $this->assertEqualValue(array('word'), $handler);
     $this->assertEqual('and', $handler->operator);
@@ -92,23 +99,23 @@ class ViewsHandlersTest extends ViewsSqlTest {
   /**
    * Tests views_break_phrase function.
    */
-  function test_views_break_phrase() {
+  public function test_views_break_phrase() {
     $empty_stdclass = new stdClass();
     $empty_stdclass->operator = 'or';
     $empty_stdclass->value = array();
 
     $null = NULL;
-    // check defaults.
+    // Check defaults.
     $this->assertEqual($empty_stdclass, views_break_phrase('', $null));
 
     $handler = views_get_handler('node', 'title', 'argument');
     $this->assertEqual($handler, views_break_phrase('', $handler));
 
-    // Generate three random numbers which can be used below;
+    // Generate three random numbers which can be used below.
     $n1 = rand(0, 100);
     $n2 = rand(0, 100);
     $n3 = rand(0, 100);
-    // test ors.
+    // Test ORs.
     $this->assertEqualValue(array($n1, $n2, $n3), views_break_phrase("$n1 $n2+$n3", $handler));
     $this->assertEqual('or', $handler->operator);
     $this->assertEqualValue(array($n1, $n2, $n3), views_break_phrase("$n1+$n2+$n3", $handler));
@@ -118,7 +125,7 @@ class ViewsHandlersTest extends ViewsSqlTest {
     $this->assertEqualValue(array($n1, $n2, $n3), views_break_phrase("$n1 $n2++$n3", $handler));
     $this->assertEqual('or', $handler->operator);
 
-    // test ands.
+    // Test ANDs.
     $this->assertEqualValue(array($n1, $n2, $n3), views_break_phrase("$n1,$n2,$n3", $handler));
     $this->assertEqual('and', $handler->operator);
     $this->assertEqualValue(array($n1, $n2, $n3), views_break_phrase("$n1,,$n2,$n3", $handler));

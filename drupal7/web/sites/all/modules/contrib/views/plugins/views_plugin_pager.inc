@@ -8,7 +8,7 @@
 /**
  * @defgroup views_pager_plugins Views pager plugins
  * @{
- * @todo.
+ * @todo .
  *
  * @see hook_views_plugins()
  */
@@ -150,7 +150,7 @@ class views_plugin_pager extends views_plugin {
   /**
    * Determine if a pager needs a count query.
    *
-   * If a pager needs a count query, a simple query
+   * If a pager needs a count query, a simple query.
    */
   public function use_count_query() {
     return TRUE;
@@ -178,7 +178,7 @@ class views_plugin_pager extends views_plugin {
   }
 
   /**
-   * Modify the query for paging
+   * Modify the query for paging.
    *
    * This is called during the build phase and can directly modify the query.
    */

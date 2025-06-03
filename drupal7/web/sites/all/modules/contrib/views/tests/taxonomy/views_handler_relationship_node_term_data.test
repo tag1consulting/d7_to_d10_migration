@@ -9,6 +9,10 @@
  * Tests the relationship_node_term_data handler.
  */
 class ViewsHandlerRelationshipNodeTermDataTest extends ViewsSqlTest {
+
+  /**
+   *
+   */
   public static function getInfo() {
     return array(
       'name' => 'Tests handler relationship_node_term_data',
@@ -20,7 +24,7 @@ class ViewsHandlerRelationshipNodeTermDataTest extends ViewsSqlTest {
   /**
    * Returns a new term with random properties in vocabulary $vid.
    */
-  function createTerm($vocabulary) {
+  public function createTerm($vocabulary) {
     $term = new stdClass();
     $term->name = $this->randomName();
     $term->description = $this->randomName();
@@ -50,7 +54,10 @@ class ViewsHandlerRelationshipNodeTermDataTest extends ViewsSqlTest {
     $this->node = $this->drupalCreateNode($node);
   }
 
-  function testViewsHandlerRelationshipNodeTermData() {
+  /**
+   *
+   */
+  public function testViewsHandlerRelationshipNodeTermData() {
     $view = $this->view_taxonomy_node_term_data();
 
     $this->executeView($view, array($this->term_1->tid, $this->term_2->tid));
@@ -64,7 +71,10 @@ class ViewsHandlerRelationshipNodeTermDataTest extends ViewsSqlTest {
     $this->assertIdenticalResultset($view, $resultset, $this->column_map);
   }
 
-  function view_taxonomy_node_term_data() {
+  /**
+   *
+   */
+  public function view_taxonomy_node_term_data() {
     $view = new view();
     $view->name = 'test_taxonomy_node_term_data';
     $view->description = '';

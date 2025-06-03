@@ -13,12 +13,12 @@ class ViewsUserTestCase extends ViewsSqlTest {
   /**
    *
    */
-  var $users = array();
+  public $users = array();
 
   /**
    *
    */
-  var $nodes = array();
+  public $nodes = array();
 
   /**
    *
@@ -46,7 +46,7 @@ class ViewsUserTestCase extends ViewsSqlTest {
   /**
    * Add a view which has no explicit relationship to the author.
    *
-   * @todo: Remove the following comment once the relationship is required.
+   * @todo Remove the following comment once the relationship is required.
    * One day a view will require the relationship so it should still work
    */
   public function testRelationship() {
@@ -67,7 +67,7 @@ class ViewsUserTestCase extends ViewsSqlTest {
   /**
    *
    */
-  function test_view_user_relationship() {
+  public function test_view_user_relationship() {
     $view = new view();
     $view->name = 'test_user_relationship';
     $view->description = '';

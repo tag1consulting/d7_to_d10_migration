@@ -13,7 +13,7 @@
 function locale_views_data() {
   // Basic table information.
   // Define the base group of this table.
-  $data['locales_source']['table']['group']  = t('Locale source');
+  $data['locales_source']['table']['group'] = t('Locale source');
 
   // Advertise this table as a possible base table.
   $data['locales_source']['table']['base'] = array(
@@ -123,7 +123,7 @@ function locale_views_data() {
   // 'locales_target' table.
   // Define the base group of this table. Fields that don't have a group
   // defined will go into this field by default.
-  $data['locales_target']['table']['group']  = t('Locale target');
+  $data['locales_target']['table']['group'] = t('Locale target');
 
   // Join information.
   $data['locales_target']['table']['join'] = array(

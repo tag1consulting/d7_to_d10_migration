@@ -17,7 +17,6 @@ class views_handler_argument_aggregator_iid extends views_handler_argument_numer
    */
   public function title_query() {
     $titles = array();
-    $placeholders = implode(', ', array_fill(0, sizeof($this->value), '%d'));
 
     $result = db_select('aggregator_item', 'ai')
       ->condition('iid', $this->value, 'IN')

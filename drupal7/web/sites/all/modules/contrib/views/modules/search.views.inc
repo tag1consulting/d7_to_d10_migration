@@ -14,7 +14,7 @@ function search_views_data() {
   // Basic table information.
   // Define the base group of this table. Fields that don't have a group
   // defined will go into this field by default.
-  $data['search_index']['table']['group']  = t('Search');
+  $data['search_index']['table']['group'] = t('Search');
 
   // For other base tables, explain how we join.
   $data['search_index']['table']['join'] = array(
@@ -111,9 +111,9 @@ function search_views_data() {
 
   // Search filter.
   $data['search_index']['keys'] = array(
-    // The item it appears as on the UI,
+    // The item it appears as on the UI.
     'title' => t('Search Terms'),
-    // The help that appears on the UI,
+    // The help that appears on the UI.
     'help' => t('The terms to search for.'),
     // Information for searching terms using the full search syntax.
     'filter' => array(

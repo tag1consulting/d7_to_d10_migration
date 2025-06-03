@@ -296,14 +296,14 @@ class ViewsPagerTest extends ViewsSqlTest {
     $this->executeView($view);
     $this->assertEqual(count($view->result), 3, 'Make sure that only a certain count of items is returned');
 
-    // Test items per page = 0
+    // Test items per page = 0.
     $view = $this->viewPagerFullZeroItemsPerPage();
     $view->set_display('default');
     $this->executeView($view);
 
     $this->assertEqual(count($view->result), 11, 'All items are return');
 
-    // @todo test number of pages.
+    // @todo Test number of pages.
     // Test items per page = 0.
     $view->destroy();
 
@@ -328,7 +328,7 @@ class ViewsPagerTest extends ViewsSqlTest {
   /**
    *
    */
-  function viewPagerFullZeroItemsPerPage() {
+  public function viewPagerFullZeroItemsPerPage() {
     $view = new view();
     $view->name = 'view_pager_full_zero_items_per_page';
     $view->description = '';
@@ -371,7 +371,7 @@ class ViewsPagerTest extends ViewsSqlTest {
   /**
    *
    */
-  function viewsPagerFull() {
+  public function viewsPagerFull() {
     $view = new view();
     $view->name = 'test_pager_full';
     $view->description = '';
@@ -400,7 +400,7 @@ class ViewsPagerTest extends ViewsSqlTest {
   /**
    *
    */
-  function viewsPagerFullFields() {
+  public function viewsPagerFullFields() {
     $view = new view();
     $view->name = 'test_pager_full';
     $view->description = '';
@@ -459,7 +459,7 @@ class ViewsPagerTest extends ViewsSqlTest {
     $view->set_display('default');
     $this->executeView($view);
     $view->use_ajax = TRUE;
-    // force the value again here.
+    // Force the value again here.
     $view->query->pager = NULL;
     $output = $view->render();
     $this->assertEqual(preg_match('/<ul class="pager">/', $output), 0, t('The pager is not rendered.'));
@@ -468,7 +468,7 @@ class ViewsPagerTest extends ViewsSqlTest {
   /**
    * Test the api functions on the view object.
    */
-  function testPagerApi() {
+  public function testPagerApi() {
     $view = $this->viewsPagerFull();
     // On the first round don't initialize the pager.
     $this->assertEqual($view->get_items_per_page(), NULL, 'If the pager is not initialized and no manual override there is no items per page.');

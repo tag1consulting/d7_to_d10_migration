@@ -69,7 +69,7 @@ class views_object {
    * @see hook_views_plugin_option_definition_alter()
    * @see hook_views_handler_option_definition_alter()
    */
-  function altered_option_definition() {
+  public function altered_option_definition() {
     $definition = $this->option_definition();
     if (!empty($this->is_plugin)) {
       // Trigger hook_views_plugin_option_definition_alter().
@@ -154,7 +154,7 @@ class views_object {
       if (empty($localization_keys) && isset($this->localization_keys)) {
         $localization_keys = $this->localization_keys;
       }
-      // but plugins don't because there isn't a common init() these days.
+      // But plugins don't because there isn't a common init() these days.
       elseif (!empty($this->is_plugin) && empty($localization_keys)) {
         if ($this->plugin_type != 'display') {
           $localization_keys = array($this->view->current_display);

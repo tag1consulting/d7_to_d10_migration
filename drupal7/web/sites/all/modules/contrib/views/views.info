@@ -6,7 +6,9 @@ core = 7.x
 ; Always available CSS
 stylesheets[all][] = css/views.css
 
+; THe Views system has only one dependency, everything else is built into core.
 dependencies[] = ctools
+
 ; Handlers
 files[] = handlers/views_handler_area.inc
 files[] = handlers/views_handler_area_messages.inc
@@ -330,8 +332,8 @@ files[] = tests/views_clone.test
 files[] = tests/views_view.test
 files[] = tests/views_ui.test
 
-; Information added by Drupal.org packaging script on 2023-03-13
-version = "7.x-3.29"
+; Information added by Drupal.org packaging script on 2025-03-13
+version = "7.x-3.30"
 core = "7.x"
 project = "views"
-datestamp = "1678722019"
+datestamp = "1741861463"

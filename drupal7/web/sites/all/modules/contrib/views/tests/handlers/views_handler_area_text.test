@@ -11,6 +11,10 @@
  * @see views_handler_area_text
  */
 class ViewsHandlerAreaTextTest extends ViewsSqlTest {
+
+  /**
+   *
+   */
   public static function getInfo() {
     return array(
       'name' => 'Area: Text',
@@ -19,10 +23,13 @@ class ViewsHandlerAreaTextTest extends ViewsSqlTest {
     );
   }
 
+  /**
+   *
+   */
   public function testAreaText() {
     $view = $this->getBasicView();
 
-    // add a text header.
+    // Add a text header.
     $string = $this->randomName();
     $view->display['default']->handler->override_option('header', array(
       'area' => array(

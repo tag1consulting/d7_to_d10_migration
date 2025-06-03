@@ -13,19 +13,19 @@ interface ViewsWizardInterface {
   /**
    * Constructor.
    */
-  function __construct($plugin);
+  public function __construct($plugin);
 
   /**
    * For AJAX callbacks to build other elements in the "show" form.
    */
-  function build_form($form, &$form_state);
+  public function build_form($form, &$form_state);
 
   /**
    * Validate form and values.
    *
    * @return an array of form errors.
    */
-  function validate($form, &$form_state);
+  public function validate($form, &$form_state);
 
   /**
    * Create a new View from form values.
@@ -34,7 +34,7 @@ interface ViewsWizardInterface {
    *
    * @throws ViewsWizardException in the event of a problem.
    */
-  function create_view($form, &$form_state);
+  public function create_view($form, &$form_state);
 
 }
 
@@ -60,7 +60,7 @@ class ViewsUiBaseViewsWizard implements ViewsWizardInterface {
     'group' => 1,
   );
 
-  function __construct($plugin) {
+  public function __construct($plugin) {
     $this->base_table = $plugin['base_table'];
     $default = $this->filter_defaults;
 
@@ -82,7 +82,10 @@ class ViewsUiBaseViewsWizard implements ViewsWizardInterface {
     }
   }
 
-  function build_form($form, &$form_state) {
+  /**
+   *
+   */
+  public function build_form($form, &$form_state) {
     $style_options = views_fetch_plugin_names('style', 'normal', array($this->base_table));
     $feed_row_options = views_fetch_plugin_names('row', 'feed', array($this->base_table));
     $path_prefix = url(NULL, array('absolute' => TRUE)) . (variable_get('clean_url', 0) ? '' : '?q=');
@@ -333,7 +336,6 @@ class ViewsUiBaseViewsWizard implements ViewsWizardInterface {
    * Per default use fields with base field.
    */
   protected function row_style_options($type) {
-    $data = views_fetch_data($this->base_table);
     // Get all available row plugins by default.
     $options = views_fetch_plugin_names('row', 'normal', array($this->base_table));
     return $options;
@@ -468,6 +470,9 @@ class ViewsUiBaseViewsWizard implements ViewsWizardInterface {
     }
   }
 
+  /**
+   *
+   */
   protected function instantiate_view($form, &$form_state) {
     // Build the basic view properties.
     $view = views_new_view();
@@ -554,6 +559,7 @@ class ViewsUiBaseViewsWizard implements ViewsWizardInterface {
               $field['id'] = view::generate_item_id($field['id'], $display_options['default']['fields']);
               $display_options['default']['fields'][$field['id']] = $field;
             }
+            unset($field);
 
             $path_fields_added = TRUE;
           }
@@ -574,6 +580,7 @@ class ViewsUiBaseViewsWizard implements ViewsWizardInterface {
         }
       }
     }
+    unset($options);
   }
 
   /**
@@ -638,6 +645,7 @@ class ViewsUiBaseViewsWizard implements ViewsWizardInterface {
       $field = $data['table']['base']['defaults']['field'];
     }
     else {
+      // The field name identified here is used later on.
       foreach ($data as $field => $field_data) {
         if (isset($field_data['field']['handler'])) {
           break;
@@ -653,6 +661,9 @@ class ViewsUiBaseViewsWizard implements ViewsWizardInterface {
     return $display_options;
   }
 
+  /**
+   *
+   */
   protected function default_display_filters($form, $form_state) {
     $filters = array();
 
@@ -669,6 +680,9 @@ class ViewsUiBaseViewsWizard implements ViewsWizardInterface {
     return $filters;
   }
 
+  /**
+   *
+   */
   protected function default_display_filters_user($form, $form_state) {
     $filters = array();
 
@@ -734,6 +748,9 @@ class ViewsUiBaseViewsWizard implements ViewsWizardInterface {
     return $filters;
   }
 
+  /**
+   *
+   */
   protected function default_display_sorts($form, $form_state) {
     $sorts = array();
 
@@ -750,6 +767,9 @@ class ViewsUiBaseViewsWizard implements ViewsWizardInterface {
     return $sorts;
   }
 
+  /**
+   *
+   */
   protected function default_display_sorts_user($form, $form_state) {
     $sorts = array();
 
@@ -779,6 +799,9 @@ class ViewsUiBaseViewsWizard implements ViewsWizardInterface {
     return $sorts;
   }
 
+  /**
+   *
+   */
   protected function page_display_options($form, $form_state) {
     $display_options = array();
     $page = $form_state['values']['page'];
@@ -805,6 +828,9 @@ class ViewsUiBaseViewsWizard implements ViewsWizardInterface {
     return $display_options;
   }
 
+  /**
+   *
+   */
   protected function block_display_options($form, $form_state) {
     $display_options = array();
     $block = $form_state['values']['block'];
@@ -816,6 +842,9 @@ class ViewsUiBaseViewsWizard implements ViewsWizardInterface {
     return $display_options;
   }
 
+  /**
+   *
+   */
   protected function page_feed_display_options($form, $form_state) {
     $display_options = array();
     $display_options['pager']['type'] = 'some';
@@ -846,7 +875,7 @@ class ViewsUiBaseViewsWizard implements ViewsWizardInterface {
    *   The display which the options will be applied to. The default display
    *   will actually be assigned the options (and this display will inherit
    *   them) when possible.
-   * @param object$default_display
+   * @param object $default_display
    *   The default display, which will store the options when possible.
    */
   protected function set_default_options($options, $display, $default_display) {
@@ -899,6 +928,9 @@ class ViewsUiBaseViewsWizard implements ViewsWizardInterface {
     }
   }
 
+  /**
+   *
+   */
   protected function retrieve_validated_view($form, $form_state, $unset = TRUE) {
     $key = hash('sha256', serialize($form_state['values']));
     $view = (isset($this->validated_views[$key]) ? $this->validated_views[$key] : NULL);
@@ -908,6 +940,9 @@ class ViewsUiBaseViewsWizard implements ViewsWizardInterface {
     return $view;
   }
 
+  /**
+   *
+   */
   protected function set_validated_view($form, $form_state, $view) {
     $key = hash('sha256', serialize($form_state['values']));
     $this->validated_views[$key] = $view;
@@ -916,7 +951,7 @@ class ViewsUiBaseViewsWizard implements ViewsWizardInterface {
   /**
    * Instantiates a view and validates values.
    */
-  function validate($form, &$form_state) {
+  public function validate($form, &$form_state) {
     $view = $this->instantiate_view($form, $form_state);
     $errors = $view->validate();
     if (!is_array($errors) || empty($errors)) {
@@ -931,7 +966,7 @@ class ViewsUiBaseViewsWizard implements ViewsWizardInterface {
    *
    * @throws ViewsWizardException if the values have not been validated.
    */
-  function create_view($form, &$form_state) {
+  public function create_view($form, &$form_state) {
     $view = $this->retrieve_validated_view($form, $form_state);
     if (empty($view)) {
       throw new ViewsWizardException(t('Attempted to create_view with values that have not been validated'));

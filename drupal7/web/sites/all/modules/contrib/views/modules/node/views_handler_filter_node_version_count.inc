@@ -35,13 +35,6 @@ class views_handler_filter_node_version_count extends views_handler_filter_numer
    * {@inheritdoc}
    */
   public function op_empty($field) {
-    if ($this->operator == 'empty') {
-      $operator = "IS NULL";
-    }
-    else {
-      $operator = "IS NOT NULL";
-    }
-
     $this->query->add_where_expression($this->options['group'], '(SELECT COUNT(vid) FROM {node_revision} WHERE nid = {' . $this->table_alias . '}.nid) ' . $this->operator);
   }
 

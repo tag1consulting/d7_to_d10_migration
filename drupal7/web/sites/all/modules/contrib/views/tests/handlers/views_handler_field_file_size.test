@@ -11,6 +11,10 @@
  * @see CommonXssUnitTest
  */
 class ViewsHandlerTestFileSize extends ViewsSqlTest {
+
+  /**
+   *
+   */
   public static function getInfo() {
     return array(
       'name' => 'Field: file_size',
@@ -19,7 +23,10 @@ class ViewsHandlerTestFileSize extends ViewsSqlTest {
     );
   }
 
-  function dataSet() {
+  /**
+   *
+   */
+  public function dataSet() {
     $data = parent::dataSet();
     $data[0]['age'] = 0;
     $data[1]['age'] = 10;
@@ -29,13 +36,19 @@ class ViewsHandlerTestFileSize extends ViewsSqlTest {
     return $data;
   }
 
-  function viewsData() {
+  /**
+   *
+   */
+  public function viewsData() {
     $data = parent::viewsData();
     $data['views_test']['age']['field']['handler'] = 'views_handler_field_file_size';
 
     return $data;
   }
 
+  /**
+   *
+   */
   public function testFieldFileSize() {
     $view = $this->getBasicView();
 

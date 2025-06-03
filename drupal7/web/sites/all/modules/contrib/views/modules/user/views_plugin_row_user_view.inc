@@ -22,7 +22,9 @@ class views_plugin_row_user_view extends views_plugin_row {
    */
   public $base_field = 'uid';
 
-  // Store the users to be used for pre_render.
+  /**
+   * Store the users to be used for pre_render.
+   */
   public $users = array();
 
   /**

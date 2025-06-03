@@ -24,7 +24,7 @@ class ViewsHandlerFieldDateTest extends ViewsSqlTest {
   /**
    *
    */
-  function viewsData() {
+  public function viewsData() {
     $data = parent::viewsData();
     $data['views_test']['created']['field']['handler'] = 'views_handler_field_date';
     return $data;
@@ -42,7 +42,7 @@ class ViewsHandlerFieldDateTest extends ViewsSqlTest {
         'table' => 'views_test',
         'field' => 'created',
         'relationship' => 'none',
-        // c is iso 8601 date format.
+        // Use the ISO-8601 date format.
         // @see http://php.net/manual/en/function.date.php
         'custom_date_format' => 'c',
         'second_date_format' => 'custom',

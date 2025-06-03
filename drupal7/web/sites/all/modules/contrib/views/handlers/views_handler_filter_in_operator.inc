@@ -126,7 +126,7 @@ class views_handler_filter_in_operator extends views_handler_filter {
         'values' => 1,
       ),
     );
-    // if the definition allows for the empty operator, add it.
+    // If the definition allows for the empty operator, add it.
     if (!empty($this->definition['allow empty'])) {
       $operators += array(
         'empty' => array(
@@ -312,11 +312,9 @@ class views_handler_filter_in_operator extends views_handler_filter {
     // was not set, and the key to the checkbox if it is set.
     // Unfortunately, this means that if the key to that checkbox is 0,
     // we are unable to tell if that checkbox was set or not.
-
     // Luckily, the '#value' on the checkboxes form actually contains
     // *only* a list of checkboxes that were set, and we can use that
     // instead.
-
     $form_state['values']['options']['value'] = $form['value']['#value'];
   }
 

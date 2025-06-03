@@ -21,7 +21,7 @@ define('VIEWS_HANDLER_RENDER_TEXT_PHASE_SINGLE_ITEM', 0);
 /**
  * Indicator of the render_text() method for rendering the whole element.
  *
- * if no render_item() method is available.
+ * If no render_item() method is available.
  */
 define('VIEWS_HANDLER_RENDER_TEXT_PHASE_COMPLETELY', 1);
 
@@ -76,7 +76,7 @@ class views_handler_field extends views_handler {
   /**
    * Keeps track of the last render index.
    *
-   * @var int|NULL
+   * @var int|null
    */
   protected $last_render_index = NULL;
 
@@ -323,6 +323,7 @@ class views_handler_field extends views_handler {
       $class = $this->tokenize_value($class, $row_index);
       $class = views_clean_css_identifier($class);
     }
+    unset($class);
     return implode(' ', $classes);
   }
 
@@ -372,6 +373,7 @@ class views_handler_field extends views_handler {
       $class = $this->tokenize_value($class, $row_index);
       $class = views_clean_css_identifier($class);
     }
+    unset($class);
     return implode(' ', $classes);
   }
 
@@ -384,6 +386,7 @@ class views_handler_field extends views_handler {
       $class = $this->tokenize_value($class, $row_index);
       $class = views_clean_css_identifier($class);
     }
+    unset($class);
     return implode(' ', $classes);
   }
 
@@ -760,7 +763,7 @@ class views_handler_field extends views_handler {
         '#description' => t('Space-separated list of characters to remove from the URL path'),
         '#default_value' => $this->options['alter']['unwanted_characters'],
         '#dependency' => array(
-          'edit-options-alter-make-link' => array(1)
+          'edit-options-alter-make-link' => array(1),
         ),
         '#maxlength' => 255,
       );
@@ -835,7 +838,6 @@ class views_handler_field extends views_handler {
         ),
       );
 
-
       // Get a list of the available fields and arguments for token replacement.
       $options = array();
       foreach ($this->view->display_handler->get_handlers('field') as $field => $handler) {
@@ -847,7 +849,7 @@ class views_handler_field extends views_handler {
       }
       // This lets us prepare the key as we want it printed.
       $count = 0;
-      foreach ($this->view->display_handler->get_handlers('argument') as $arg => $handler) {
+      foreach ($this->view->display_handler->get_handlers('argument') as $handler) {
         $options[t('Arguments')]['%' . ++$count] = t('@argument title', array('@argument' => $handler->ui_name()));
         $options[t('Arguments')]['!' . $count] = t('@argument input', array('@argument' => $handler->ui_name()));
       }
@@ -1045,7 +1047,7 @@ If you would like to have the characters \'[\' and \']\' please use the html ent
   }
 
   /**
-   * Provide extra data to the administration form
+   * Provide extra data to the administration form.
    */
   public function admin_summary() {
     return $this->label();
@@ -1103,7 +1105,6 @@ If you would like to have the characters \'[\' and \']\' please use the html ent
     }
 
     if ($this->allow_advanced_render()) {
-      $tokens = NULL;
       if (method_exists($this, 'render_item')) {
         $items = array();
         foreach ($raw_items as $count => $item) {
@@ -1381,7 +1382,7 @@ If you would like to have the characters \'[\' and \']\' please use the html ent
     }
 
     $alt = strtr($alter['alt'], $tokens);
-    // Set the title attribute of the link only if it improves accessibility
+    // Set the title attribute of the link only if it improves accessibility.
     if ($alt && $alt != $text) {
       $options['attributes']['title'] = decode_entities($alt);
     }
@@ -1460,7 +1461,7 @@ If you would like to have the characters \'[\' and \']\' please use the html ent
       $tokens = $this->view->build_info['substitutions'];
     }
     $count = 0;
-    foreach ($this->view->display_handler->get_handlers('argument') as $arg => $handler) {
+    foreach ($this->view->display_handler->get_handlers('argument') as $handler) {
       $token = '%' . ++$count;
       if (!isset($tokens[$token])) {
         $tokens[$token] = '';
@@ -1721,6 +1722,7 @@ class views_handler_field_file_size extends views_handler_field {
       switch ($this->options['file_size_display']) {
         case 'bytes':
           return $value;
+
         case 'formatted':
         default:
           return format_size($value);

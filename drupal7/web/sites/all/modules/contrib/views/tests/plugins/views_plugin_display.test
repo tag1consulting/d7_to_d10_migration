@@ -24,11 +24,11 @@ class ViewsPluginDisplayTestCase extends ViewsSqlTest {
   /**
    * Tests the overriding of filter_groups.
    */
-  function testFilterGroupsOverriding() {
+  public function testFilterGroupsOverriding() {
     $view = $this->viewFilterGroupsUpdating();
     $view->init_display();
 
-    // mark is as overridden, yes FALSE, means overridden.
+    // Mark is as overridden, yes FALSE, means overridden.
     $view->display['page']->handler->set_override('filter_groups', FALSE);
     $this->assertFalse($view->display['page']->handler->is_defaulted('filter_groups'), "Take sure that 'filter_groups' is marked as overridden.");
     $this->assertFalse($view->display['page']->handler->is_defaulted('filters'), "Take sure that 'filters'' is marked as overridden.");
@@ -41,7 +41,7 @@ class ViewsPluginDisplayTestCase extends ViewsSqlTest {
    *
    * @return view
    */
-  function viewFilterGroupsOverriding() {
+  public function viewFilterGroupsOverriding() {
     $view = new view();
     $view->name = 'test_filter_group_override';
     $view->description = '';
@@ -93,7 +93,7 @@ class ViewsPluginDisplayTestCase extends ViewsSqlTest {
    * @see http://drupal.org/node/1259608
    * @see views_plugin_display::init()
    */
-  function testFilterGroupsUpdating() {
+  public function testFilterGroupsUpdating() {
     $view = $this->viewFilterGroupsUpdating();
     $view->init_display();
 
@@ -108,7 +108,7 @@ class ViewsPluginDisplayTestCase extends ViewsSqlTest {
    *
    * @return view
    */
-  function viewFilterGroupsUpdating() {
+  public function viewFilterGroupsUpdating() {
     $view = new view();
     $view->name = 'test_filter_groups';
     $view->description = '';

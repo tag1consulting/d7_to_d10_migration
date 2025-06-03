@@ -83,7 +83,7 @@ class views_plugin_display_feed extends views_plugin_display_page {
    * {@inheritdoc}
    */
   public function defaultable_sections($section = NULL) {
-    if (in_array($section, array('style_options', 'style_plugin', 'row_options', 'row_plugin',))) {
+    if (in_array($section, array('style_options', 'style_plugin', 'row_options', 'row_plugin'))) {
       return FALSE;
     }
 
@@ -109,7 +109,7 @@ class views_plugin_display_feed extends views_plugin_display_page {
 
     // Overrides for standard stuff.
     $options['style_plugin']['default'] = 'rss';
-    $options['style_options']['default']  = array('description' => '');
+    $options['style_options']['default'] = array('description' => '');
     $options['sitename_title']['default'] = FALSE;
     $options['row_plugin']['default'] = '';
     $options['defaults']['default']['style_plugin'] = FALSE;
@@ -245,7 +245,7 @@ class views_plugin_display_feed extends views_plugin_display_page {
       $clone->build_title();
       $plugin->attach_to($display_id, $this->get_path(), $clone->get_title());
 
-      // Clean up
+      // Clean up.
       $clone->destroy();
       unset($clone);
     }

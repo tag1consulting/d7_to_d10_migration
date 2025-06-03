@@ -15,7 +15,7 @@ function user_views_data() {
   // 'users' table.
   // Define the base group of this table. Fields that don't have a group
   // defined will go into this field by default.
-  $data['users']['table']['group']  = t('User');
+  $data['users']['table']['group'] = t('User');
 
   $data['users']['table']['base'] = array(
     'field' => 'uid',
@@ -42,9 +42,9 @@ function user_views_data() {
 
   // User ID / 'uid'.
   $data['users']['uid'] = array(
-    // The item it appears as on the UI,
+    // The item it appears as on the UI.
     'title' => t('Uid'),
-    // The help that appears on the UI,
+    // The help that appears on the UI.
     'help' => t('The user ID'),
     'field' => array(
       'handler' => 'views_handler_field_user',
@@ -125,9 +125,9 @@ function user_views_data() {
 
   // User name.
   $data['users']['name'] = array(
-    // The item it appears as on the UI,
+    // The item it appears as on the UI.
     'title' => t('Name'),
-    // The help that appears on the UI,
+    // The help that appears on the UI.
     'help' => t('The user or author name.'),
     'field' => array(
       'handler' => 'views_handler_field_user_name',
@@ -149,9 +149,9 @@ function user_views_data() {
   // Email address.
   // Note that this field implements field level access control.
   $data['users']['mail'] = array(
-    // The item it appears as on the UI,
+    // The item it appears as on the UI.
     'title' => t('E-mail'),
-    // The help that appears on the UI,
+    // The help that appears on the UI.
     'help' => t('E-mail address for a given user. This field is normally not shown to users, so be cautious when using it.'),
     'field' => array(
       'handler' => 'views_handler_field_user_mail',
@@ -170,7 +170,7 @@ function user_views_data() {
 
   // Language.
   $data['users']['language'] = array(
-    // The item it appears as on the UI,
+    // The item it appears as on the UI.
     'title' => t('Language'),
     'help' => t('Language of the user'),
     'field' => array(
@@ -191,9 +191,9 @@ function user_views_data() {
   // Picture.
   $data['users']['picture_fid']['moved to'] = array('users', 'picture');
   $data['users']['picture'] = array(
-    // The item it appears as on the UI,
+    // The item it appears as on the UI.
     'title' => t('Picture'),
-    // The help that appears on the UI,
+    // The help that appears on the UI.
     'help' => t("The user's picture, if allowed."),
     // Information for displaying the uid.
     'field' => array(
@@ -221,9 +221,9 @@ function user_views_data() {
 
   // Created field.
   $data['users']['created'] = array(
-    // The item it appears as on the UI,
+    // The item it appears as on the UI.
     'title' => t('Created date'),
-    // The help that appears on the UI,
+    // The help that appears on the UI.
     'help' => t('The date the user was created.'),
     'field' => array(
       'handler' => 'views_handler_field_date',
@@ -296,9 +296,9 @@ function user_views_data() {
   if (db_field_exists('users', 'changed')) {
     // Changed field.
     $data['users']['changed'] = array(
-      // The item it appears as on the UI,
+      // The item it appears as on the UI.
       'title' => t('Changed date'),
-      // The help that appears on the UI,
+      // The help that appears on the UI.
       'help' => t('The date the user was changed.'),
       'field' => array(
         'handler' => 'views_handler_field_date',
@@ -315,9 +315,9 @@ function user_views_data() {
 
   // Access field.
   $data['users']['access'] = array(
-    // The item it appears as on the UI,
+    // The item it appears as on the UI.
     'title' => t('Last access'),
-    // The help that appears on the UI,
+    // The help that appears on the UI.
     'help' => t("The user's last access date."),
     'field' => array(
       'handler' => 'views_handler_field_date',
@@ -333,9 +333,9 @@ function user_views_data() {
 
   // Login field.
   $data['users']['login'] = array(
-    // The item it appears as on the UI,
+    // The item it appears as on the UI.
     'title' => t('Last login'),
-    // The help that appears on the UI,
+    // The help that appears on the UI.
     'help' => t("The user's last login date."),
     'field' => array(
       'handler' => 'views_handler_field_date',
@@ -351,9 +351,9 @@ function user_views_data() {
 
   // Active status.
   $data['users']['status'] = array(
-    // The item it appears as on the UI,
+    // The item it appears as on the UI.
     'title' => t('Active status'),
-    // The help that appears on the UI,
+    // The help that appears on the UI.
     'help' => t('Whether a user is active or blocked.'),
     // Information for displaying a title as a field.
     'field' => array(
@@ -375,9 +375,9 @@ function user_views_data() {
 
   // Log field.
   $data['users']['signature'] = array(
-    // The item it appears as on the UI,
+    // The item it appears as on the UI.
     'title' => t('Signature'),
-    // The help that appears on the UI,
+    // The help that appears on the UI.
     'help' => t("The user's signature."),
     // Information for displaying a title as a field.
     'field' => array(
@@ -415,7 +415,7 @@ function user_views_data() {
 
   // ----------------------------------------------------------------------
   // 'users_roles' table.
-  $data['users_roles']['table']['group']  = t('User');
+  $data['users_roles']['table']['group'] = t('User');
 
   // Explain how this table joins to others.
   $data['users_roles']['table']['join'] = array(
@@ -487,7 +487,7 @@ function user_views_data() {
   );
 
   // 'permission' table.
-  $data['role_permission']['table']['group']  = t('User');
+  $data['role_permission']['table']['group'] = t('User');
   $data['role_permission']['table']['join'] = array(
      // Directly links to users table.
     'users' => array(
@@ -511,7 +511,7 @@ function user_views_data() {
 
   // ----------------------------------------------------------------------
   // 'authmap' table.
-  $data['authmap']['table']['group']  = t('User');
+  $data['authmap']['table']['group'] = t('User');
   $data['authmap']['table']['join'] = array(
      // Directly links to users table.
     'users' => array(

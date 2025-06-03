@@ -59,9 +59,6 @@ class views_plugin_argument_default_php extends views_plugin_argument_default {
    * {@inheritdoc}
    */
   public function get_argument() {
-    // set up variables to make it easier to reference during the argument.
-    $view = &$this->view;
-    $argument = &$this->argument;
     ob_start();
     $result = eval($this->options['code']);
     ob_end_clean();

@@ -9,6 +9,10 @@
  * Tests the core views_handler_filter_in_operator handler.
  */
 class ViewsHandlerFilterInOperator extends ViewsSqlTest {
+
+  /**
+   *
+   */
   public static function getInfo() {
     return array(
       'name' => 'Filter: in_operator',
@@ -17,13 +21,19 @@ class ViewsHandlerFilterInOperator extends ViewsSqlTest {
     );
   }
 
-  function viewsData() {
+  /**
+   *
+   */
+  public function viewsData() {
     $data = parent::viewsData();
     $data['views_test']['age']['filter']['handler'] = 'views_handler_filter_in_operator';
 
     return $data;
   }
 
+  /**
+   *
+   */
   public function testFilterInOperatorSimple() {
     $view = $this->getBasicView();
 
@@ -95,11 +105,14 @@ class ViewsHandlerFilterInOperator extends ViewsSqlTest {
     ));
   }
 
+  /**
+   *
+   */
   public function testFilterInOperatorGroupedExposedSimple() {
     $filters = $this->getGroupedExposedFilters();
     $view = $this->getBasicPageView();
 
-    // Filter: Age, Operator: in, Value: 26, 30
+    // Filter: Age, Operator: in, Value: 26, 30.
     $filters['age']['group_info']['default_group'] = 1;
     $view->set_display('page_1');
     $view->display['page_1']->handler->override_option('filters', $filters);
@@ -124,11 +137,14 @@ class ViewsHandlerFilterInOperator extends ViewsSqlTest {
     ));
   }
 
+  /**
+   *
+   */
   public function testFilterNotInOperatorGroupedExposedSimple() {
     $filters = $this->getGroupedExposedFilters();
     $view = $this->getBasicPageView();
 
-    // Filter: Age, Operator: in, Value: 26, 30
+    // Filter: Age, Operator: in, Value: 26, 30.
     $filters['age']['group_info']['default_group'] = 2;
     $view->set_display('page_1');
     $view->display['page_1']->handler->override_option('filters', $filters);
@@ -157,6 +173,9 @@ class ViewsHandlerFilterInOperator extends ViewsSqlTest {
     ));
   }
 
+  /**
+   *
+   */
   protected function getGroupedExposedFilters() {
     $filters = array(
       'age' => array(

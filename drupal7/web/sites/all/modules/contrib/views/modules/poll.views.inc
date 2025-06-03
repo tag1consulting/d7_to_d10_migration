@@ -12,7 +12,7 @@
  */
 function poll_views_data() {
   // Basic table information.
-  $data['poll']['table']['group']  = t('Poll');
+  $data['poll']['table']['group'] = t('Poll');
 
   // Join to 'node' as a base table.
   $data['poll']['table']['join'] = array(

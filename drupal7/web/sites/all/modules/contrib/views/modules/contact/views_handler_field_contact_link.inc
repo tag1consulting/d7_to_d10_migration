@@ -36,7 +36,6 @@ class views_handler_field_contact_link extends views_handler_field_user_link {
    * {@inheritdoc}
    */
   public function render_link($data, $values) {
-    global $user;
     $uid = $this->get_value($values, 'uid');
 
     if (empty($uid)) {

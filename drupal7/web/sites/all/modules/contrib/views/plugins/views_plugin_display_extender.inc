@@ -6,7 +6,7 @@
  */
 
 /**
- * @todo.
+ * @todo .
  *
  * @ingroup views_display_plugins
  */

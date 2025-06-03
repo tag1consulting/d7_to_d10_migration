@@ -44,7 +44,7 @@ class views_handler_sort_node_language extends views_handler_sort {
     $system_langcode = str_replace(array(
       '***CURRENT_LANGUAGE***',
       '***DEFAULT_LANGUAGE***',
-      ),
+    ),
       array(
         $language_content->language,
         $default_language,

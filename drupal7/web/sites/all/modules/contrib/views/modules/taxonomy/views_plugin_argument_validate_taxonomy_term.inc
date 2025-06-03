@@ -155,7 +155,7 @@ class views_plugin_argument_validate_taxonomy_term extends views_plugin_argument
           }
         }
 
-        // if unverified tids left - verify them and cache results.
+        // If unverified tids left - verify them and cache results.
         if (count($test)) {
           $query = db_select('taxonomy_term_data', 'td');
           $query->addTag('taxonomy_term_access');

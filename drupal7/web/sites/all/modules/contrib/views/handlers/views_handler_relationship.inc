@@ -67,7 +67,6 @@ class views_handler_relationship extends views_handler {
   public function option_definition() {
     $options = parent::option_definition();
 
-
     // Relationships definitions should define a default label, but if they
     // aren't get another default value.
     if (!empty($this->definition['label'])) {

@@ -41,7 +41,7 @@ function image_field_views_data_views_data_alter(&$data, $field) {
     if (isset($entity_info)) {
       $pseudo_field_name = 'reverse_' . $field['field_name'] . '_' . $entity_type;
 
-      list($label, $all_labels) = field_views_field_label($field['field_name']);
+      list($label) = field_views_field_label($field['field_name']);
       $entity = $entity_info['label'];
       if ($entity == t('Node')) {
         $entity = t('Content');

@@ -20,14 +20,20 @@ class views_handler_field_user_roles extends views_handler_field_prerender_list 
     $this->additional_fields['uid'] = array('table' => 'users', 'field' => 'uid');
   }
 
-  function option_definition() {
+  /**
+   *
+   */
+  public function option_definition() {
     $options = parent::option_definition();
     $options['display_roles'] = array('default' => array());
 
     return $options;
   }
 
-  function options_form(&$form, &$form_state) {
+  /**
+   *
+   */
+  public function options_form(&$form, &$form_state) {
     $roles = user_roles(TRUE);
     unset($roles[DRUPAL_AUTHENTICATED_RID]);
     if (!empty($roles)) {

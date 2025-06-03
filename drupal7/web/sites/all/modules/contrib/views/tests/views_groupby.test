@@ -21,9 +21,11 @@ class ViewsQueryGroupByTest extends ViewsSqlTest {
     );
   }
 
-  // tests ambiguous group by column error (postgresql)
+  /**
+   * Tests ambiguous group by column error (postgresql)
+   */
   public function testAggregateAmbiguity() {
-    // Create 4 nodes of type1
+    // Create 4 nodes of type1.
     $type1 = $this->drupalCreateContentType();
 
     $node_1 = array(
@@ -35,11 +37,14 @@ class ViewsQueryGroupByTest extends ViewsSqlTest {
     $this->drupalCreateNode($node_1);
 
     $view = $this->viewsAggregateAmbiguityView();
-    $output = $view->execute_display();
+    $view->execute_display();
 
     $this->assertEqual(count($view->result), 1, 'Make sure there are no ambiguity problems with the group by operation.');
   }
 
+  /**
+   *
+   */
   public function viewsAggregateAmbiguityView() {
     $view = new view();
     $view->name = 'aggregate_ambiguity';
@@ -97,7 +102,6 @@ class ViewsQueryGroupByTest extends ViewsSqlTest {
     $handler->display->display_options['arguments']['type']['default_argument_type'] = 'fixed';
     $handler->display->display_options['arguments']['type']['summary']['format'] = 'default_summary';
 
-
     return $view;
   }
 
@@ -105,7 +109,7 @@ class ViewsQueryGroupByTest extends ViewsSqlTest {
    * Tests aggregate count feature.
    */
   public function testAggregateCount() {
-    // Create 2 nodes of type1 and 3 nodes of type2
+    // Create 2 nodes of type1 and 3 nodes of type2.
     $type1 = $this->drupalCreateContentType();
     $type2 = $this->drupalCreateContentType();
 
@@ -125,7 +129,7 @@ class ViewsQueryGroupByTest extends ViewsSqlTest {
     $this->drupalCreateNode($node_2);
 
     $view = $this->viewsAggregateCountView();
-    $output = $view->execute_display();
+    $view->execute_display();
 
     $this->assertEqual(count($view->result), 2, 'Make sure the count of items is right.');
 
@@ -142,14 +146,14 @@ class ViewsQueryGroupByTest extends ViewsSqlTest {
   /**
    *
    */
-  // public function testAggregateSum() {
-  // }
+  // Public function testAggregateSum() {
+  // }.
 
   /**
    *
    */
   public function viewsAggregateCountView() {
-    $view = new view;
+    $view = new view();
     $view->name = 'aggregate_count';
     $view->description = '';
     $view->tag = '';
@@ -202,8 +206,8 @@ class ViewsQueryGroupByTest extends ViewsSqlTest {
    * @param array|null $values
    *   (optional) Expected values.
    */
-  function GroupByTestHelper($group_by = NULL, $values = NULL) {
-    // Create 4 nodes of type1 and 3 nodes of type2
+  public function GroupByTestHelper($group_by = NULL, $values = NULL) {
+    // Create 4 nodes of type1 and 3 nodes of type2.
     $type1 = $this->drupalCreateContentType();
     $type2 = $this->drupalCreateContentType();
 
@@ -224,7 +228,7 @@ class ViewsQueryGroupByTest extends ViewsSqlTest {
     $this->drupalCreateNode($node_2);
 
     $view = $this->viewsGroupByViewHelper($group_by);
-    $output = $view->execute_display();
+    $view->execute_display();
 
     $this->assertEqual(count($view->result), 2, 'Make sure the count of items is right.');
 
@@ -253,8 +257,8 @@ class ViewsQueryGroupByTest extends ViewsSqlTest {
   /**
    *
    */
-  function viewsGroupByViewHelper($group_by = NULL) {
-    $view = new view;
+  public function viewsGroupByViewHelper($group_by = NULL) {
+    $view = new view();
     $view->name = 'group_by_count';
     $view->description = '';
     $view->tag = '';
@@ -359,8 +363,7 @@ class ViewsQueryGroupByTest extends ViewsSqlTest {
    */
   public function testGroupByCountOnlyFilters() {
     // Check if GROUP BY and HAVING are included when a view
-    // Doesn't display SUM, COUNT, MAX... functions in SELECT statment
-
+    // Doesn't display SUM, COUNT, MAX... functions in SELECT statment.
     $type1 = $this->drupalCreateContentType();
 
     $node_1 = array(
@@ -371,7 +374,7 @@ class ViewsQueryGroupByTest extends ViewsSqlTest {
     }
 
     $view = $this->viewsGroupByCountViewOnlyFilters();
-    $output = $view->execute_display();
+    $view->execute_display();
 
     $this->assertTrue(strpos($view->build_info['query'], 'GROUP BY'), t('Make sure that GROUP BY is in the query'));
     $this->assertTrue(strpos($view->build_info['query'], 'HAVING'), t('Make sure that HAVING is in the query'));
@@ -380,8 +383,8 @@ class ViewsQueryGroupByTest extends ViewsSqlTest {
   /**
    *
    */
-  function viewsGroupByCountViewOnlyFilters() {
-    $view = new view;
+  public function viewsGroupByCountViewOnlyFilters() {
+    $view = new view();
     $view->name = 'group_by_in_filters';
     $view->description = '';
     $view->tag = '';
@@ -460,9 +463,9 @@ class ViewsUiGroupbyTestCase extends DrupalWebTestCase {
   /**
    * Tests whether basic saving works.
    *
-   * @todo: this should check the change of the settings as well.
+   * @todo This should check the change of the settings as well.
    */
-  function testGroupBySave() {
+  public function testGroupBySave() {
     $this->drupalGet('admin/structure/views/view/test_views_groupby_save/edit');
 
     $edit = array(

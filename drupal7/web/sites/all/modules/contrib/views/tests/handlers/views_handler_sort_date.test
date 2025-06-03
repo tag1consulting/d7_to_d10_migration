@@ -9,6 +9,10 @@
  * Tests for core views_handler_sort_date handler.
  */
 class ViewsHandlerSortDateTest extends ViewsSqlTest {
+
+  /**
+   *
+   */
   public static function getInfo() {
     return array(
       'name' => 'Sort: date',
@@ -17,6 +21,9 @@ class ViewsHandlerSortDateTest extends ViewsSqlTest {
     );
   }
 
+  /**
+   *
+   */
   protected function expectedResultSet($granularity, $reverse = TRUE) {
     $expected = array();
     if (!$reverse) {

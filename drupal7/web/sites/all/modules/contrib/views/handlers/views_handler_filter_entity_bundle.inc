@@ -105,6 +105,7 @@ class views_handler_filter_entity_bundle extends views_handler_filter_in_operato
       foreach ($this->value as &$value) {
         $value = str_replace('comment_node_', '', $value);
       }
+      unset($value);
     }
     elseif ($this->entity_type == 'taxonomy_term') {
       $join = new views_join();

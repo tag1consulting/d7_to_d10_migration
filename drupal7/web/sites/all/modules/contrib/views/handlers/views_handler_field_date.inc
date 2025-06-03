@@ -36,7 +36,7 @@ class views_handler_field_date extends views_handler_field {
   public function options_form(&$form, &$form_state) {
     $date_formats = array();
     $date_types = system_get_date_types();
-    foreach ($date_types as $key => $value) {
+    foreach ($date_types as $value) {
       $date_formats[$value['type']] = t('@date_format format', array('@date_format' => $value['title'])) . ': ' . format_date(REQUEST_TIME, $value['type']);
     }
 
@@ -94,7 +94,9 @@ class views_handler_field_date extends views_handler_field {
       // correct left margin to the element's wrapper.
       '#dependency' => array(
         // This condition is handled by form API's states.
+        // @code
         // 'edit-options-date-format' => array('today time ago'),
+        // @endcode
         'edit-options-second-date-format' => array('custom'),
       ),
     );

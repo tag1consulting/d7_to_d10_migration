@@ -17,14 +17,14 @@
       // We need to do this for both .click() and .mousedown() since JavaScript
       // code might trigger either behavior.
       var $submit_buttons = $('input[type=submit], button', ajax_body);
-      $submit_buttons.click(function(event) {
+      $submit_buttons.click(function (event) {
         this.form.clk = this;
       });
-      $submit_buttons.mousedown(function(event) {
+      $submit_buttons.mousedown(function (event) {
         this.form.clk = this;
       });
 
-      $('form', ajax_body).once('views-ajax-submit-processed').each(function() {
+      $('form', ajax_body).once('views-ajax-submit-processed').each(function () {
         var element_settings = {
           'url': response.url,
           'event': 'submit',
@@ -107,7 +107,7 @@
    */
   Drupal.behaviors.livePreview = {
     attach: function (context) {
-      $('input#edit-displays-live-preview', context).once('views-ajax-processed').click(function() {
+      $('input#edit-displays-live-preview', context).once('views-ajax-processed').click(function () {
         if ($(this).is(':checked')) {
           $('#preview-submit').click();
         }
@@ -120,7 +120,7 @@
    */
   Drupal.behaviors.syncPreviewDisplay = {
     attach: function (context) {
-      $("#views-tabset a").once('views-ajax-processed').click(function() {
+      $("#views-tabset a").once('views-ajax-processed').click(function () {
         var href = $(this).attr('href');
         // Cut of #views-tabset.
         var display_id = href.substr(11);
@@ -189,7 +189,7 @@
       // @todo Revisit this after fixing Views UI to display a Preview outside
       //   of the main Edit form.
       $('div#views-live-preview input[type=submit]')
-        .once('views-ajax-processed').each(function(event) {
+        .once('views-ajax-processed').each(function (event) {
           $(this).click(function () {
             this.form.clk = this;
             return true;

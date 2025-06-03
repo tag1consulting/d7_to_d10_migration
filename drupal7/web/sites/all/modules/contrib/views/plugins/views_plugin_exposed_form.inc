@@ -67,7 +67,7 @@ class views_plugin_exposed_form extends views_plugin {
       '#required' => TRUE,
     );
 
-    $form['reset_button'] = array (
+    $form['reset_button'] = array(
       '#type' => 'checkbox',
       '#title' => t('Include reset button'),
       '#description' => t('If checked the exposed form will provide a button to reset all the applied exposed filters'),
@@ -75,13 +75,13 @@ class views_plugin_exposed_form extends views_plugin {
     );
 
     $form['reset_button_label'] = array(
-     '#type' => 'textfield',
+      '#type' => 'textfield',
       '#title' => t('Reset button label'),
       '#description' => t('Text to display in the reset button of the exposed form.'),
       '#default_value' => $this->options['reset_button_label'],
       '#required' => TRUE,
       '#dependency' => array(
-        'edit-exposed-form-options-reset-button' => array(1)
+        'edit-exposed-form-options-reset-button' => array(1),
       ),
     );
 
@@ -240,7 +240,7 @@ class views_plugin_exposed_form extends views_plugin {
     }
 
     $form['submit']['#value'] = $this->options['submit_button'];
-    // Check if there is exposed sorts for this view
+    // Check if there is exposed sorts for this view.
     $exposed_sorts = array();
     foreach ($this->view->sort as $id => $handler) {
       if ($handler->can_expose() && $handler->is_exposed()) {
@@ -306,7 +306,6 @@ class views_plugin_exposed_form extends views_plugin {
       $form_state['pager_plugin'] = $pager;
     }
 
-
     // Apply autosubmit values.
     if (!empty($this->options['autosubmit'])) {
       $form = array_merge_recursive($form, array('#attributes' => array('class' => array('ctools-auto-submit-full-form'))));
@@ -330,15 +329,15 @@ class views_plugin_exposed_form extends views_plugin {
   }
 
   /**
-  * This function is executed when exposed form is submited.
-  *
-  * @param array $form
-  *   Nested array of form elements that comprise the form.
-  * @param array $form_state
-  *   A keyed array containing the current state of the form.
-  * @param array $exclude
-  *   Nested array of keys to exclude of insert into $view->exposed_raw_input.
-  */
+   * This function is executed when exposed form is submited.
+   *
+   * @param array $form
+   *   Nested array of form elements that comprise the form.
+   * @param array $form_state
+   *   A keyed array containing the current state of the form.
+   * @param array $exclude
+   *   Nested array of keys to exclude of insert into $view->exposed_raw_input.
+   */
   public function exposed_form_submit(&$form, &$form_state, &$exclude) {
     if (!empty($form_state['values']['op']) && $form_state['values']['op'] == $this->options['reset_button_label']) {
       $this->reset_form($form, $form_state);
@@ -354,7 +353,6 @@ class views_plugin_exposed_form extends views_plugin {
    */
   public function reset_form(&$form, &$form_state) {
     // _SESSION is not defined for users who are not logged in.
-
     // If filters are not overridden, store the 'remember' settings on the
     // default display. If they are, store them on this display. This way,
     // multiple displays in the same view can share the same filters and

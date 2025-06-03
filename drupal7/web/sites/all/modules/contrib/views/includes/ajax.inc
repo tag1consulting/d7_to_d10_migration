@@ -302,7 +302,6 @@ function views_ajax_form_wrapper($form_id, &$form_state) {
   return $output;
 }
 
-
 /**
  * Page callback for views user autocomplete.
  */
@@ -357,7 +356,6 @@ function views_ajax_autocomplete_taxonomy($vid, $tags_typed = '') {
   $tags_typed = drupal_explode_tags($tags_typed);
   $tag_last = drupal_strtolower(array_pop($tags_typed));
 
-  $matches = array();
   if ($tag_last != '') {
 
     $query = db_select('taxonomy_term_data', 't');
@@ -380,7 +378,7 @@ function views_ajax_autocomplete_taxonomy($vid, $tags_typed = '') {
     $prefix = count($tags_typed) ? drupal_implode_tags($tags_typed) . ', ' : '';
 
     $term_matches = array();
-    foreach ($tags_return as $tid => $name) {
+    foreach ($tags_return as $name) {
       $n = $name;
       // Term names containing commas or quotes must be wrapped in quotes.
       if (strpos($name, ',') !== FALSE || strpos($name, '"') !== FALSE) {

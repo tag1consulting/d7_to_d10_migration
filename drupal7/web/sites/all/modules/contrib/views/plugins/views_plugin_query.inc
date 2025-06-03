@@ -135,7 +135,7 @@ class views_plugin_query extends views_plugin {
   }
 
   /**
-   * Set an OFFSET on the query, specifying a number of results to skip
+   * Set an OFFSET on the query, specifying a number of results to skip.
    */
   public function set_offset($offset) {
     $this->offset = $offset;
@@ -174,7 +174,7 @@ class views_plugin_query extends views_plugin {
       $group = empty($groups) ? 1 : max(array_keys($groups)) + 1;
     }
 
-    // Create an empty group
+    // Create an empty group.
     if (empty($groups[$group])) {
       $groups[$group] = array('conditions' => array(), 'args' => array());
     }

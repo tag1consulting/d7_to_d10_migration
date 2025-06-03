@@ -10,6 +10,9 @@
  */
 class viewsHandlerArgumentCommentUserUidTest extends ViewsSqlTest {
 
+  /**
+   *
+   */
   public static function getInfo() {
     return array(
       'name' => 'Tests handler argument_comment_user_uid',
@@ -26,7 +29,7 @@ class viewsHandlerArgumentCommentUserUidTest extends ViewsSqlTest {
    * @param array $comment
    *   Comment to save.
    */
-  function postComment($node, $comment = array()) {
+  public function postComment($node, $comment = array()) {
     $comment += array(
       'uid' => $this->loggedInUser->uid,
       'nid' => $node->nid,
@@ -54,7 +57,10 @@ class viewsHandlerArgumentCommentUserUidTest extends ViewsSqlTest {
     $this->postComment($this->node_user_commented);
   }
 
-  function testCommentUserUidTest() {
+  /**
+   *
+   */
+  public function testCommentUserUidTest() {
     $view = $this->view_comment_user_uid();
 
     $this->executeView($view, array($this->account->uid));
@@ -71,7 +77,10 @@ class viewsHandlerArgumentCommentUserUidTest extends ViewsSqlTest {
     $this->assertIdenticalResultset($view, $resultset, $this->column_map);
   }
 
-  function view_comment_user_uid() {
+  /**
+   *
+   */
+  public function view_comment_user_uid() {
     $view = new view();
     $view->name = 'test_comment_user_uid';
     $view->description = '';

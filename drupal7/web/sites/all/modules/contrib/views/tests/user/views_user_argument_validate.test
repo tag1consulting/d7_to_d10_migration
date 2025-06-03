@@ -9,6 +9,10 @@
  * Tests views user argument argument handler.
  */
 class ViewsUserArgumentValidate extends ViewsSqlTest {
+
+  /**
+   *
+   */
   public static function getInfo() {
     return array(
       'name' => 'Tests user argument validator',
@@ -27,9 +31,12 @@ class ViewsUserArgumentValidate extends ViewsSqlTest {
     $this->account = $this->drupalCreateUser();
   }
 
-  function testArgumentValidateUserUid() {
+  /**
+   *
+   */
+  public function testArgumentValidateUserUid() {
     $account = $this->account;
-    // test 'uid' case.
+    // Test 'uid' case.
     $view = $this->view_argument_validate_user('uid');
     $view->set_display('default');
     $view->pre_execute();
@@ -37,7 +44,7 @@ class ViewsUserArgumentValidate extends ViewsSqlTest {
     $this->assertTrue($view->argument['null']->validate_arg($account->uid));
     // Reset safed argument validation.
     $view->argument['null']->argument_validated = NULL;
-    // Fail for a string variable since type is 'uid'
+    // Fail for a string variable since type is 'uid'.
     $this->assertFalse($view->argument['null']->validate_arg($account->name));
     // Reset safed argument validation.
     $view->argument['null']->argument_validated = NULL;
@@ -45,9 +52,12 @@ class ViewsUserArgumentValidate extends ViewsSqlTest {
     $this->assertFalse($view->argument['null']->validate_arg(32));
   }
 
-  function testArgumentValidateUserName() {
+  /**
+   *
+   */
+  public function testArgumentValidateUserName() {
     $account = $this->account;
-    // test 'name' case.
+    // Test 'name' case.
     $view = $this->view_argument_validate_user('name');
     $view->set_display('default');
     $view->pre_execute();
@@ -55,7 +65,7 @@ class ViewsUserArgumentValidate extends ViewsSqlTest {
     $this->assertTrue($view->argument['null']->validate_arg($account->name));
     // Reset safed argument validation.
     $view->argument['null']->argument_validated = NULL;
-    // Fail for a uid variable since type is 'name'
+    // Fail for a uid variable since type is 'name'.
     $this->assertFalse($view->argument['null']->validate_arg($account->uid));
     // Reset safed argument validation.
     $view->argument['null']->argument_validated = NULL;
@@ -63,9 +73,12 @@ class ViewsUserArgumentValidate extends ViewsSqlTest {
     $this->assertFalse($view->argument['null']->validate_arg($this->randomName()));
   }
 
-  function testArgumentValidateUserEither() {
+  /**
+   *
+   */
+  public function testArgumentValidateUserEither() {
     $account = $this->account;
-    // test 'either' case.
+    // Test 'either' case.
     $view = $this->view_argument_validate_user('either');
     $view->set_display('default');
     $view->pre_execute();
@@ -73,7 +86,7 @@ class ViewsUserArgumentValidate extends ViewsSqlTest {
     $this->assertTrue($view->argument['null']->validate_arg($account->name));
     // Reset safed argument validation.
     $view->argument['null']->argument_validated = NULL;
-    // Fail for a uid variable since type is 'name'
+    // Fail for a uid variable since type is 'name'.
     $this->assertTrue($view->argument['null']->validate_arg($account->uid));
     // Reset safed argument validation.
     $view->argument['null']->argument_validated = NULL;
@@ -85,7 +98,10 @@ class ViewsUserArgumentValidate extends ViewsSqlTest {
     $this->assertFalse($view->argument['null']->validate_arg(32));
   }
 
-  function view_argument_validate_user($argtype) {
+  /**
+   *
+   */
+  public function view_argument_validate_user($argtype) {
     $view = new view();
     $view->name = 'view_argument_validate_user';
     $view->description = '';

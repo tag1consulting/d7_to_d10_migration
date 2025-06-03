@@ -20,7 +20,7 @@ class views_handler_field_profile_date extends views_handler_field_date {
    */
   public function options_form(&$form, &$form_state) {
     parent::options_form($form, $form_state);
-    // we can't do "time ago" so remove it from the form.
+    // We can't do "time ago" so remove it from the form.
     unset($form['date_format']['#options']['time ago']);
   }
 
@@ -76,7 +76,7 @@ class views_handler_field_profile_date extends views_handler_field_date {
       'Y' => $value['year'],
       'y' => substr($value['year'], 2, 2),
 
-      // kill time stuff.
+      // Kill time stuff.
       'a' => NULL,
       'A' => NULL,
       'g' => NULL,

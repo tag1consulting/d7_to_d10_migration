@@ -9,7 +9,9 @@
  * Instantiate and construct a new handler.
  */
 function _views_create_handler($definition, $type = 'handler', $handler_type = NULL) {
-  //  debug('Instantiating handler ' . $definition['handler']);
+  // @code
+  // debug('Instantiating handler ' . $definition['handler']);
+  // @endcode
   if (empty($definition['handler'])) {
     vpr('_views_create_handler - type: @type - failed: handler has not been provided.',
       array('@type' => isset($handler_type) ? ($type . '(handler type: ' . $handler_type . ')') : $type)
@@ -44,10 +46,10 @@ function _views_create_handler($definition, $type = 'handler', $handler_type = N
   }
 
   if (!empty($definition['override handler'])) {
-    $handler = new $definition['override handler'];
+    $handler = new $definition['override handler']();
   }
   else {
-    $handler = new $definition['handler'];
+    $handler = new $definition['handler']();
   }
 
   $handler->set_definition($definition);
@@ -61,7 +63,7 @@ function _views_create_handler($definition, $type = 'handler', $handler_type = N
     $handler->plugin_name = $definition['name'];
   }
 
-  // let the handler have something like a constructor.
+  // Let the handler have something like a constructor.
   $handler->construct();
 
   return $handler;
@@ -95,7 +97,7 @@ function views_get_table_join($table, $base_table) {
   if (isset($data['table']['join'][$base_table])) {
     $h = $data['table']['join'][$base_table];
     if (!empty($h['handler']) && class_exists($h['handler'])) {
-      $handler = new $h['handler'];
+      $handler = new $h['handler']();
     }
     else {
       $handler = new views_join();
@@ -355,16 +357,16 @@ class views_handler extends views_object {
    * Transform a string by a certain method.
    *
    * @param string $string
-   *    The input you want to transform.
+   *   The input you want to transform.
    * @param array $option
-   *    How do you want to transform it, possible values:
+   *   How do you want to transform it, possible values:
    *      - upper: Uppercase the string.
    *      - lower: lowercase the string.
    *      - ucfirst: Make the first char uppercase.
    *      - ucwords: Make each word in the string uppercase.
    *
    * @return string
-   *    The transformed string.
+   *   The transformed string.
    */
   public function case_transform($string, $option) {
     global $multibyte;
@@ -753,7 +755,7 @@ class views_handler extends views_object {
    * as adding an 'extra'.
    */
   public function get_join() {
-    // get the join from this table that links back to the base table.
+    // Get the join from this table that links back to the base table.
     // Determine the primary table to seek.
     if (empty($this->query->relationships[$this->relationship])) {
       $base_table = $this->query->base_table;
@@ -830,7 +832,7 @@ class views_many_to_one_helper {
   /**
    * {@inheritdoc}
    */
-  static function option_definition(&$options) {
+  public static function option_definition(&$options) {
     $options['reduce_duplicates'] = array('default' => FALSE, 'bool' => TRUE);
   }
 
@@ -851,7 +853,7 @@ class views_many_to_one_helper {
    * Provide an option to use a formula.
    *
    * If it wants us to do this, it must set $helper->formula = TRUE and
-   * implement handler->get_formula();.
+   * implement handler->get_formula().
    */
   public function get_field() {
     if (!empty($this->formula)) {
@@ -1007,7 +1009,6 @@ class views_many_to_one_helper {
 
       // Case 2: it's anything but an 'or'.
       // We do one join per selected value.
-
       // Clone the join for each table:
       $this->handler->table_aliases = array();
       $values = $this->handler->operator === 'not' ? array($this->handler->value) : $this->handler->value;
@@ -1036,7 +1037,7 @@ class views_many_to_one_helper {
           $this->handler->view->many_to_one_aliases[$field][$value] = $this->handler->table . '_value_' . ($this->handler->view->many_to_one_count[$this->handler->table]++);
           $alias = $this->handler->table_aliases[$value] = $this->add_table($join,
             $this->handler->view->many_to_one_aliases[$field][$value]);
-          // and set table_alias to the first of these.
+          // And set table_alias to the first of these.
           if (empty($this->handler->table_alias)) {
             $this->handler->table_alias = $alias;
           }
@@ -1087,7 +1088,7 @@ class views_many_to_one_helper {
         if (is_array($value) && count($value) > 1) {
           $operator = 'IN';
         }
-	else {
+        else {
           $value = is_array($value) ? array_pop($value) : $value;
           $operator = '=';
         }
@@ -1199,8 +1200,8 @@ function views_break_phrase_string($str, &$handler = NULL) {
  * @param object $handler
  *   The handler object to use as a base. If not specified one will be created.
  *
- * @return $handler
- *   The new handler object.
+ * @return object
+ *   The new handler object, presumed to be a \stdClass.
  */
 function views_break_phrase($str, &$handler = NULL) {
   if (!$handler) {
@@ -1246,6 +1247,7 @@ function views_break_phrase($str, &$handler = NULL) {
 
 // --------------------------------------------------------------------------
 // Date helper functions.
+
 /**
  * Figure out what timezone we're in; needed for some date manipulations.
  */
@@ -1284,7 +1286,7 @@ function views_get_timezone() {
  * @param string $field
  *   The real table and field name, like 'tablename.fieldname'.
  * @param string $field_type
- *  The type of date field, 'int' or 'datetime'.
+ *   The type of date field, 'int' or 'datetime'.
  * @param string $set_offset
  *   The name of a field that holds the timezone offset or a fixed timezone
  *   offset value. If not provided, the normal Drupal timezone handling
@@ -1468,7 +1470,7 @@ function views_date_sql_extract($extract_type, $field, $field_type = 'int', $set
   $db_type = Database::getConnection()->databaseType();
   $field = views_date_sql_field($field, $field_type, $set_offset);
 
-  // Note there is no space after FROM to avoid db_rewrite problems
+  // Note there is no space after FROM to avoid db_rewrite problems.
   // @see http://drupal.org/node/79904.
   switch ($extract_type) {
     case('DATE'):
@@ -1667,7 +1669,6 @@ class views_join {
       $extras = array();
       foreach ($this->extra as $info) {
         if (is_array($info)) {
-          $extra = '';
           // Figure out the table name. Remember, only use aliases provided if
           // at all possible.
           $join_table = '';
@@ -1736,13 +1737,14 @@ class views_join {
 
     $select_query->addJoin($this->type, $right_table, $table['alias'], $condition, $arguments);
   }
+
 }
 
 /**
  * Join handler for relationships that join with a subquery as the left field.
  *
  * For example:
- *  LEFT JOIN node node_term_data ON ([YOUR SUBQUERY HERE]) = node_term_data.nid
+ *  LEFT JOIN node node_term_data ON ([YOUR SUBQUERY HERE]) = node_term_data.nid.
  *
  * 'join' definition:
  *   Same as views_join class above, except:
@@ -1795,7 +1797,6 @@ class views_join_subquery extends views_join {
       $extras = array();
       foreach ($this->extra as $info) {
         if (is_array($info)) {
-          $extra = '';
           // Figure out the table name. Remember, only use aliases provided if
           // at all possible.
           $join_table = '';
@@ -1840,6 +1841,7 @@ class views_join_subquery extends views_join {
 
     $select_query->addJoin($this->type, $right_table, $table['alias'], $condition, $arguments);
   }
+
 }
 
 /**
