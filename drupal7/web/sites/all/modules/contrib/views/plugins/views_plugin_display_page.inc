@@ -44,7 +44,7 @@ class views_plugin_display_page extends views_plugin_display {
         'name' => array('default' => variable_get('menu_default_node_menu', 'navigation')),
         'context' => array('default' => ''),
         'context_only_inline' => array('default' => FALSE),
-       ),
+      ),
     );
     $options['tab_options'] = array(
       'contains' => array(
@@ -54,7 +54,7 @@ class views_plugin_display_page extends views_plugin_display {
         'description' => array('default' => '', 'translatable' => FALSE),
         'weight' => array('default' => 0),
         'name' => array('default' => 'navigation'),
-       ),
+      ),
     );
 
     return $options;
@@ -66,8 +66,7 @@ class views_plugin_display_page extends views_plugin_display {
   public function execute_hook_menu($callbacks) {
     $items = array();
     // Replace % with the link to our standard views argument loader
-    // views_arg_load -- which lives in views.module
-
+    // views_arg_load -- which lives in views.module.
     $bits = explode('/', $this->get_option('path'));
     $page_arguments = array($this->view->name, $this->display->id);
     $this->view->init_handlers();
@@ -124,13 +123,13 @@ class views_plugin_display_page extends views_plugin_display {
 
     if ($path) {
       $items[$path] = array(
-        // default views page entry
+        // Default views page entry.
         'page callback' => 'views_page',
         'page arguments' => $page_arguments,
         // Default access check (per display)
         'access callback' => 'views_access',
         'access arguments' => $access_arguments,
-        // Identify URL embedded arguments and correlate them to a handler
+        // Identify URL embedded arguments and correlate them to a handler.
         'load arguments'  => array($this->view->name, $this->display->id, '%index'),
         // Make sure the menu router knows where views_page is.
         'module' => 'views',
@@ -157,7 +156,7 @@ class views_plugin_display_page extends views_plugin_display {
 
         case 'normal':
           $items[$path]['type'] = MENU_NORMAL_ITEM;
-          // Insert item into the proper menu
+          // Insert item into the proper menu.
           $items[$path]['menu_name'] = $menu['name'];
           break;
 
@@ -168,6 +167,7 @@ class views_plugin_display_page extends views_plugin_display {
         case 'default tab':
           $items[$path]['type'] = MENU_DEFAULT_LOCAL_TASK;
           break;
+
         case 'local action':
           $items[$path]['type'] = MENU_LOCAL_ACTION;
           break;
@@ -188,18 +188,18 @@ class views_plugin_display_page extends views_plugin_display {
           // Remove the last piece.
           $bit = array_pop($bits);
 
-          // we can't do this if they tried to make the last path bit variable.
+          // We can't do this if they tried to make the last path bit variable.
           // @todo We can validate this.
           if ($bit != '%views_arg' && !empty($bits)) {
             $default_path = implode('/', $bits);
             $items[$default_path] = array(
-              // default views page entry
+              // Default views page entry.
               'page callback' => 'views_page',
               'page arguments' => $page_arguments,
               // Default access check (per display)
               'access callback' => 'views_access',
               'access arguments' => $access_arguments,
-              // Identify URL embedded arguments and correlate them to a handler
+              // Identify URL embedded arguments and correlate them to a handler.
               'load arguments'  => array($this->view->name, $this->display->id, '%index'),
               'title' => $tab_options['title'],
               'description' => $tab_options['description'],
@@ -249,7 +249,6 @@ class views_plugin_display_page extends views_plugin_display {
     }
 
     $this->view->get_breadcrumb(TRUE);
-
 
     // And now render the view.
     $render = $this->view->render();
@@ -315,6 +314,7 @@ class views_plugin_display_page extends views_plugin_display {
       case 'default tab':
         $menu_str = t('Tab: @title', array('@title' => $menu['title']));
         break;
+
       case 'local action':
         $menu_str = t('Local action: @title', array('@title' => $menu['title']));
     }
@@ -350,7 +350,7 @@ class views_plugin_display_page extends views_plugin_display {
           '#default_value' => $this->get_option('path'),
           '#field_prefix' => '<span dir="ltr">' . url(NULL, array('absolute' => TRUE)) . (variable_get('clean_url', 0) ? '' : '?q='),
           '#field_suffix' => '</span>&lrm;',
-          '#attributes' => array('dir'=>'ltr'),
+          '#attributes' => array('dir' => 'ltr'),
           '#maxlength' => 255,
         );
         break;

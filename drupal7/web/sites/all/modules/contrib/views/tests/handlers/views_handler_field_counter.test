@@ -9,6 +9,10 @@
  * Tests the views_handler_field_counter handler.
  */
 class ViewsHandlerFilterCounterTest extends ViewsSqlTest {
+
+  /**
+   *
+   */
   public static function getInfo() {
     return array(
       'name' => 'Field: Counter',
@@ -17,7 +21,10 @@ class ViewsHandlerFilterCounterTest extends ViewsSqlTest {
     );
   }
 
-  function testSimple() {
+  /**
+   *
+   */
+  public function testSimple() {
     $view = $this->getBasicView();
     $view->display['default']->handler->override_option('fields', array(
       'counter' => array(
@@ -64,8 +71,10 @@ class ViewsHandlerFilterCounterTest extends ViewsSqlTest {
     $this->assertEqual(2 + $rand_start, $view->style_plugin->rendered_fields[2]['counter']);
   }
 
-  // @todo Write tests for pager.
-  function testPager() {
+  /**
+   * @todo Write tests for pager.
+   */
+  public function testPager() {
   }
 
 }

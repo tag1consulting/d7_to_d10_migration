@@ -147,7 +147,7 @@ function views_revert_views() {
 
   // If the user specified a list of views on the CLI, revert those.
   elseif (!empty($viewnames)) {
-    foreach ($viewnames as $key => $viewname) {
+    foreach ($viewnames as $viewname) {
       $is_overridden = array_key_exists($viewname, $overridden);
 
       // Check if the provided view name is in the system.
@@ -273,7 +273,6 @@ function views_development_settings() {
   drush_log($message, 'success');
 }
 
-
 /**
  * Callback function for views-list command.
  */
@@ -334,7 +333,7 @@ function drush_views_list() {
   );
 
   // Setup a row for each view.
-  foreach ($views as $id => $view) {
+  foreach ($views as $view) {
     // If options were specified, check that first mismatch push the loop to
     // the next view.
     if ($with_tags && !in_array($view->tag, $tags)) {
@@ -496,7 +495,7 @@ function _views_drush_changestatus($viewnames = array(), $status = NULL) {
     $processed = $status ? dt('disabled') : dt('enabled');
     $views_status = variable_get('views_defaults', array());
 
-    foreach ($viewnames as $key => $viewname) {
+    foreach ($viewnames as $viewname) {
       if ($views_status[$viewname] !== $status) {
         $views_status[$viewname] = $status;
         $changed = TRUE;

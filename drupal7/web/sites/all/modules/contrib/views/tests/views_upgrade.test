@@ -38,7 +38,7 @@ class ViewsUpgradeTestCase extends ViewsSqlTest {
   /**
    *
    */
-  function viewsData() {
+  public function viewsData() {
     $data = parent::viewsData();
     $data['views_test']['old_field_1']['moved to'] = array('views_test', 'id');
     $data['views_test']['old_field_2']['field']['moved to'] = array('views_test', 'name');
@@ -55,7 +55,7 @@ class ViewsUpgradeTestCase extends ViewsSqlTest {
   /**
    *
    */
-  function debugField($field) {
+  public function debugField($field) {
     $keys = array('id', 'table', 'field', 'actual_field', 'original_field', 'real_field');
     $info = array();
     foreach ($keys as $key) {

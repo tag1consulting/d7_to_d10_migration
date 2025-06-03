@@ -7,8 +7,8 @@ hidden = TRUE
 files[] = entity_test.module
 files[] = entity_test.install
 
-; Information added by Drupal.org packaging script on 2021-11-20
-version = "7.x-1.10"
+; Information added by Drupal.org packaging script on 2024-07-14
+version = "7.x-1.11"
 core = "7.x"
 project = "entity"
-datestamp = "1637434458"
+datestamp = "1720924769"

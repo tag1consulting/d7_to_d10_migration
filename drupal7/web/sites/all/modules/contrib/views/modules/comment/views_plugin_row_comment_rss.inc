@@ -13,16 +13,16 @@ class views_plugin_row_comment_rss extends views_plugin_row {
   /**
    * {@inheritdoc}
    */
-   public $base_table = 'comment';
+  public $base_table = 'comment';
 
-   /**
-    * {@inheritdoc}
-    */
-   public $base_field = 'cid';
+  /**
+   * {@inheritdoc}
+   */
+  public $base_field = 'cid';
 
-   /**
-    * {@inheritdoc}
-    */
+  /**
+   * {@inheritdoc}
+   */
   public function option_definition() {
     $options = parent::option_definition();
 
@@ -67,12 +67,13 @@ class views_plugin_row_comment_rss extends views_plugin_row {
       $comment->depth = count(explode('.', $comment->thread)) - 1;
       $nids[] = $comment->nid;
     }
+    unset($comment);
 
     $this->nodes = node_load_multiple($nids);
   }
 
   /**
-   * Return the main options, which are shown in the summary title
+   * Return the main options, which are shown in the summary title.
    *
    * @see views_plugin_row_node_rss::options_form_summary_options()
    * @todo Maybe provide a views_plugin_row_rss_entity and reuse this method
@@ -164,7 +165,7 @@ class views_plugin_row_comment_rss extends views_plugin_row {
     return theme($this->theme_functions(), array(
       'view' => $this->view,
       'options' => $this->options,
-      'row' => $item
+      'row' => $item,
     ));
   }
 

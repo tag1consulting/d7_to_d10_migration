@@ -16,10 +16,10 @@ class views_handler_field_node_link_translate extends views_handler_field_node_l
    * {@inheritdoc}
    */
   public function render_link($data, $values) {
-    // ensure user has access to edit this node.
+    // Ensure user has access to edit this node.
     $node = $this->get_value($values);
     $node->status = 1;
-    // unpublished nodes ignore access control.
+    // Unpublished nodes ignore access control.
     if ($node->language == LANGUAGE_NONE || !translation_supported_type($node->type) || !node_access('view', $node) || !user_access('translate content')) {
       return;
     }

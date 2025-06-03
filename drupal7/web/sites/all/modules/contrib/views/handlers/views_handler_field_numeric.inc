@@ -132,6 +132,8 @@ class views_handler_field_numeric extends views_handler_field {
       $value = number_format($value, $this->options['precision'], $this->options['decimal'], $this->options['separator']);
     }
     else {
+      // Only accept numerical values.
+      $value = isset($value) && is_numeric($value) ? $value : 0;
       $point_position = strpos($value, '.');
       $remainder = ($point_position === FALSE) ? '' : substr($value, $point_position + 1);
       $value = $value > 0 ? floor((float) $value) : ceil((float) $value);

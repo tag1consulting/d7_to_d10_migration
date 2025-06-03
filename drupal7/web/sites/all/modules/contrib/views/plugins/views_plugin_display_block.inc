@@ -241,7 +241,7 @@ class views_plugin_display_block extends views_plugin_display {
     if (strlen($delta) >= 32) {
       $delta = md5($delta);
     }
-    if (db_table_exists('block') && $bid = db_query("SELECT bid FROM {block} WHERE module = 'views' AND delta = :delta", array(':delta' => $delta))->fetchField()) {
+    if (db_table_exists('block') && db_query("SELECT bid FROM {block} WHERE module = 'views' AND delta = :delta", array(':delta' => $delta))->fetchField()) {
       db_update('block')
         ->fields(array(
           'cache' => $cache_setting,

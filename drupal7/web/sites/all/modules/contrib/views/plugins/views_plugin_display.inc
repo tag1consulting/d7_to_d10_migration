@@ -235,6 +235,7 @@ class views_plugin_display extends views_plugin {
           $filter['group'] = 1;
         }
       }
+      unset($filter);
       $this->set_option('filters', $filters);
       $changed = TRUE;
     }
@@ -305,9 +306,9 @@ class views_plugin_display extends views_plugin {
   public function uses_exposed() {
     if (!isset($this->has_exposed)) {
       foreach ($this->handlers as $type => $value) {
-        foreach ($this->view->$type as $id => $handler) {
+        foreach ($this->view->$type as $handler) {
           if ($handler->can_expose() && $handler->is_exposed()) {
-            // one is all we need; if we find it, return true.
+            // One is all we need; if we find it, return true.
             $this->has_exposed = TRUE;
             return TRUE;
           }
@@ -411,7 +412,7 @@ class views_plugin_display extends views_plugin {
       return FALSE;
     }
     if (!empty($this->view->argument) && $this->get_option('hide_attachment_summary')) {
-      foreach ($this->view->argument as $argument_id => $argument) {
+      foreach ($this->view->argument as $argument) {
         if ($argument->needs_style_plugin() && empty($argument->argument_validated)) {
           return FALSE;
         }
@@ -939,7 +940,7 @@ class views_plugin_display extends views_plugin {
    * @param string $name
    *   The name of the plugin defined in hook_views_plugins.
    *
-   * @return views_plugin|FALSE
+   * @return views_plugin|false
    *   FALSE if no plugin, otherwise the requested instance of a plugin.
    */
   public function get_plugin($type = 'style', $name = NULL) {
@@ -1185,7 +1186,7 @@ class views_plugin_display extends views_plugin {
       $tokens = $this->view->build_info['substitutions'];
     }
     $count = 0;
-    foreach ($this->view->display_handler->get_handlers('argument') as $arg => $handler) {
+    while ($this->view->display_handler->get_handlers('argument')) {
       $token = '%' . ++$count;
       if (!isset($tokens[$token])) {
         $tokens[$token] = '';
@@ -1283,8 +1284,6 @@ class views_plugin_display extends views_plugin {
     $style_plugin_instance = $this->get_plugin('style');
     $style_summary = empty($style_plugin['title']) ? t('Missing style plugin') : $style_plugin_instance->summary_title();
     $style_title = empty($style_plugin['title']) ? t('Missing style plugin') : $style_plugin_instance->plugin_title();
-
-    $style = '';
 
     $options['style_plugin'] = array(
       'category' => 'format',
@@ -1402,7 +1401,6 @@ class views_plugin_display extends views_plugin {
     );
     $languages = array_merge($languages, views_language_list());
 
-    $field_language = array();
     $options['field_language'] = array(
       'category' => 'other',
       'title' => t('Field Language'),
@@ -1795,7 +1793,7 @@ class views_plugin_display extends views_plugin {
         $entities = entity_get_info();
         $entity_tables = array();
         $has_translation_handlers = FALSE;
-        foreach ($entities as $type => $entity_info) {
+        foreach ($entities as $entity_info) {
           $entity_tables[] = $entity_info['base table'];
 
           if (!empty($entity_info['translation'])) {
@@ -1917,7 +1915,7 @@ class views_plugin_display extends views_plugin {
         $options = array();
         // This lets us prepare the key as we want it printed.
         $count = 0;
-        foreach ($this->view->display_handler->get_handlers('argument') as $arg => $handler) {
+        foreach ($this->view->display_handler->get_handlers('argument') as $handler) {
           $options[t('Arguments')]['%' . ++$count] = t('@argument title', array('@argument' => $handler->ui_name()));
           $options[t('Arguments')]['!' . $count] = t('@argument input', array('@argument' => $handler->ui_name()));
         }
@@ -2330,7 +2328,6 @@ class views_plugin_display extends views_plugin {
     $registry = $this->theme_registry;
     $extension = $this->theme_extension;
 
-    $output = '';
     $picked = FALSE;
     foreach ($themes as $theme) {
       $template = strtr($theme, '_', '-') . $extension;
@@ -3122,7 +3119,6 @@ class views_plugin_display extends views_plugin {
     $output = '';
     $style_plugin = $this->get_plugin();
     if ($option == 'style_plugin') {
-      $type = 'style';
       $options_field = 'style_options';
       $plugin = $style_plugin;
     }
@@ -3131,7 +3127,6 @@ class views_plugin_display extends views_plugin {
         return;
       }
 
-      $type = 'row';
       $options_field = 'row_options';
       $plugin = $this->get_plugin('row');
       // If the style plugin doesn't use row plugins, don't even bother.
@@ -3183,11 +3178,8 @@ class views_plugin_display extends views_plugin {
    *
    */
   public function unpack_style($indent, $prefix, $storage, $option, $definition, $parents) {
-    $output = '';
     $style_plugin = $this->get_plugin();
     if ($option == 'style_plugin') {
-      $type = 'style';
-      $options_field = 'style_options';
       $plugin = $style_plugin;
     }
     else {
@@ -3195,8 +3187,6 @@ class views_plugin_display extends views_plugin {
         return;
       }
 
-      $type = 'row';
-      $options_field = 'row_options';
       $plugin = $this->get_plugin('row');
       // If the style plugin doesn't use row plugins, don't even bother.
     }
@@ -3238,7 +3228,7 @@ class views_plugin_display extends views_plugin {
       $type = $option;
     }
     $types = views_object_types();
-    foreach ($storage[$option] as $id => $info) {
+    foreach ($storage[$option] as $info) {
       if (!empty($types[$type]['type'])) {
         $handler_type = $types[$type]['type'];
       }

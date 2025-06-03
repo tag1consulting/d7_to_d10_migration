@@ -183,7 +183,7 @@ class views_handler_relationship_groupwise_max extends views_handler_relationshi
    *   - subquery_order: either ASC or DESC.
    *
    * @return string
-   *    The subquery SQL string, ready for use in the main query.
+   *   The subquery SQL string, ready for use in the main query.
    */
   public function left_query($options) {
     // Either load another view, or create one on the fly.
@@ -212,8 +212,6 @@ class views_handler_relationship_groupwise_max extends views_handler_relationshi
     $temp_view->args[] = '**CORRELATED**';
 
     // Add the base table ID field.
-    $views_data = views_fetch_data($this->definition['base']);
-    $base_field = $views_data['table']['base']['field'];
     $temp_view->add_item('default', 'field', $this->definition['base'], $this->definition['field']);
 
     // Add the correct argument for our relationship's base ie the "how to get
@@ -222,7 +220,7 @@ class views_handler_relationship_groupwise_max extends views_handler_relationshi
     $temp_view->add_item(
       'default',
       'argument',
-      // For example, 'term_node',
+      // For example, 'term_node'.
       $this->definition['argument table'],
       // For example, 'tid'.
       $this->definition['argument field']
@@ -332,6 +330,7 @@ class views_handler_relationship_groupwise_max extends views_handler_relationshi
         }
       }
     }
+    unset($condition);
   }
 
   /**
@@ -382,7 +381,7 @@ class views_handler_relationship_groupwise_max extends views_handler_relationshi
     }
 
     if (!empty($def['join_handler']) && class_exists($def['join_handler'])) {
-      $join = new $def['join_handler'];
+      $join = new $def['join_handler']();
     }
     else {
       $join = new views_join_subquery();

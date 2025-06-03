@@ -10,6 +10,9 @@
  */
 class ViewsUiCommentViewsWizard extends ViewsUiBaseViewsWizard {
 
+  /**
+   *
+   */
   protected function row_style_options($type) {
     $options = array();
     $options['comment'] = t('comments');
@@ -17,6 +20,9 @@ class ViewsUiCommentViewsWizard extends ViewsUiBaseViewsWizard {
     return $options;
   }
 
+  /**
+   *
+   */
   protected function build_form_style(&$form, &$form_state, $type) {
     parent::build_form_style($form, $form_state, $type);
     $style_form =& $form['displays'][$type]['options']['style'];
@@ -42,6 +48,9 @@ class ViewsUiCommentViewsWizard extends ViewsUiBaseViewsWizard {
     }
   }
 
+  /**
+   *
+   */
   protected function page_display_options($form, $form_state) {
     $display_options = parent::page_display_options($form, $form_state);
     $row_plugin = isset($form_state['values']['page']['style']['row_plugin']) ? $form_state['values']['page']['style']['row_plugin'] : NULL;
@@ -50,6 +59,9 @@ class ViewsUiCommentViewsWizard extends ViewsUiBaseViewsWizard {
     return $display_options;
   }
 
+  /**
+   *
+   */
   protected function block_display_options($form, $form_state) {
     $display_options = parent::block_display_options($form, $form_state);
     $row_plugin = isset($form_state['values']['block']['style']['row_plugin']) ? $form_state['values']['block']['style']['row_plugin'] : NULL;
@@ -61,7 +73,7 @@ class ViewsUiCommentViewsWizard extends ViewsUiBaseViewsWizard {
   /**
    * Set the row style and row style plugins to the display_options.
    */
-  protected  function display_options_row(&$display_options, $row_plugin, $row_options) {
+  protected function display_options_row(&$display_options, $row_plugin, $row_options) {
     switch ($row_plugin) {
       case 'comment':
         $display_options['row_plugin'] = 'comment';
@@ -70,6 +82,9 @@ class ViewsUiCommentViewsWizard extends ViewsUiBaseViewsWizard {
     }
   }
 
+  /**
+   *
+   */
   protected function default_display_options($form, $form_state) {
     $display_options = parent::default_display_options($form, $form_state);
 

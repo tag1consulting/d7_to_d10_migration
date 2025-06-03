@@ -7,6 +7,7 @@
 
 /**
  * Field handler whichs allows to show machine name content as human name.
+ *
  * @ingroup views_field_handlers
  *
  * Definition items:
@@ -17,7 +18,9 @@
 class views_handler_field_machine_name extends views_handler_field {
 
   /**
-   * @var array Stores the available options.
+   * Stores the available options.
+   *
+   * @var array
    */
   public $value_options;
 

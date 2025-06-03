@@ -16,7 +16,7 @@ function comment_views_data() {
   $data['comment']['comment']['field']['moved to'] = array('field_data_comment_body', 'comment_body');
   // Define the base group of this table. Fields that don't have a group
   // defined will go into this field by default.
-  $data['comment']['table']['group']  = t('Comment');
+  $data['comment']['table']['group'] = t('Comment');
 
   $data['comment']['table']['base'] = array(
     'field' => 'cid',
@@ -460,7 +460,7 @@ function comment_views_data() {
   // ----------------------------------------------------------------------
   // 'node_comment_statistics' table.
   // Define the group.
-  $data['node_comment_statistics']['table']['group']  = t('Content');
+  $data['node_comment_statistics']['table']['group'] = t('Content');
 
   // Joins.
   $data['node_comment_statistics']['table']['join'] = array(
@@ -705,11 +705,12 @@ function template_preprocess_views_view_row_comment(&$vars) {
   // array; there is no way to avoid building them in the first place.
   // @see comment_build_content()
   if (empty($options['links'])) {
-    foreach ($build as $cid => &$comment_build) {
+    foreach ($build as &$comment_build) {
       if (isset($comment_build['links'])) {
         unset($comment_build['links']);
       }
     }
+    unset($comment_build);
   }
   $vars['comment'] = drupal_render($build);
 }

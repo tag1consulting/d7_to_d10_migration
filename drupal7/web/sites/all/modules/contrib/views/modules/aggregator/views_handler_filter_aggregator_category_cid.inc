@@ -6,7 +6,7 @@
  */
 
 /**
- * Filter by aggregator category cid
+ * Filter by aggregator category cid.
  *
  * @ingroup views_filter_handlers
  */

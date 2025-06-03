@@ -153,7 +153,7 @@ function views_theme($existing, $type, $theme, $path) {
 
   // Register theme functions for all style plugins.
   foreach ($plugins as $type => $info) {
-    foreach ($info as $plugin => $def) {
+    foreach ($info as $def) {
       if (isset($def['theme']) && (!isset($def['register theme']) || !empty($def['register theme']))) {
         $hooks[$def['theme']] = array(
           'pattern' => $def['theme'] . '__',
@@ -310,7 +310,7 @@ function views_plugin_list() {
   $plugin_data = views_fetch_plugin_data();
   $plugins = array();
   foreach (views_get_enabled_views() as $view) {
-    foreach ($view->display as $display_id => $display) {
+    foreach ($view->display as $display) {
       foreach ($plugin_data as $type => $info) {
         if ($type == 'display' && isset($display->display_plugin)) {
           $name = $display->display_plugin;
@@ -702,7 +702,7 @@ function views_block_info() {
     }
 
     $view->init_display();
-    foreach ($view->display as $display_id => $display) {
+    foreach ($view->display as $display) {
 
       if (isset($display->handler) && !empty($display->handler->definition['uses hook block'])) {
         $result = $display->handler->execute_hook_block_list();
@@ -825,7 +825,7 @@ function views_block_view($delta) {
 
   // This indicates it's a special one.
   if (substr($delta, 0, 1) == '-') {
-    list($nothing, $type, $name, $display_id) = explode('-', $delta);
+    list(, $type, $name, $display_id) = explode('-', $delta);
     // Put the - back on.
     $type = '-' . $type;
     if ($view = views_get_view($name)) {
@@ -1861,7 +1861,7 @@ function views_debug($message, $placeholders = array()) {
     }
     elseif ($devel_region == 'drupal_debug') {
       $output = empty($output) ? t($message, $placeholders) : $output;
-      dd($output);
+      drupal_debug($output);
     }
     else {
       $output = empty($output) ? t($message, $placeholders) : $output;
@@ -1890,6 +1890,9 @@ function vsm($message) {
   }
 }
 
+/**
+ *
+ */
 function views_trace() {
   $message = '';
   foreach (debug_backtrace() as $item) {
@@ -1901,10 +1904,16 @@ function views_trace() {
   return $message;
 }
 
+/**
+ *
+ */
 function vsm_trace() {
   vsm(views_trace());
 }
 
+/**
+ *
+ */
 function vpr_trace() {
   dpr(views_trace());
 }
@@ -1982,8 +1991,7 @@ function views_form_views_form($form, &$form_state, $view, $output) {
   );
 
   $substitutions = array();
-  foreach ($view->field as $field_name => $field) {
-    $form_element_name = $field_name;
+  foreach ($view->field as $form_element_name => $field) {
     if (method_exists($field, 'form_element_name')) {
       $form_element_name = $field->form_element_name();
     }
@@ -2059,7 +2067,7 @@ function views_form_views_form_validate($form, &$form_state) {
   $view = $form_state['build_info']['args'][0];
 
   // Call the validation method on every field handler that has it.
-  foreach ($view->field as $field_name => $field) {
+  foreach ($view->field as $field) {
     if (method_exists($field, 'views_form_validate')) {
       $field->views_form_validate($form, $form_state);
     }
@@ -2067,7 +2075,7 @@ function views_form_views_form_validate($form, &$form_state) {
 
   // Call the validate method on every area handler that has it.
   foreach (array('header', 'footer') as $area) {
-    foreach ($view->{$area} as $area_name => $area_handler) {
+    foreach ($view->{$area} as $area_handler) {
       if (method_exists($area_handler, 'views_form_validate')) {
         $area_handler->views_form_validate($form, $form_state);
       }
@@ -2085,7 +2093,7 @@ function views_form_views_form_submit($form, &$form_state) {
   $view = $form_state['build_info']['args'][0];
 
   // Call the submit method on every field handler that has it.
-  foreach ($view->field as $field_name => $field) {
+  foreach ($view->field as $field) {
     if (method_exists($field, 'views_form_submit')) {
       $field->views_form_submit($form, $form_state);
     }
@@ -2093,7 +2101,7 @@ function views_form_views_form_submit($form, &$form_state) {
 
   // Call the submit method on every area handler that has it.
   foreach (array('header', 'footer') as $area) {
-    foreach ($view->{$area} as $area_name => $area_handler) {
+    foreach ($view->{$area} as $area_handler) {
       if (method_exists($area_handler, 'views_form_submit')) {
         $area_handler->views_form_submit($form, $form_state);
       }
@@ -2438,6 +2446,7 @@ function _views_query_tag_alter_condition(QueryAlterableInterface $query, &$cond
       }
     }
   }
+  unset($condition);
 }
 
 /**
@@ -2600,12 +2609,15 @@ function views_var_export($var, $prefix = '', $init = TRUE) {
  *
  * @see drupal_clean_css_identifier()
  */
-function views_clean_css_identifier($identifier, $filter = array(
-  ' ' => '-',
-  '/' => '-',
-  '[' => '-',
-  ']' => '',
-)) {
+function views_clean_css_identifier(
+  $identifier,
+  $filter = array(
+    ' ' => '-',
+    '/' => '-',
+    '[' => '-',
+    ']' => '',
+  )
+) {
   // By default, we filter using Drupal's coding standards.
   $identifier = strtr($identifier, $filter);
 
@@ -2770,172 +2782,210 @@ function views_admin_menu_cache_info() {
 }
 
 if (!function_exists('aggregator_views_api')) {
+
   /**
    * Provide Views integration for the Aggregator module.
    */
   function aggregator_views_api() {
     return views_views_api();
   }
+
 }
 
 if (!function_exists('book_views_api')) {
+
   /**
    * Provide Views integration for the Book module.
    */
   function book_views_api() {
     return views_views_api();
   }
+
 }
 
 if (!function_exists('comment_views_api')) {
+
   /**
    * Provide Views integration for the Comment module.
    */
   function comment_views_api() {
     return views_views_api();
   }
+
 }
 
 if (!function_exists('field_views_api')) {
+
   /**
    * Provide Views integration for the Field module.
    */
   function field_views_api() {
     return views_views_api();
   }
+
 }
 
 if (!function_exists('file_views_api')) {
+
   /**
    * Provide Views integration for the File module.
    */
   function file_views_api() {
     return views_views_api();
   }
+
 }
 
 if (!function_exists('filter_views_api')) {
+
   /**
    * Provide Views integration for the Filter module.
    */
   function filter_views_api() {
     return views_views_api();
   }
+
 }
 
 if (!function_exists('image_views_api')) {
+
   /**
    * Provide Views integration for the Image module.
    */
   function image_views_api() {
     return views_views_api();
   }
+
 }
 
 if (!function_exists('locale_views_api')) {
+
   /**
    * Provide Views integration for the Locale module.
    */
   function locale_views_api() {
     return views_views_api();
   }
+
 }
 
 if (!function_exists('node_views_api')) {
+
   /**
    * Provide Views integration for the Node module.
    */
   function node_views_api() {
     return views_views_api();
   }
+
 }
 
 if (!function_exists('poll_views_api')) {
+
   /**
    * Provide Views integration for the Poll module.
    */
   function poll_views_api() {
     return views_views_api();
   }
+
 }
 
 if (!function_exists('profile_views_api')) {
+
   /**
    * Provide Views integration for the Profile module.
    */
   function profile_views_api() {
     return views_views_api();
   }
+
 }
 
 if (!function_exists('search_views_api')) {
+
   /**
    * Provide Views integration for the Search module.
    */
   function search_views_api() {
     return views_views_api();
   }
+
 }
 
 if (!function_exists('statistics_views_api')) {
+
   /**
    * Provide Views integration for the Statistics module.
    */
   function statistics_views_api() {
     return views_views_api();
   }
+
 }
 
 if (!function_exists('system_views_api')) {
+
   /**
    * Provide Views integration for the System module.
    */
   function system_views_api() {
     return views_views_api();
   }
+
 }
 
 if (!function_exists('tracker_views_api')) {
+
   /**
    * Provide Views integration for the Tracker module.
    */
   function tracker_views_api() {
     return views_views_api();
   }
+
 }
 
 if (!function_exists('taxonomy_views_api')) {
+
   /**
    * Provide Views integration for the Taxonomy module.
    */
   function taxonomy_views_api() {
     return views_views_api();
   }
+
 }
 
 if (!function_exists('translation_views_api')) {
+
   /**
    * Provide Views integration for the Translation module.
    */
   function translation_views_api() {
     return views_views_api();
   }
+
 }
 
 if (!function_exists('user_views_api')) {
+
   /**
    * Provide Views integration for the User module.
    */
   function user_views_api() {
     return views_views_api();
   }
+
 }
 
 if (!function_exists('contact_views_api')) {
+
   /**
    * Provide Views integration for the Contact module.
    */
   function contact_views_api() {
     return views_views_api();
   }
+
 }

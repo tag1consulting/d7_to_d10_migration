@@ -59,7 +59,7 @@ class ViewsCloneTest extends ViewsSqlTest {
     ));
 
     // Execute view to be cloned.
-    $result = $view->execute();
+    $view->execute();
 
     // To make sure that we are properly testing removal of all properties, we
     // first need to assert that they are actually present in the original view.

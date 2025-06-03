@@ -55,7 +55,7 @@ class views_handler_field_ncs_last_comment_name extends views_handler_field {
       $account->name = $this->get_value($values);
       $account->uid = $values->{$this->uid};
       return theme('username', array(
-        'account' => $account
+        'account' => $account,
       ));
     }
     else {

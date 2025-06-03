@@ -9,6 +9,10 @@
  * Tests the core views_handler_field_math handler.
  */
 class ViewsHandlerFieldMath extends ViewsSqlTest {
+
+  /**
+   *
+   */
   public static function getInfo() {
     return array(
       'name' => 'Field: Math',
@@ -17,11 +21,17 @@ class ViewsHandlerFieldMath extends ViewsSqlTest {
     );
   }
 
-  function viewsData() {
+  /**
+   *
+   */
+  public function viewsData() {
     $data = parent::viewsData();
     return $data;
   }
 
+  /**
+   *
+   */
   public function testFieldCustom() {
     $view = $this->getBasicView();
 

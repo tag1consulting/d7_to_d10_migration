@@ -121,9 +121,7 @@ class views_handler_filter_user_name extends views_handler_filter_in_operator {
    */
   public function validate_user_strings(&$form, $values) {
     $uids = array();
-    $placeholders = array();
     $args = array();
-    $results = array();
     foreach ($values as $value) {
       if (strtolower($value) == 'anonymous') {
         $uids[] = 0;
@@ -131,7 +129,6 @@ class views_handler_filter_user_name extends views_handler_filter_in_operator {
       else {
         $missing[strtolower($value)] = TRUE;
         $args[] = $value;
-        $placeholders[] = "'%s'";
       }
     }
 
@@ -139,6 +136,7 @@ class views_handler_filter_user_name extends views_handler_filter_in_operator {
       return $uids;
     }
 
+    $missing = array();
     $result = db_query("SELECT * FROM {users} WHERE name IN (:names)", array(':names' => $args));
     foreach ($result as $account) {
       unset($missing[strtolower($account->name)]);

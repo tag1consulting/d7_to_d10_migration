@@ -31,7 +31,7 @@ class views_handler_field_aggregator_category extends views_handler_field {
   }
 
   /**
-   * Provide link to category option
+   * Provide link to category option.
    */
   public function options_form(&$form, &$form_state) {
     $form['link_to_category'] = array(

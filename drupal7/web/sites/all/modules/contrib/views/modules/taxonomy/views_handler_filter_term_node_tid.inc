@@ -245,9 +245,8 @@ class views_handler_filter_term_node_tid extends views_handler_filter_many_to_on
       }
     }
 
-
     if (empty($form_state['exposed'])) {
-      // Retain the helper option
+      // Retain the helper option.
       $this->helper->options_form($form, $form_state);
 
       // Show help text if not exposed to end users.
@@ -288,7 +287,7 @@ class views_handler_filter_term_node_tid extends views_handler_filter_many_to_on
     }
 
     // If view is an attachment and is inheriting exposed filters, then assume
-    // exposed input has already been validated
+    // exposed input has already been validated.
     if (!empty($this->view->is_attachment) && $this->view->display_handler->uses_exposed()) {
       $this->validated_exposed_input = (array) $this->view->exposed_raw_input[$this->options['expose']['identifier']];
     }
@@ -401,7 +400,7 @@ class views_handler_filter_term_node_tid extends views_handler_filter_many_to_on
    * {@inheritdoc}
    */
   public function value_submit($form, &$form_state) {
-    // prevent array_filter from messing up our arrays in parent submit.
+    // Prevent array_filter from messing up our arrays in parent submit.
   }
 
   /**
@@ -423,7 +422,7 @@ class views_handler_filter_term_node_tid extends views_handler_filter_many_to_on
    * {@inheritdoc}
    */
   public function admin_summary() {
-    // set up $this->value_options for the parent summary
+    // Set up $this->value_options for the parent summary.
     $this->value_options = array();
 
     if ($this->value) {

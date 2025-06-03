@@ -9,8 +9,11 @@
  * Tests Views pluggable translations.
  */
 class ViewsTranslatableTest extends ViewsSqlTest {
-  var $strings;
+  public $strings;
 
+  /**
+   *
+   */
   public static function getInfo() {
     return array(
       'name' => 'Views Translatable Test',
@@ -66,6 +69,9 @@ class ViewsTranslatableTest extends ViewsSqlTest {
     $this->assertEqual(sort($expected_strings), sort($result_strings), 'Make sure that the localization plugin got every translatable string.');
   }
 
+  /**
+   *
+   */
   public function testUi() {
     // Make sure that the string is not translated in the UI.
     $view = $this->view_unpack_translatable();
@@ -103,7 +109,7 @@ class ViewsTranslatableTest extends ViewsSqlTest {
     $view->init_display();
 
     // Don't run translation. We just want to get the right keys.
-    foreach ($view->display as $display_id => $display) {
+    foreach ($view->display as $display) {
       $translatables = array();
       $display->handler->unpack_translatables($translatables);
 
@@ -146,6 +152,9 @@ class ViewsTranslatableTest extends ViewsSqlTest {
     }
   }
 
+  /**
+   *
+   */
   public function view_unpack_translatable() {
     $view = new view();
     $view->name = 'view_unpack_translatable';

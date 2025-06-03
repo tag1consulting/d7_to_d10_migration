@@ -9,6 +9,10 @@
  * Tests views ajax display.
  */
 class ViewsAjaxTest extends ViewsSqlTest {
+
+  /**
+   *
+   */
   public static function getInfo() {
     return array(
       'name' => 'Ajax',

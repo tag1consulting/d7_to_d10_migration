@@ -187,7 +187,6 @@ class views_handler_argument_term_node_tid_depth_join extends views_handler_argu
         'operator' => $operator,
       ),
     );
-    $taxonomy_index_alias = $this->query->add_relationship('taxonomy_index', $join, 'node');
 
     // Distinct is required to prevent duplicate rows.
     $this->query->distinct = TRUE;

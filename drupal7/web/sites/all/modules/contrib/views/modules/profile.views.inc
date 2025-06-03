@@ -14,7 +14,7 @@ function profile_views_data() {
   $data['profile_values']['moved to'] = 'profile_value';
   // Define the base group of this table. Fields that don't have a group
   // defined will go into this field by default.
-  $data['profile_value']['table']['group']  = t('Profile');
+  $data['profile_value']['table']['group'] = t('Profile');
 
   $data['profile_value']['table']['join'] = array(
     'node' => array(
@@ -72,13 +72,13 @@ function profile_views_get_fields() {
     foreach ($results as $row) {
       if (!empty($row->options)) {
         if (!in_array(substr($row->options, 0, 2), array('a:', 'b:', 'i:', 'f:', 'o:', 's:'))) {
-          // unserialized fields default version.
+          // Unserialized fields default version.
           $options = $row->options;
           unset($row->options);
           $row->options = $options;
         }
         else {
-          // serialized fields or modified version.
+          // Serialized fields or modified version.
           $row->options = unserialize($row->options);
         }
       }
@@ -87,7 +87,6 @@ function profile_views_get_fields() {
   }
   return $fields;
 }
-
 
 /**
  * Add profile fields to view table.

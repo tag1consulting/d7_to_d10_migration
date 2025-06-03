@@ -9,6 +9,10 @@
  * Tests the core views_handler_filter_date handler.
  */
 class ViewsHandlerFilterDateTest extends ViewsSqlTest {
+
+  /**
+   *
+   */
   public static function getInfo() {
     return array(
       'name' => 'Filter: Date',
@@ -39,7 +43,7 @@ class ViewsHandlerFilterDateTest extends ViewsSqlTest {
   /**
    * Test the general offset functionality.
    */
-  function testOffset() {
+  public function testOffset() {
     $view = $this->views_test_offset();
     // Test offset for simple operator.
     $view->set_display('default');
@@ -100,11 +104,10 @@ class ViewsHandlerFilterDateTest extends ViewsSqlTest {
     $view->destroy();
   }
 
-
   /**
    * Tests the filter operator between/not between.
    */
-  function testBetween() {
+  public function testBetween() {
     // Test between with min and max.
     $view = $this->views_test_between();
     $view->set_display('default');
@@ -168,7 +171,7 @@ class ViewsHandlerFilterDateTest extends ViewsSqlTest {
   /**
    * Make sure the validation callbacks works.
    */
-  function testUiValidation() {
+  public function testUiValidation() {
     $view = $this->views_test_between();
     $view->save();
 
@@ -185,7 +188,10 @@ class ViewsHandlerFilterDateTest extends ViewsSqlTest {
     $this->assertText(t('Invalid date format.'), 'Make sure that validation is runned and the invalidate date format is identified.');
   }
 
-  function views_test_between() {
+  /**
+   *
+   */
+  public function views_test_between() {
     $view = new view();
     $view->name = 'test_filter_date_between';
     $view->description = '';
@@ -218,7 +224,10 @@ class ViewsHandlerFilterDateTest extends ViewsSqlTest {
     return $view;
   }
 
-  function views_test_offset() {
+  /**
+   *
+   */
+  public function views_test_offset() {
     $view = $this->views_test_between();
     return $view;
   }

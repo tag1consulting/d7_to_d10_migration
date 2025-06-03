@@ -118,40 +118,40 @@ function field_views_field_default_views_data($field) {
   $group_name = count($field['bundles']) > 1 ? $translations['field'] : NULL;
 
   // Build the relationships between the field table and the entity tables.
-  foreach ($field['bundles'] as $entity => $bundles) {
-    $entity_info = entity_get_info($entity);
+  foreach ($field['bundles'] as $entity_type => $bundles) {
+    $entity_info = entity_get_info($entity_type);
     if (empty($entity_info)) {
       watchdog('views',
         'Field %field_name refers to nonexistent entity type %type. You might want to remove this broken field instance. <a href="https://www.drupal.org/node/3200406">See documentation.</a>',
-        array('%field_name' => $field['field_name'], '%type' => $entity),
+        array('%field_name' => $field['field_name'], '%type' => $entity_type),
         WATCHDOG_WARNING
       );
       continue;
     }
-    $groups[$entity] = $entity_info['label'];
+    $groups[$entity_type] = $entity_info['label'];
 
     // Override Node to Content.
-    if ($groups[$entity] == $translations['node']) {
-      $groups[$entity] = $translations['content'];
+    if ($groups[$entity_type] == $translations['node']) {
+      $groups[$entity_type] = $translations['content'];
     }
 
     // If only one bundle use this as the default name.
     if (empty($group_name)) {
-      $group_name = $groups[$entity];
+      $group_name = $groups[$entity_type];
     }
 
-    $entity_tables[$entity_info['base table']] = $entity;
-    $current_tables[$entity] = $entity_info['base table'];
+    $entity_tables[$entity_info['base table']] = $entity_type;
+    $current_tables[$entity_type] = $entity_info['base table'];
     if (isset($entity_info['revision table'])) {
-      $entity_tables[$entity_info['revision table']] = $entity;
-      $revision_tables[$entity] = $entity_info['revision table'];
+      $entity_tables[$entity_info['revision table']] = $entity_type;
+      $revision_tables[$entity_type] = $entity_info['revision table'];
     }
 
     $data[$current_table]['table']['join'][$entity_info['base table']] = array(
       'left_field' => $entity_info['entity keys']['id'],
       'field' => 'entity_id',
       'extra' => array(
-        array('field' => 'entity_type', 'value' => $entity),
+        array('field' => 'entity_type', 'value' => $entity_type),
         array('field' => 'deleted', 'value' => 0, 'numeric' => TRUE),
       ),
     );
@@ -161,7 +161,7 @@ function field_views_field_default_views_data($field) {
         'left_field' => $entity_info['entity keys']['revision'],
         'field' => 'revision_id',
         'extra' => array(
-          array('field' => 'entity_type', 'value' => $entity),
+          array('field' => 'entity_type', 'value' => $entity_type),
           array('field' => 'deleted', 'value' => 0, 'numeric' => TRUE),
         ),
       );
@@ -170,7 +170,10 @@ function field_views_field_default_views_data($field) {
     }
 
     foreach ($bundles as $bundle) {
-      $bundles_names[] = t('@entity:@bundle', array('@entity' => $entity, '@bundle' => $bundle));
+      $bundles_names[] = t(
+        '@entity:@bundle',
+        array('@entity' => $entity_type, '@bundle' => $bundle)
+      );
     }
   }
 

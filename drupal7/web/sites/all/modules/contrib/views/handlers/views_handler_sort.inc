@@ -51,7 +51,7 @@ class views_handler_sort extends views_handler {
   }
 
   /**
-   * Display whether or not the sort order is ascending or descending
+   * Display whether or not the sort order is ascending or descending.
    */
   public function admin_summary() {
     if (!empty($this->options['exposed'])) {
@@ -70,7 +70,7 @@ class views_handler_sort extends views_handler {
   }
 
   /**
-   * Basic options for all sort criteria
+   * Basic options for all sort criteria.
    */
   public function options_form(&$form, &$form_state) {
     parent::options_form($form, $form_state);

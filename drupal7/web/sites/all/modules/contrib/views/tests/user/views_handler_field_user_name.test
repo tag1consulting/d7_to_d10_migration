@@ -11,6 +11,10 @@
  * @see views_handler_field_user_name
  */
 class viewsHandlerFieldUserNameTest extends ViewsSqlTest {
+
+  /**
+   *
+   */
   public static function getInfo() {
     return array(
       'name' => 'Tests user: name field',
@@ -19,7 +23,10 @@ class viewsHandlerFieldUserNameTest extends ViewsSqlTest {
     );
   }
 
-  function testUserName() {
+  /**
+   *
+   */
+  public function testUserName() {
     $view = $this->view_user_name();
     $view->init_display();
     $this->executeView($view);
@@ -68,7 +75,10 @@ class viewsHandlerFieldUserNameTest extends ViewsSqlTest {
     $this->assertTrue(strpos($render, $username) !== FALSE, 'If link to user is checked the username should be part of the output.');
   }
 
-  function view_user_name() {
+  /**
+   *
+   */
+  public function view_user_name() {
     $view = new view();
     $view->name = 'test_views_handler_field_user_name';
     $view->description = '';
@@ -110,8 +120,11 @@ class viewsHandlerFieldUserNameTest extends ViewsSqlTest {
     return $view;
   }
 
-  function view_raw_user_name() {
-    $view = new view;
+  /**
+   *
+   */
+  public function view_raw_user_name() {
+    $view = new view();
     $view->name = 'test_views_handler_field_user_name';
     $view->description = '';
     $view->tag = 'default';
@@ -152,4 +165,5 @@ class viewsHandlerFieldUserNameTest extends ViewsSqlTest {
 
     return $view;
   }
+
 }

@@ -16,7 +16,7 @@ function taxonomy_views_data() {
   // ----------------------------------------------------------------------
   // 'taxonomy_vocabulary' table.
   $data['vocabulary']['moved to'] = 'taxonomy_vocabulary';
-  $data['taxonomy_vocabulary']['table']['group']  = t('Taxonomy vocabulary');
+  $data['taxonomy_vocabulary']['table']['group'] = t('Taxonomy vocabulary');
   $data['taxonomy_vocabulary']['table']['entity type'] = 'taxonomy_vocabulary';
   $data['taxonomy_vocabulary']['table']['join'] = array(
     // Vocabulary links to taxonomy_term_data directly via vid.
@@ -36,7 +36,7 @@ function taxonomy_views_data() {
 
   // Vocabulary name.
   $data['taxonomy_vocabulary']['name'] = array(
-    // The item it appears as on the UI,
+    // The item it appears as on the UI.
     'title' => t('Name'),
     'field' => array(
       'help' => t('Name of the vocabulary a term is a member of. This will be the vocabulary that whichever term the "Taxonomy: Term" field is; and can similarly cause duplicates.'),
@@ -49,7 +49,7 @@ function taxonomy_views_data() {
     ),
   );
   $data['taxonomy_vocabulary']['machine_name'] = array(
-    // The item it appears as on the UI,
+    // The item it appears as on the UI.
     'title' => t('Machine name'),
     'field' => array(
       'help' => t('Machine-Name of the vocabulary a term is a member of. This will be the vocabulary that whichever term the "Taxonomy: Term" field is; and can similarly cause duplicates.'),
@@ -66,7 +66,7 @@ function taxonomy_views_data() {
     ),
   );
   $data['taxonomy_vocabulary']['vid'] = array(
-    // The item it appears as on the UI,
+    // The item it appears as on the UI.
     'title' => t('Vocabulary ID'),
     'help' => t('The taxonomy vocabulary ID'),
     'field' => array(
@@ -82,7 +82,7 @@ function taxonomy_views_data() {
     ),
   );
   $data['taxonomy_vocabulary']['description'] = array(
-    // The item it appears as on the UI,
+    // The item it appears as on the UI.
     'title' => t('Description'),
     'help' => t('The taxonomy vocabulary description'),
     'field' => array(
@@ -111,7 +111,7 @@ function taxonomy_views_data() {
   // ----------------------------------------------------------------------
   // 'taxonomy_term_data' table.
   $data['term_data']['moved to'] = 'taxonomy_term_data';
-  $data['taxonomy_term_data']['table']['group']  = t('Taxonomy term');
+  $data['taxonomy_term_data']['table']['group'] = t('Taxonomy term');
   $data['taxonomy_term_data']['table']['base'] = array(
     'field' => 'tid',
     'title' => t('Term'),
@@ -268,7 +268,7 @@ function taxonomy_views_data() {
   // ----------------------------------------------------------------------
   // 'taxonomy_index' table.
   $data['term_node']['moved to'] = 'taxonomy_index';
-  $data['taxonomy_index']['table']['group']  = t('Taxonomy term');
+  $data['taxonomy_index']['table']['group'] = t('Taxonomy term');
 
   $data['taxonomy_index']['table']['join'] = array(
     'taxonomy_term_data' => array(
@@ -325,7 +325,7 @@ function taxonomy_views_data() {
 
   // ----------------------------------------------------------------------
   // 'term_hierarchy' table.
-  $data['taxonomy_term_hierarchy']['table']['group']  = t('Taxonomy term');
+  $data['taxonomy_term_hierarchy']['table']['group'] = t('Taxonomy term');
 
   $data['term_hierarchy']['moved to'] = 'taxonomy_term_hierarchy';
   $data['taxonomy_term_hierarchy']['table']['join'] = array(
@@ -467,7 +467,7 @@ function taxonomy_field_views_data_views_data_alter(&$data, $field) {
     $entity_info = entity_get_info($entity_type);
     $pseudo_field_name = 'reverse_' . $field['field_name'] . '_' . $entity_type;
 
-    list($label, $all_labels) = field_views_field_label($field['field_name']);
+    list($label) = field_views_field_label($field['field_name']);
     $entity = $entity_info['label'];
     if ($entity == t('Node')) {
       $entity = t('Content');

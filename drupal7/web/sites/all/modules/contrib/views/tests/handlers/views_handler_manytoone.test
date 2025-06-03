@@ -546,7 +546,7 @@ class ViewsHandlerManyToOneTest extends ViewsSqlTest {
     $result4 = ($nid === (int) $this->nodes[2]->nid);
     $this->assertTrue($result1 && $result2 && $result3 && $result4, 'Option 4: View result has correct node ID.');
 
-    // @todo: Fix and uncomment in issue #3045168.
+    // @todo Fix and uncomment in issue #3045168.
     // Option 5: Is all of 1 and 2.
     // @code
     // $view = $this->getTermIdExposedGroupedOptionsTestView();

@@ -142,7 +142,7 @@ class views_handler_field_prerender_list extends views_handler_field {
    * @param string $field
    *   Optional name of the field where the value is stored.
    * @param bool $raw
-   *   Use the raw data and not the data defined in pre_render
+   *   Use the raw data and not the data defined in pre_render.
    */
   public function get_value($values, $field = NULL, $raw = FALSE) {
     if ($raw) {

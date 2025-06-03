@@ -33,9 +33,9 @@ class views_handler_field_file_filemime extends views_handler_field_file {
     parent::options_form($form, $form_state);
   }
 
-    /**
-     * {@inheritdoc}
-     */
+  /**
+   * {@inheritdoc}
+   */
   public function render($values) {
     $data = $values->{$this->field_alias};
     if (!empty($this->options['filemime_image']) && $data !== NULL && $data !== '') {

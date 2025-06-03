@@ -42,11 +42,9 @@ function _views_theme_functions($hook, $view, $display = NULL) {
  * Preprocess the primary theme implementation for a view.
  */
 function template_preprocess_views_view(&$vars) {
-  global $base_path;
-
   $view = $vars['view'];
 
-  $vars['rows']       = (!empty($view->result) || $view->style_plugin->even_empty()) ? $view->style_plugin->render($view->result) : '';
+  $vars['rows'] = (!empty($view->result) || $view->style_plugin->even_empty()) ? $view->style_plugin->render($view->result) : '';
 
   $vars['css_name']   = drupal_clean_css_identifier($view->name);
   $vars['name']       = $view->name;
@@ -75,11 +73,11 @@ function template_preprocess_views_view(&$vars) {
     $vars['empty'] = $view->display_handler->render_area('empty', $empty);
   }
 
-  $vars['exposed']    = !empty($view->exposed_widgets) ? $view->exposed_widgets : '';
-  $vars['more']       = $view->display_handler->render_more_link();
-  $vars['feed_icon']  = !empty($view->feed_icon) ? $view->feed_icon : '';
+  $vars['exposed']   = !empty($view->exposed_widgets) ? $view->exposed_widgets : '';
+  $vars['more']      = $view->display_handler->render_more_link();
+  $vars['feed_icon'] = !empty($view->feed_icon) ? $view->feed_icon : '';
 
-  $vars['pager']      = '';
+  $vars['pager'] = '';
 
   // @todo Figure out whether this belongs into views_ui_preprocess_views_view.
   // Render title for the admin preview.
@@ -87,7 +85,7 @@ function template_preprocess_views_view(&$vars) {
 
   if ($view->display_handler->render_pager()) {
     $exposed_input = $view->get_exposed_input();
-    $vars['pager']      = $view->query->render_pager($exposed_input);
+    $vars['pager'] = $view->query->render_pager($exposed_input);
   }
 
   $vars['attachment_before'] = !empty($view->attachment_before) ? $view->attachment_before : '';
@@ -129,9 +127,11 @@ function template_preprocess_views_view(&$vars) {
             'view_args' => check_plain(implode('/', $view->args)),
             'view_path' => check_plain($_GET['q']),
             // Pass through URL to ensure we get e.g. language prefixes.
+            // @code
             // 'view_base_path' => isset($view->display['page']) ?
             //   substr(url($view->display['page']->display_options['path']),
             //   strlen($base_path)) : '',
+            // @endcode
             'view_base_path' => $view->get_path(),
             'view_dom_id' => $vars['dom_id'],
             // To fit multiple views on a page, the programmer may have
@@ -322,7 +322,6 @@ function template_preprocess_views_view_fields(&$vars) {
  * Display a single views grouping.
  */
 function theme_views_view_grouping($vars) {
-  $view = $vars['view'];
   $title = $vars['title'];
   $content = $vars['content'];
 
@@ -350,9 +349,6 @@ function template_preprocess_views_view_grouping(&$vars) {
  * @endcode
  */
 function theme_views_view_field($vars) {
-  $view = $vars['view'];
-  $field = $vars['field'];
-  $row = $vars['row'];
   return $vars['output'];
 }
 
@@ -371,8 +367,8 @@ function template_preprocess_views_view_field(&$vars) {
  * Preprocess theme function to print a single record from a row, with fields.
  */
 function template_preprocess_views_view_summary(&$vars) {
-  $view     = $vars['view'];
-  $argument = $view->argument[$view->build_info['summary_level']];
+  $view                = $vars['view'];
+  $argument            = $view->argument[$view->build_info['summary_level']];
   $vars['row_classes'] = array();
 
   $url_options = array();
@@ -423,8 +419,8 @@ function template_preprocess_views_view_summary(&$vars) {
  * Template preprocess theme function to print summary basically unformatted.
  */
 function template_preprocess_views_view_summary_unformatted(&$vars) {
-  $view     = $vars['view'];
-  $argument = $view->argument[$view->build_info['summary_level']];
+  $view                = $vars['view'];
+  $argument            = $view->argument[$view->build_info['summary_level']];
   $vars['row_classes'] = array();
 
   $url_options = array();
@@ -477,29 +473,29 @@ function template_preprocess_views_view_summary_unformatted(&$vars) {
  * Display a view as a table style.
  */
 function template_preprocess_views_view_table(&$vars) {
-  $view     = $vars['view'];
+  $view = $vars['view'];
 
   // We need the raw data for this grouping, which is passed in as
   // $vars['rows']. However, the template also needs to use for the rendered
   // fields. We therefore swap the raw data out to a new variable and reset
   // $vars['rows'] so that it can get rebuilt. Store rows so that they may be
   // used by further preprocess functions.
-  $result   = $vars['result'] = $vars['rows'];
-  $vars['rows'] = array();
+  $result                = $vars['result'] = $vars['rows'];
+  $vars['rows']          = array();
   $vars['field_classes'] = array();
-  $vars['header'] = array();
+  $vars['header']        = array();
   $vars['classes_array'] = array();
 
-  $options  = $view->style_plugin->options;
-  $handler  = $view->style_plugin;
-  
+  $options = $view->style_plugin->options;
+  $handler = $view->style_plugin;
+
   if (!empty($handler->options['class'])) {
     $classes = explode(' ', $handler->options['class']);
     $classes = array_map('views_clean_css_identifier', $classes);
 
     if (!empty($classes)) {
       // Trim empty class entries.
-      foreach ($classes as $key => $class) {
+      foreach ($classes as $class) {
         if (!empty($class)) {
           $vars['classes_array'][] = $class;
         }
@@ -507,17 +503,16 @@ function template_preprocess_views_view_table(&$vars) {
     }
   }
 
-  $default_row_class = isset($options['default_row_class']) ? $options['default_row_class'] : TRUE;
   $row_class_special = isset($options['row_class_special']) ? $options['row_class_special'] : TRUE;
 
-  $fields   = &$view->field;
-  $columns  = $handler->sanitize_columns($options['columns'], $fields);
+  $fields  = &$view->field;
+  $columns = $handler->sanitize_columns($options['columns'], $fields);
 
-  $active   = !empty($handler->active) ? $handler->active : '';
-  $order    = !empty($handler->order) ? $handler->order : 'asc';
+  $active = !empty($handler->active) ? $handler->active : '';
+  $order  = !empty($handler->order) ? $handler->order : 'asc';
 
-  $query    = tablesort_get_query_parameters();
-  $query    += $view->get_exposed_input();
+  $query  = tablesort_get_query_parameters();
+  $query += $view->get_exposed_input();
 
   // Fields must be rendered in order as of Views 2.3, so we will pre-render
   // everything.
@@ -636,14 +631,15 @@ function template_preprocess_views_view_table(&$vars) {
     // field is not empty.
     if (!empty($options['info'][$field]['empty_column'])) {
       $empty = TRUE;
-      foreach ($vars['rows'] as $num => $columns) {
+      foreach ($vars['rows'] as $columns) {
         $empty &= empty($columns[$column]);
       }
       if ($empty) {
-        foreach ($vars['rows'] as $num => &$column_items) {
+        foreach ($vars['rows'] as &$column_items) {
           unset($column_items[$column]);
           unset($vars['header'][$column]);
         }
+        unset($column_items);
       }
     }
   }
@@ -701,14 +697,13 @@ function template_preprocess_views_view_table(&$vars) {
  * Display a view as a grid style.
  */
 function template_preprocess_views_view_grid(&$vars) {
-  $view     = $vars['view'];
-  $result   = $view->result;
-  $options  = $view->style_plugin->options;
-  $handler  = $view->style_plugin;
+  $view              = $vars['view'];
+  $options           = $view->style_plugin->options;
+  $handler           = $view->style_plugin;
   $default_row_class = isset($options['default_row_class']) ? $options['default_row_class'] : TRUE;
   $row_class_special = isset($options['row_class_special']) ? $options['row_class_special'] : TRUE;
 
-  $columns  = $options['columns'];
+  $columns = $options['columns'];
 
   $rows = array();
   $row_indexes = array();
@@ -872,7 +867,7 @@ function template_preprocess_views_view_unformatted(&$vars) {
  * Display the view as an HTML list element.
  */
 function template_preprocess_views_view_list(&$vars) {
-  $handler  = $vars['view']->style_plugin;
+  $handler = $vars['view']->style_plugin;
 
   $class = explode(' ', $handler->options['class']);
   $class = array_map('views_clean_css_identifier', $class);
@@ -901,14 +896,12 @@ function template_preprocess_views_view_list(&$vars) {
  * Preprocess an RSS feed.
  */
 function template_preprocess_views_view_rss(&$vars) {
-  global $base_url;
   global $language;
 
-  $view     = &$vars['view'];
-  $options  = &$vars['options'];
-  $items    = &$vars['rows'];
+  $view  = &$vars['view'];
+  $items = &$vars['rows'];
 
-  $style    = &$view->style_plugin;
+  $style = &$view->style_plugin;
 
   // The RSS 2.0 "spec" doesn't indicate HTML can be used in the description.
   // We strip all HTML tags, but need to prevent double encoding from properly
@@ -965,9 +958,7 @@ function template_preprocess_views_view_rss(&$vars) {
  * Default theme function for all RSS rows.
  */
 function template_preprocess_views_view_row_rss(&$vars) {
-  $view     = &$vars['view'];
-  $options  = &$vars['options'];
-  $item     = &$vars['row'];
+  $item = &$vars['row'];
 
   $vars['title'] = check_plain($item->title);
   $vars['link'] = check_url($item->link);
@@ -1077,7 +1068,7 @@ function theme_views_form_views_form($variables) {
 }
 
 /**
- * theme function for a mini pager.
+ * Theme function for a mini pager.
  */
 function theme_views_mini_pager($vars) {
   global $pager_page_array, $pager_total;

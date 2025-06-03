@@ -16,7 +16,7 @@ class views_handler_argument_user_uid extends views_handler_argument_numeric {
    * Override the behavior of title(). Get the name of the user.
    *
    * @return array
-   *    A list of usernames.
+   *   A list of usernames.
    */
   public function title_query() {
     if (!$this->argument) {

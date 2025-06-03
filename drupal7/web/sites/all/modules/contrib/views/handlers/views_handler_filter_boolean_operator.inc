@@ -6,7 +6,7 @@
  */
 
 /**
- * Simple filter to handle matching of boolean values
+ * Simple filter to handle matching of boolean values.
  *
  * Definition items:
  * - label: (REQUIRED) The label for the checkbox.

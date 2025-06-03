@@ -13,7 +13,7 @@
 function book_views_data() {
   // ----------------------------------------------------------------------
   // 'book' table.
-  $data['book']['table']['group']  = t('Book');
+  $data['book']['table']['group'] = t('Book');
   $data['book']['table']['join'] = array(
     'node' => array(
       'left_field' => 'nid',

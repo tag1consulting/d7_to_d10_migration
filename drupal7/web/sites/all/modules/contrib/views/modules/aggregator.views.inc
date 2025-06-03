@@ -15,7 +15,7 @@ function aggregator_views_data() {
   // Main Aggregator Item base table.
   // Define the base group of this table. Fields that don't have a group
   // defined will go into this field by default.
-  $data['aggregator_item']['table']['group']  = t('Aggregator');
+  $data['aggregator_item']['table']['group'] = t('Aggregator');
 
   // Advertise this table as a possible base table.
   $data['aggregator_item']['table']['base'] = array(
@@ -28,9 +28,9 @@ function aggregator_views_data() {
   // Fields
   // Item ID / 'iid'.
   $data['aggregator_item']['iid'] = array(
-    // The item it appears as on the UI,
+    // The item it appears as on the UI.
     'title' => t('Item ID'),
-    // The help that appears on the UI,
+    // The help that appears on the UI.
     'help' => t('The unique ID of the aggregator item.'),
     // Information for displaying the iid.
     'field' => array(
@@ -56,7 +56,7 @@ function aggregator_views_data() {
 
   // Title.
   $data['aggregator_item']['title'] = array(
-    // The item it appears as on the UI,
+    // The item it appears as on the UI.
     'title' => t('Title'),
     'help' => t('The title of the aggregator item.'),
     // Information for displaying a title as a field.
@@ -76,7 +76,7 @@ function aggregator_views_data() {
 
   // Link.
   $data['aggregator_item']['link'] = array(
-    // The item it appears as on the UI,
+    // The item it appears as on the UI.
     'title' => t('Link'),
     'help' => t('The link to the original source URL of the item.'),
     'field' => array(
@@ -94,7 +94,7 @@ function aggregator_views_data() {
 
   // Author.
   $data['aggregator_item']['author'] = array(
-    // The item it appears as on the UI,
+    // The item it appears as on the UI.
     'title' => t('Author'),
     'help' => t('The author of the original imported item.'),
     // Information for displaying a title as a field.
@@ -116,7 +116,7 @@ function aggregator_views_data() {
 
   // 'guid'.
   $data['aggregator_item']['guid'] = array(
-    // The item it appears as on the UI,
+    // The item it appears as on the UI.
     'title' => t('GUID'),
     'help' => t('The guid of the original imported item.'),
     // Information for displaying a title as a field.
@@ -138,7 +138,7 @@ function aggregator_views_data() {
 
   // Feed body.
   $data['aggregator_item']['description'] = array(
-    // The item it appears as on the UI,
+    // The item it appears as on the UI.
     'title' => t('Body'),
     'help' => t('The actual content of the imported item.'),
     // Information for displaying a title as a field.
@@ -154,7 +154,7 @@ function aggregator_views_data() {
 
   // Item timestamp.
   $data['aggregator_item']['timestamp'] = array(
-    // The item it appears as on the UI,
+    // The item it appears as on the UI.
     'title' => t('Timestamp'),
     'help' => t('The date the original feed item was posted. (With some feeds, this will be the date it was imported.)'),
     // Information for displaying a title as a field.
@@ -176,7 +176,7 @@ function aggregator_views_data() {
 
   // ----------------------------------------------------------------------
   // Aggregator feed table.
-  $data['aggregator_feed']['table']['group']  = t('Aggregator feed');
+  $data['aggregator_feed']['table']['group'] = t('Aggregator feed');
 
   // Explain how this table joins to others.
   $data['aggregator_feed']['table']['join'] = array(
@@ -188,9 +188,9 @@ function aggregator_views_data() {
 
   // Feed ID / 'fid'.
   $data['aggregator_feed']['fid'] = array(
-    // The item it appears as on the UI,
+    // The item it appears as on the UI.
     'title' => t('Feed ID'),
-    // The help that appears on the UI,
+    // The help that appears on the UI.
     'help' => t('The unique ID of the aggregator feed.'),
     // Information for displaying the fid.
     'field' => array(
@@ -216,9 +216,9 @@ function aggregator_views_data() {
 
   // Title.
   $data['aggregator_feed']['title'] = array(
-    // The item it appears as on the UI,
+    // The item it appears as on the UI.
     'title' => t('Title'),
-    // The help that appears on the UI,
+    // The help that appears on the UI.
     'help' => t('The title of the aggregator feed.'),
     // Information for displaying a title as a field.
     'field' => array(
@@ -240,7 +240,7 @@ function aggregator_views_data() {
 
   // Link.
   $data['aggregator_feed']['link'] = array(
-    // The item it appears as on the UI,
+    // The item it appears as on the UI.
     'title' => t('Link'),
     'help' => t('The link to the source URL of the feed.'),
     // Information for displaying a title as a field.
@@ -258,7 +258,7 @@ function aggregator_views_data() {
 
   // Feed last updated.
   $data['aggregator_feed']['checked'] = array(
-    // The item it appears as on the UI,
+    // The item it appears as on the UI.
     'title' => t('Last checked'),
     'help' => t('The date the feed was last checked for new content.'),
     // Information for displaying a title as a field.
@@ -279,7 +279,7 @@ function aggregator_views_data() {
 
   // Feed description.
   $data['aggregator_feed']['description'] = array(
-    // The item it appears as on the UI,
+    // The item it appears as on the UI.
     'title' => t('Description'),
     'help' => t('The description of the aggregator feed.'),
     // Information for displaying a title as a field.
@@ -294,7 +294,7 @@ function aggregator_views_data() {
 
   // Feed last updated.
   $data['aggregator_feed']['modified'] = array(
-    // The item it appears as on the UI,
+    // The item it appears as on the UI.
     'title' => t('Last modified'),
     'help' => t('The date of the most recent new content on the feed.'),
     // Information for displaying a title as a field.

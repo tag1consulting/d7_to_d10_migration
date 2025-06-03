@@ -161,7 +161,7 @@ function views_views_plugins() {
         'handler' => 'views_plugin_style_summary',
         'theme' => 'views_view_summary',
         'type' => 'summary',
-  // only shows up as a summary style.
+    // Only shows up as a summary style.
         'uses options' => TRUE,
         'help topic' => 'style-summary',
       ),
@@ -171,7 +171,7 @@ function views_views_plugins() {
         'handler' => 'views_plugin_style_summary_unformatted',
         'theme' => 'views_view_summary_unformatted',
         'type' => 'summary',
-  // only shows up as a summary style.
+    // Only shows up as a summary style.
         'uses options' => TRUE,
         'help topic' => 'style-summary-unformatted',
       ),
@@ -384,7 +384,7 @@ function views_views_plugins() {
       'handler' => 'views_plugin_style_summary_jump_menu',
       'theme' => 'views_view_summary_jump_menu',
       'type' => 'summary',
-    // only shows up as a summary style.
+    // Only shows up as a summary style.
       'uses options' => TRUE,
       'help topic' => 'style-summary-jump-menu',
     );
@@ -455,7 +455,7 @@ function views_discover_plugins() {
         // Set the internal name to be able to read it out later.
         $def['name'] = $plugin;
 
-        // merge the new data in.
+        // Merge the new data in.
         $cache[$type][$plugin] = $def;
       }
     }
@@ -569,6 +569,7 @@ class views_plugin extends views_object {
   public function summary_title() {
     return t('Settings');
   }
+
   /**
    * Return the human readable name of the display.
    *

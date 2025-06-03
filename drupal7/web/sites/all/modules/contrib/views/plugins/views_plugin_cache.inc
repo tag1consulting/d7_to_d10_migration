@@ -8,7 +8,7 @@
 /**
  * @defgroup views_cache_plugins Views cache plugins
  * @{
- * @todo.
+ * @todo .
  *
  * @see hook_views_plugins()
  */
@@ -338,7 +338,7 @@ class views_plugin_cache extends views_plugin {
     $key_data += array(
       'roles' => array_keys($user->roles),
       'super-user' => $user->uid == 1,
-    // special caching for super user.
+    // Special caching for super user.
       'language' => $GLOBALS['language']->language,
       'language_content' => $GLOBALS['language_content']->language,
       'base_url' => $GLOBALS['base_url'],

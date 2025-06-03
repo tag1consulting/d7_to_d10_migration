@@ -11,6 +11,10 @@
  * The actual stuff is done in the parent class.
  */
 class viewsHandlerFilterCommentUserUidTest extends viewsHandlerArgumentCommentUserUidTest {
+
+  /**
+   *
+   */
   public static function getInfo() {
     return array(
       'name' => 'Tests handler filter_comment_user_uid',
@@ -23,7 +27,7 @@ class viewsHandlerFilterCommentUserUidTest extends viewsHandlerArgumentCommentUs
    * Override the view from the argument test case to remove the argument and
    * add filter with the uid as the value.
    */
-  function view_comment_user_uid() {
+  public function view_comment_user_uid() {
     $view = parent::view_comment_user_uid();
     // Remove the argument.
     $view->set_item('default', 'argument', 'uid_touch', NULL);

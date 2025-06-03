@@ -116,7 +116,8 @@ class views_plugin_argument_validate_node extends views_plugin_argument_validate
         }
 
         return isset($types[$node->type]);
-        break;
+
+      break;
 
       case 'nids':
         $nids = new stdClass();

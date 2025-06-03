@@ -10,6 +10,9 @@
  */
 class ViewsNodeRevisionRelationsTestCase extends ViewsSqlTest {
 
+  /**
+   *
+   */
   public static function getInfo() {
     return array(
       'name' => 'Tests basic node_revision integration',
@@ -66,7 +69,7 @@ class ViewsNodeRevisionRelationsTestCase extends ViewsSqlTest {
   /**
    * Test view with default join on node.nid.
    */
-  function test_view_node_revision_nid() {
+  public function test_view_node_revision_nid() {
     $view = new view();
     $view->name = 'test_node_revision_nid';
     $view->description = '';
@@ -122,7 +125,7 @@ class ViewsNodeRevisionRelationsTestCase extends ViewsSqlTest {
   /**
    * Test view with default join on node.vid.
    */
-  function test_view_node_revision_vid() {
+  public function test_view_node_revision_vid() {
     $view = new view();
     $view->name = 'test_node_revision_vid';
     $view->description = '';

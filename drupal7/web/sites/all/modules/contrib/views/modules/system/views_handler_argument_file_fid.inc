@@ -24,6 +24,7 @@ class views_handler_argument_file_fid extends views_handler_argument_numeric {
     foreach ($titles as &$title) {
       $title = check_plain($title);
     }
+    unset($title);
     return $titles;
   }
 

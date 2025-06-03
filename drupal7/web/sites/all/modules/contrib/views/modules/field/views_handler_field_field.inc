@@ -340,7 +340,7 @@ class views_handler_field_field extends views_handler_field {
   public function option_definition() {
     $options = parent::option_definition();
 
-    // option_definition runs before init/construct, so no $this->field_info
+    // option_definition runs before init/construct, so no $this->field_info.
     $field = field_info_field($this->definition['field_name']);
     $field_type = field_info_field_types($field['type']);
     $column_names = array_keys($field['columns']);
@@ -656,7 +656,6 @@ class views_handler_field_field extends views_handler_field {
     if (!empty($values)) {
       // Divide the entity ids by entity type, so they can be loaded in bulk.
       $entities_by_type = array();
-      $revisions_by_type = array();
       foreach ($values as $key => $object) {
         if (isset($this->aliases['entity_type']) && isset($object->{$this->aliases['entity_type']}) && isset($object->{$this->field_alias}) && !isset($values[$key]->_field_data[$this->field_alias])) {
           $entity_type = $object->{$this->aliases['entity_type']};
@@ -710,6 +709,7 @@ class views_handler_field_field extends views_handler_field {
       foreach ($values as $row_id => &$value) {
         $value->{'field_' . $this->options['id']} = $this->set_items($value, $row_id);
       }
+      unset($value);
     }
   }
 

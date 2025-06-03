@@ -16,7 +16,7 @@ class views_handler_argument_search extends views_handler_argument {
    * Take sure that parseSearchExpression is runned and everything is set up.
    *
    * @param string $input
-   *    The search phrase which was input by the user.
+   *   The search phrase which was input by the user.
    */
   public function query_parse_search_expression($input) {
     if (!isset($this->search_query)) {
@@ -78,6 +78,7 @@ class views_handler_argument_search extends views_handler_argument {
             $this->search_query->condition_replace_string('d.', "$search_dataset.", $condition);
           }
         }
+        unset($condition);
         $search_conditions =& $search_condition->conditions();
         $search_conditions = array_merge($search_conditions, $condition_conditions);
       }

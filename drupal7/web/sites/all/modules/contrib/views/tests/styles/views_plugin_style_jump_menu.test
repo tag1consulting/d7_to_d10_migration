@@ -15,7 +15,7 @@ class viewsPluginStyleJumpMenuTest extends ViewsSqlTest {
    *
    * @var array
    */
-  var $nodes;
+  public $nodes;
 
   /**
    *
@@ -46,7 +46,7 @@ class viewsPluginStyleJumpMenuTest extends ViewsSqlTest {
   /**
    * Tests jump menues with more then one same path but maybe differnet titles.
    */
-  function testDuplicatePaths() {
+  public function testDuplicatePaths() {
     $view = $this->getJumpMenuView();
     $view->set_display();
     $view->init_handlers();
@@ -74,7 +74,7 @@ class viewsPluginStyleJumpMenuTest extends ViewsSqlTest {
   /**
    *
    */
-  function getJumpMenuView() {
+  public function getJumpMenuView() {
     $view = new view();
     $view->name = 'test_jump_menu';
     $view->description = '';
@@ -146,7 +146,7 @@ class viewsPluginStyleJumpMenuTest extends ViewsSqlTest {
     $handler->display->display_options['sorts']['created']['id'] = 'created';
     $handler->display->display_options['sorts']['created']['table'] = 'node';
     $handler->display->display_options['sorts']['created']['field'] = 'created';
-    $handler->display->display_options['sorts']['created']['order'] = 'DESC';
+    $handler->display->display_options['sorts']['created']['order'] = 'ASC';
     /* Filter criterion: Content: Published */
     $handler->display->display_options['filters']['status']['id'] = 'status';
     $handler->display->display_options['filters']['status']['table'] = 'node';

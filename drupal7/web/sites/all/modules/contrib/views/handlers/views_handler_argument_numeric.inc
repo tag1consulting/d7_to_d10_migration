@@ -16,12 +16,14 @@ class views_handler_argument_numeric extends views_handler_argument {
 
   /**
    * The operator used for the query: or|and.
+   *
    * @var string
    */
   public $operator;
 
   /**
    * The actual value which is used for querying.
+   *
    * @var array
    */
   public $value;
@@ -44,7 +46,7 @@ class views_handler_argument_numeric extends views_handler_argument {
   public function options_form(&$form, &$form_state) {
     parent::options_form($form, $form_state);
 
-    // allow + for or, , for and
+    // Allow + for or, , for and.
     $form['break_phrase'] = array(
       '#type' => 'checkbox',
       '#title' => t('Allow multiple values'),
@@ -93,7 +95,7 @@ class views_handler_argument_numeric extends views_handler_argument {
    * Override for specific title lookups.
    *
    * @return array
-   *    Returns all titles, if it's just one title it's an array with one entry.
+   *   Returns all titles, if it's just one title it's an array with one entry.
    */
   public function title_query() {
     return $this->value;

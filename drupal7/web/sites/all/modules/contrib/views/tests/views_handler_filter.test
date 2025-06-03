@@ -53,11 +53,10 @@ class ViewsHandlerFilterTest extends ViewsSqlTest {
   /**
    * Tests "is all of" of filter operation.
    */
-  function testFilterInOperatorUi() {
+  public function testFilterInOperatorUi() {
     $term = $this->drupalCreateTerm(1);
 
-    $node1 = $this->drupalCreateNode(array('type' => 'article','field_tags_tid' => $term->tid, 'created' => REQUEST_TIME));
-    $node2 = $this->drupalCreateNode(array('type' => 'article', 'created' => REQUEST_TIME + 1));
+    $node1 = $this->drupalCreateNode(array('type' => 'article', 'field_tags_tid' => $term->tid, 'created' => REQUEST_TIME));
     $user2 = $this->drupalCreateUser(array('access content'));
     // $this->drupalLogin($this->drupalCreateUser(array('administer users'));
     $this->drupalLogin($this->drupalCreateUser(array('administer users', 'access administration pages', 'administer site configuration', 'administer nodes', 'bypass node access')));

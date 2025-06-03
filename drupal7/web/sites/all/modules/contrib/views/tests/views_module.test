@@ -9,6 +9,10 @@
  * Tests basic functions from the Views module.
  */
 class ViewsModuleTest extends ViewsSqlTest {
+
+  /**
+   *
+   */
   public static function getInfo() {
     return array(
       'name' => 'Tests views.module',
@@ -26,6 +30,9 @@ class ViewsModuleTest extends ViewsSqlTest {
     drupal_theme_rebuild();
   }
 
+  /**
+   * {@inheritdoc}
+   */
   public function viewsData() {
     $data = parent::viewsData();
     $data['views_test_previous'] = array();
@@ -39,7 +46,10 @@ class ViewsModuleTest extends ViewsSqlTest {
     return $data;
   }
 
-  public function test_views_trim_text() {
+  /**
+   * Tests views_trim_text().
+   */
+  public function testViewsTrimText() {
     // Test unicode, @see http://drupal.org/node/513396#comment-2839416
     $text = array(
       'Tuy nhiên, những hi vọng',
@@ -71,7 +81,7 @@ class ViewsModuleTest extends ViewsSqlTest {
       $this->assertEqual($result_text, $expect[$key]);
     }
 
-    // Test also word_boundary
+    // Test also word_boundary.
     $alter['word_boundary'] = TRUE;
     $expect = array(
       'Tuy nhiên',
@@ -93,10 +103,10 @@ class ViewsModuleTest extends ViewsSqlTest {
   /**
    * Tests the dynamic includes of templates via module feature.
    */
-  function testModuleTemplates() {
+  public function testViewsThemeModuleTemplates() {
     $views_status = variable_get('views_defaults', array());
     $views_status['frontpage'] = FALSE;
-    // false is enabled.
+    // False is enabled.
     variable_set('views_defaults', $views_status);
 
     $existing = array();
@@ -108,9 +118,9 @@ class ViewsModuleTest extends ViewsSqlTest {
   }
 
   /**
-   * Tests the views_get_handler method.
+   * Tests views_get_handler().
    */
-  function testviews_get_handler() {
+  public function testViewsGetHandler() {
     $types = array('field', 'area', 'filter');
     foreach ($types as $type) {
       $handler = views_get_handler($this->randomName(), $this->randomName(), $type);
@@ -158,8 +168,7 @@ class ViewsModuleTest extends ViewsSqlTest {
   /**
    * Tests views_fetch_data().
    */
-  function testFetchData() {
-
+  public function testViewsFetchData() {
     // Make sure we start with a empty cache.
     $this->resetStaticViewsDataCache();
     cache_clear_all('*', 'cache_views', TRUE);
@@ -226,7 +235,7 @@ class ViewsModuleTest extends ViewsSqlTest {
   /**
    * Ensure that a certain handler is a instance of a certain table/field.
    */
-  function assertInstanceHandler($handler, $table, $field, $id) {
+  protected function assertInstanceHandler($handler, $table, $field, $id) {
     $table_data = views_fetch_data($table);
     $field_data = $table_data[$field][$id];
 

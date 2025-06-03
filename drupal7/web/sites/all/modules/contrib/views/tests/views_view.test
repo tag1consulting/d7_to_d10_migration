@@ -24,7 +24,7 @@ class ViewsViewTest extends ViewsSqlTest {
   /**
    * Ensure that every kind of heavy objects are removed by the destructor.
    */
-  function testDestroy() {
+  public function testDestroy() {
     $view = $this->view_test_destroy();
 
     $view->preview();
@@ -46,7 +46,7 @@ class ViewsViewTest extends ViewsSqlTest {
    * @param object $view
    *   The view to destroy.
    */
-  function assertViewDestroy($view) {
+  public function assertViewDestroy($view) {
     $this->assertFalse(isset($view->display['default']->handler), 'Make sure all displays are destroyed.');
     $this->assertFalse(isset($view->display['attachment_1']->handler), 'Make sure all displays are destroyed.');
 
@@ -71,7 +71,7 @@ class ViewsViewTest extends ViewsSqlTest {
   /**
    * Test deleting a view.
    */
-  function testDelete() {
+  public function testDelete() {
     // Delete a database view.
     $view = $this->view_test_delete();
     $view->save();
@@ -88,7 +88,7 @@ class ViewsViewTest extends ViewsSqlTest {
   /**
    * Test validation.
    */
-  function testValidate() {
+  public function testValidate() {
     // Test a view with multiple displays.
     // Validating a view shouldn't change the active display.
     // @todo Create an extra validation view.
@@ -111,7 +111,7 @@ class ViewsViewTest extends ViewsSqlTest {
    * Includes:
    *   filters, fields, arguments, relationships, sorts, areas and attachments.
    */
-  function view_test_destroy() {
+  public function view_test_destroy() {
     $view = new view();
     $view->name = 'test_destroy';
     $view->description = '';
@@ -277,7 +277,7 @@ class ViewsViewTest extends ViewsSqlTest {
   /**
    * Creates a test view.
    */
-  function view_test_delete() {
+  public function view_test_delete() {
     $view = new view();
     $view->name = 'test_view_delete';
     $view->description = '';

@@ -14,7 +14,7 @@ function statistics_views_data() {
   // Basic table information.
   // ----------------------------------------------------------------
   // 'node_counter' table.
-  $data['node_counter']['table']['group']  = t('Content statistics');
+  $data['node_counter']['table']['group'] = t('Content statistics');
 
   // Joins to the node table.
   $data['node_counter']['table']['join'] = array(
@@ -77,7 +77,7 @@ function statistics_views_data() {
 
   // ----------------------------------------------------------------
   // 'accesslog' table.
-  $data['accesslog']['table']['group']  = t('Access log');
+  $data['accesslog']['table']['group'] = t('Access log');
 
   // Advertise this table as a possible base table.
   $data['accesslog']['table']['base'] = array(

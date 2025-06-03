@@ -228,7 +228,7 @@ abstract class ViewsSqlTest extends ViewsTestCase {
    *
    * @todo Convert existing setUp functions.
    */
-  function enableViewsUi() {
+  public function enableViewsUi() {
     module_enable(array('views_ui'));
     // @todo Figure out why it's required to clear the cache here.
     views_module_include('views_default', TRUE);
@@ -260,7 +260,8 @@ abstract class ViewsSqlTest extends ViewsTestCase {
           'type' => 'int',
           'unsigned' => TRUE,
           'not null' => TRUE,
-          'default' => 0),
+          'default' => 0,
+        ),
         'job' => array(
           'description' => "The person's job",
           'type' => 'varchar',
@@ -505,7 +506,7 @@ abstract class ViewsSqlTest extends ViewsTestCase {
     // cache.
     drupal_static_reset('views_exposed_form_cache');
 
-    $display = $view->new_display('page', 'Page', 'page_1');
+    $view->new_display('page', 'Page', 'page_1');
     return $view;
   }
 

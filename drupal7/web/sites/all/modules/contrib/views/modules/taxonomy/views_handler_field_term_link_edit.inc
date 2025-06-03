@@ -59,7 +59,7 @@ class views_handler_field_term_link_edit extends views_handler_field {
   /**
    * {@inheritdoc}
    */
-  function render($values) {
+  public function render($values) {
     $value = $this->get_value($values, 'tid');
     return $this->render_link($this->sanitize_value($value), $values);
   }
@@ -67,7 +67,7 @@ class views_handler_field_term_link_edit extends views_handler_field {
   /**
    * {@inheritdoc}
    */
-  function render_link($data, $values) {
+  public function render_link($data, $values) {
     // Mock a term object for taxonomy_term_edit_access(). Use machine name and
     // vid to ensure compatibility with vid based and machine name based
     // access checks. See http://drupal.org/node/995156

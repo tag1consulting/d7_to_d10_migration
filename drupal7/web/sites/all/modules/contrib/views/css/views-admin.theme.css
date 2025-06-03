@@ -883,7 +883,7 @@ ul#views-display-menu-tabs li.add ul.action-list li {
 
 /* @group Configure filter criteria */
 
-/* @todo the width and border info could be moved into a more generic class */
+/* @todo The width and border info could be moved into a more generic class. */
 /* @todo Make this a class to be used anywhere there's node types? */
 .form-type-checkboxes #edit-options-value,
 .form-type-checkboxes #edit-options-validate-options-node-types {

@@ -67,7 +67,7 @@ class views_handler_area_view extends views_handler_area {
   /**
    * Loads the used view for rendering.
    *
-   * @return \view|NULL
+   * @return \view|null
    *   The loaded view or NULL, in case the view was not loadable / recursion
    *   got detected / access got denied.
    */

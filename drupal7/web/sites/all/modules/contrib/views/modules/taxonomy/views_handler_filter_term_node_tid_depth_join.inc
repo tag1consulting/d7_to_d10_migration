@@ -153,7 +153,6 @@ class views_handler_filter_term_node_tid_depth_join extends views_handler_filter
         'operator' => $operator,
       ),
     );
-    $taxonomy_index_alias = $this->query->add_relationship('taxonomy_index', $join, 'node');
   }
 
 }

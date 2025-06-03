@@ -20,7 +20,7 @@ class views_plugin_display_attachment extends views_plugin_display {
   /**
    * {@inheritdoc}
    */
-  public function option_definition () {
+  public function option_definition() {
     $options = parent::option_definition();
 
     $options['show_title'] = array('default' => FALSE, 'bool' => TRUE);
@@ -158,6 +158,7 @@ class views_plugin_display_attachment extends views_plugin_display {
           '#default_value' => $this->get_option('show_title'),
         );
         break;
+
       case 'show_title_empty':
         $form['#title'] .= t('Title');
         $form['show_title_empty'] = array(
@@ -167,6 +168,7 @@ class views_plugin_display_attachment extends views_plugin_display {
           '#default_value' => $this->get_option('show_title_empty'),
         );
         break;
+
       case 'inherit_arguments':
         $form['#title'] .= t('Inherit contextual filters');
         $form['inherit_arguments'] = array(

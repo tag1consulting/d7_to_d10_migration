@@ -40,9 +40,9 @@ function node_views_data() {
   // 'node' table -- fields.
   // Node ID / 'nid'.
   $data['node']['nid'] = array(
-    // The item it appears as on the UI,
+    // The item it appears as on the UI.
     'title' => t('Nid'),
-    // The help that appears on the UI,
+    // The help that appears on the UI.
     'help' => t('The node ID.'),
     // Information for displaying the nid.
     'field' => array(
@@ -70,9 +70,9 @@ function node_views_data() {
   // Title.
   // This definition has more items in it than it needs to as an example.
   $data['node']['title'] = array(
-    // The item it appears as on the UI,
+    // The item it appears as on the UI.
     'title' => t('Title'),
-    // The help that appears on the UI,
+    // The help that appears on the UI.
     'help' => t('The content title.'),
     // Information for displaying a title as a field.
     'field' => array(
@@ -98,9 +98,9 @@ function node_views_data() {
 
   // Created field.
   $data['node']['created'] = array(
-    // The item it appears as on the UI,
+    // The item it appears as on the UI.
     'title' => t('Post date'),
-    // The help that appears on the UI,
+    // The help that appears on the UI.
     'help' => t('The date the content was posted.'),
     'field' => array(
       'handler' => 'views_handler_field_date',
@@ -116,9 +116,9 @@ function node_views_data() {
 
   // Changed field.
   $data['node']['changed'] = array(
-    // The item it appears as on the UI,
+    // The item it appears as on the UI.
     'title' => t('Updated date'),
-    // The help that appears on the UI,
+    // The help that appears on the UI.
     'help' => t('The date the content was last updated.'),
     'field' => array(
       'handler' => 'views_handler_field_date',
@@ -134,9 +134,9 @@ function node_views_data() {
 
   // Content type.
   $data['node']['type'] = array(
-    // The item it appears as on the UI,
+    // The item it appears as on the UI.
     'title' => t('Type'),
-    // The help that appears on the UI,
+    // The help that appears on the UI.
     'help' => t('The content type (for example, "blog entry", "forum post", "story", etc).'),
     'field' => array(
       'handler' => 'views_handler_field_node_type',
@@ -210,9 +210,9 @@ function node_views_data() {
 
   // Sticky.
   $data['node']['sticky'] = array(
-    // The item it appears as on the UI,
+    // The item it appears as on the UI.
     'title' => t('Sticky status'),
-    // The help that appears on the UI,
+    // The help that appears on the UI.
     'help' => t('Whether or not the content is sticky.'),
     // Information for displaying a title as a field.
     'field' => array(
@@ -441,7 +441,7 @@ function node_views_data() {
   $data['node_revisions']['moved to'] = 'node_revision';
   $data['node_revision']['table']['entity type'] = 'node';
   $data['node_revision']['table']['revision'] = TRUE;
-  $data['node_revision']['table']['group']  = t('Content revision');
+  $data['node_revision']['table']['group'] = t('Content revision');
   // Support the conversion of the field body.
   $data['node_revisions']['body']['moved to'] = array('field_revision_data', 'body-revision_id');
 
@@ -549,9 +549,9 @@ function node_views_data() {
 
   // Title.
   $data['node_revision']['title'] = array(
-    // The item it appears as on the UI,
+    // The item it appears as on the UI.
     'title' => t('Title'),
-    // The help that appears on the UI,
+    // The help that appears on the UI.
     'help' => t('The content title.'),
     // Information for displaying a title as a field.
     'field' => array(
@@ -573,9 +573,9 @@ function node_views_data() {
 
   // Log field.
   $data['node_revision']['log'] = array(
-    // The item it appears as on the UI,
+    // The item it appears as on the UI.
     'title' => t('Log message'),
-    // The help that appears on the UI,
+    // The help that appears on the UI.
     'help' => t('The log message entered when the revision was created.'),
     // Information for displaying a title as a field.
     'field' => array(
@@ -588,9 +588,9 @@ function node_views_data() {
 
   // Revision timestamp / 'changed' field.
   $data['node_revision']['timestamp'] = array(
-    // The item it appears as on the UI,
+    // The item it appears as on the UI.
     'title' => t('Updated date'),
-    // The help that appears on the UI,
+    // The help that appears on the UI.
     'help' => t('The date the node was last updated.'),
     'field' => array(
       'handler' => 'views_handler_field_date',
@@ -632,7 +632,7 @@ function node_views_data() {
   // Node access table.
   // Define the base group of this table. Fields that don't have a group
   // defined will go into this field by default.
-  $data['node_access']['table']['group']  = t('Content access');
+  $data['node_access']['table']['group'] = t('Content access');
 
   // For other base tables, explain how we join.
   $data['node_access']['table']['join'] = array(
@@ -658,7 +658,7 @@ function node_views_data() {
   // it so that we can later add the real table for other purposes if we need
   // it.
   $data['history_user']['moved to'] = 'history';
-  $data['history']['table']['group']  = t('Content');
+  $data['history']['table']['group'] = t('Content');
 
   // Explain how this table joins to others.
   $data['history']['table']['join'] = array(
@@ -775,7 +775,7 @@ function node_views_analyze($view) {
   $ret = array();
   // Check for something other than the default display.
   if ($view->base_table == 'node') {
-    foreach ($view->display as $id => $display) {
+    foreach ($view->display as $display) {
       if (empty($display->handler)) {
         continue;
       }
@@ -809,7 +809,7 @@ function node_views_analyze($view) {
       }
     }
   }
-  foreach ($view->display as $id => $display) {
+  foreach ($view->display as $display) {
     if ($display->display_plugin == 'page') {
       if ($display->handler->get_option('path') == 'node/%') {
         $ret[] = views_ui_analysis(t('Display %display has set node/% as path. This will not produce what you want. If you want to have multiple versions of the node view, use panels.', array('%display' => $display->display_title)), 'warning');

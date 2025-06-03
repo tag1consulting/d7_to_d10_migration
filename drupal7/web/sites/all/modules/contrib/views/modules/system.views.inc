@@ -16,7 +16,7 @@ function system_views_data() {
   // ----------------------------------------------------------------------
   // 'file_managed' table.
   $data['files']['moved to'] = 'file_managed';
-  $data['file_managed']['table']['group']  = t('File');
+  $data['file_managed']['table']['group'] = t('File');
 
   // Advertise this table as a possible base table.
   $data['file_managed']['table']['base'] = array(
@@ -40,7 +40,7 @@ function system_views_data() {
     'argument' => array(
       'handler' => 'views_handler_argument_file_fid',
       'name field' => 'filename',
-  // the field to display in the summary.
+  // The field to display in the summary.
       'numeric' => TRUE,
     ),
     'filter' => array(
@@ -181,7 +181,7 @@ function system_views_data() {
 
   // ----------------------------------------------------------------------
   // file_usage table.
-  $data['file_usage']['table']['group']  = t('File Usage');
+  $data['file_usage']['table']['group'] = t('File Usage');
 
   // Provide field-type-things to several base tables; on the core files table
   // ("file_managed") so that we can create relationships from files to
@@ -471,7 +471,7 @@ function system_views_data() {
 
   // ----------------------------------------------------------------------
   // System table.
-  $data['system']['table']['group']  = t('System');
+  $data['system']['table']['group'] = t('System');
 
   // Advertise this table as a possible base table.
   $data['system']['table']['base'] = array(

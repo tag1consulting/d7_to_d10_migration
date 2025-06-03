@@ -41,7 +41,7 @@ class views_handler_argument_formula extends views_handler_argument {
   }
 
   /**
-   * Build the summary query based on a formula
+   * Build the summary query based on a formula.
    */
   public function summary_query() {
     $this->ensure_my_table();
@@ -56,7 +56,7 @@ class views_handler_argument_formula extends views_handler_argument {
   }
 
   /**
-   * Build the query based upon the formula
+   * Build the query based upon the formula.
    */
   public function query($group_by = FALSE) {
     $this->ensure_my_table();

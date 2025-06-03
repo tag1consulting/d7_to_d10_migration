@@ -29,7 +29,7 @@ class views_plugin_row extends views_plugin {
     $this->view = &$view;
     $this->display = &$display;
 
-    // Overlay incoming options on top of defaults
+    // Overlay incoming options on top of defaults.
     $this->unpack_options($this->options, isset($options) ? $options : $display->handler->get_option('row_options'));
   }
 

@@ -26,7 +26,7 @@
  * @{
  * This page explains the basic cycle of a view and what processes happen.
  *
- * @todo.
+ * @todo .
  * @}
  */
 
@@ -434,7 +434,7 @@ function hook_views_data() {
       'label' => t('Published'),
       // This setting is used by the boolean filter handler, as possible option.
       'type' => 'yes-no',
-      // use boolean_field = 1 instead of boolean_field <> 0 in WHERE statement.
+      // Use boolean_field = 1 instead of boolean_field <> 0 in WHERE statement.
       'use equal' => TRUE,
     ),
     'sort' => array(
@@ -595,7 +595,7 @@ function hook_field_views_data_alter(&$result, $field, $module) {
 function hook_field_views_data_views_data_alter(&$data, $field) {
   $field_name = $field['field_name'];
   $data_key = 'field_data_' . $field_name;
-  // Views data for this field is in $data[$data_key]
+  // Views data for this field is in $data[$data_key].
 }
 
 /**
@@ -739,9 +739,9 @@ function hook_views_plugins_alter(&$plugins) {
  * modules.
  *
  * @param array $options
- *  The option definitions to be altered.
+ *   The option definitions to be altered.
  * @param $plugin
- *  A views object of the plugin where the default options are defined.
+ *   A views object of the plugin where the default options are defined.
  *
  * @see views_object::option_definition()
  * @see hook_views_handler_option_definition_alter()
@@ -767,9 +767,9 @@ function hook_views_plugin_option_definition_alter(&$options, $plugin) {
  * modules.
  *
  * @param array $options
- *  The option definitions to be altered.
+ *   The option definitions to be altered.
  * @param $handler
- *  A views object of the handler where the default options are defined.
+ *   A views object of the handler where the default options are defined.
  *
  * @see views_handler::option_definition()
  * @see hook_views_plugin_option_definition_alter()
@@ -1182,7 +1182,9 @@ function hook_views_query_alter(&$view, &$query) {
           );
         }
       }
+      unset($condition);
     }
+    unset($condition_group);
   }
 }
 
@@ -1262,7 +1264,7 @@ function hook_views_ui_ajax_forms_alter(&$forms) {
   // would contain $form_state['type'] and $form_state['id'].
   // The urls that would call this form would be (both nojs and ajax versions):
   // admin/structure/views/nojs/categorise-item/<view_name>/<display_name>/<type>/<id>
-  // admin/structure/views/ajax/categorise-item/<view_name>/<display_name>/<type>/<id>
+  // admin/structure/views/ajax/categorise-item/<view_name>/<display_name>/<type>/<id>.
   $forms['categorise-item'] = array(
     'form_id' => 'mymodule_views_categorize_fields_form',
     'args' => array('type', 'id'),
@@ -1293,6 +1295,7 @@ function hook_views_ajax_data_alter(&$commands, $view) {
       $command['command'] .= 'myScrollTop';
     }
   }
+  unset($command);
 }
 
 /**

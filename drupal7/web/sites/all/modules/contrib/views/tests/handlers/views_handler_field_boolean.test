@@ -9,6 +9,10 @@
  * Tests the core views_handler_field_boolean handler.
  */
 class ViewsHandlerFieldBooleanTest extends ViewsSqlTest {
+
+  /**
+   *
+   */
   public static function getInfo() {
     return array(
       'name' => 'Field: Boolean',
@@ -17,7 +21,10 @@ class ViewsHandlerFieldBooleanTest extends ViewsSqlTest {
     );
   }
 
-  function dataSet() {
+  /**
+   *
+   */
+  public function dataSet() {
     // Use default dataset but remove the age from john and paul.
     $data = parent::dataSet();
     $data[0]['age'] = 0;
@@ -25,12 +32,18 @@ class ViewsHandlerFieldBooleanTest extends ViewsSqlTest {
     return $data;
   }
 
-  function viewsData() {
+  /**
+   *
+   */
+  public function viewsData() {
     $data = parent::viewsData();
     $data['views_test']['age']['field']['handler'] = 'views_handler_field_boolean';
     return $data;
   }
 
+  /**
+   *
+   */
   public function testFieldBoolean() {
     $view = $this->getBasicView();
 
@@ -61,7 +74,7 @@ class ViewsHandlerFieldBooleanTest extends ViewsSqlTest {
     $this->assertEqual(t('False'), $view->field['age']->advanced_render($view->result[0]));
     $this->assertEqual(t('True'), $view->field['age']->advanced_render($view->result[1]));
 
-    // test awesome unicode.
+    // Test awesome unicode.
     $view->field['age']->options['type'] = 'unicode-yes-no';
     $this->assertEqual('✖', $view->field['age']->advanced_render($view->result[0]));
     $this->assertEqual('✔', $view->field['age']->advanced_render($view->result[1]));

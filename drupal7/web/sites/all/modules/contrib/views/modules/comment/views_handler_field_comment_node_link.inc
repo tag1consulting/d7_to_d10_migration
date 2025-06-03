@@ -76,7 +76,6 @@ class views_handler_field_comment_node_link extends views_handler_field_entity {
     //   drupal_alter('link', $links, $node);
     // Might this have unexpected consequences if these hooks expect items in
     // $node that we don't have?
-
     // Only render the links, if they are defined.
     return !empty($node->content['links']['comment']) ? drupal_render($node->content['links']['comment']) : '';
   }

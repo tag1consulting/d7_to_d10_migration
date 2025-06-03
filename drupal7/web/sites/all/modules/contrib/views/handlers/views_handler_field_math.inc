@@ -6,7 +6,7 @@
  */
 
 /**
- * Render a mathematical expression as a numeric value
+ * Render a mathematical expression as a numeric value.
  *
  * Definition terms:
  * - float: If true this field contains a decimal value. If unset this field
@@ -55,7 +55,7 @@ class views_handler_field_math extends views_handler_field_numeric {
     $tokens = array_map('floatval', $this->get_render_tokens(array()));
     $value = strtr($this->options['expression'], $tokens);
     $expressions = explode(';', $value);
-    $math = new ctools_math_expr;
+    $math = new ctools_math_expr();
     foreach ($expressions as $expression) {
       if ($expression !== '') {
         $value = $math->evaluate($expression);

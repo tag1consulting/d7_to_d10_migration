@@ -114,7 +114,6 @@ class ViewsGlossaryTestCase extends ViewsSqlTest {
     $arguments['title']['break_phrase'] = TRUE;
     $view->display_handler->set_option('arguments', $arguments);
     $this->executeView($view, array('d+p'));
-    $expected_result_count = $nodes_per_character['d'] + $nodes_per_character['p'];
     $result_count = isset($view->result) && is_array($view->result) ? count($view->result) : 0;
     $this->assertIdentical($result_count, 3, 'View has 3 results.');
     $nid = isset($view->result[0]->nid) ? $view->result[0]->nid : '0';

@@ -38,7 +38,6 @@ class views_plugin_access_perm extends views_plugin_access {
     return t($this->options['perm']);
   }
 
-
   /**
    * {@inheritdoc}
    */

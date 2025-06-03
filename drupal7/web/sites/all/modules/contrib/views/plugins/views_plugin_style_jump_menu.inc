@@ -173,12 +173,4 @@ class views_plugin_style_jump_menu extends views_plugin_style {
     return $form;
   }
 
-  /**
-   *
-   */
-  public function render_set($title, $records) {
-    $options = array();
-    $fields = $this->rendered_fields;
-  }
-
 }

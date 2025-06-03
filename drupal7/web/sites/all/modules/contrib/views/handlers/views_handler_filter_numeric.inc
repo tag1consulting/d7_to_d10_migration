@@ -6,7 +6,7 @@
  */
 
 /**
- * Simple filter to handle greater than/less than filters
+ * Simple filter to handle greater than/less than filters.
  *
  * @ingroup views_filter_handlers
  */
@@ -89,7 +89,7 @@ class views_handler_filter_numeric extends views_handler_filter {
       ),
     );
 
-    // if the definition allows for the empty operator, add it.
+    // If the definition allows for the empty operator, add it.
     if (!empty($this->definition['allow empty'])) {
       $operators += array(
         'empty' => array(
@@ -129,7 +129,7 @@ class views_handler_filter_numeric extends views_handler_filter {
   }
 
   /**
-   * Provide a list of all the numeric operators
+   * Provide a list of all the numeric operators.
    */
   public function operator_options($which = 'title') {
     $options = array();
@@ -155,7 +155,7 @@ class views_handler_filter_numeric extends views_handler_filter {
   }
 
   /**
-   * Provide a simple textfield for equality
+   * Provide a simple textfield for equality.
    */
   public function value_form(&$form, &$form_state) {
     $form['value']['#tree'] = TRUE;
@@ -178,14 +178,14 @@ class views_handler_filter_numeric extends views_handler_filter {
       $operator_values_with_2_values = $this->operator_values(2);
       if ($limit_operators) {
         // If limit operators is enabled, check that at least one operator
-        // with two values is enabled to display the min max widgets
+        // with two values is enabled to display the min max widgets.
         foreach ($operator_values_with_2_values as $operator) {
           if (isset($this->options['expose']['available_operators'][$operator])) {
             $use_minmax = TRUE;
             break;
           }
         }
-        // the same for operators with one value
+        // The same for operators with one value.
         foreach ($operator_values_with_1_values as $operator) {
           if (isset($this->options['expose']['available_operators'][$operator])) {
             $use_value = TRUE;
@@ -199,7 +199,7 @@ class views_handler_filter_numeric extends views_handler_filter {
       $identifier = $this->options['expose']['identifier'];
 
       if (empty($this->options['expose']['use_operator']) || empty($this->options['expose']['operator_id'])) {
-        // exposed and locked.
+        // Exposed and locked.
         $which = in_array($this->operator, $operator_values_with_2_values) ? 'minmax' : 'value';
       }
       else {
@@ -274,7 +274,7 @@ class views_handler_filter_numeric extends views_handler_filter {
         // Ensure there is something in the 'value'.
         $form['value'] = array(
           '#type' => 'value',
-          '#value' => NULL
+          '#value' => NULL,
         );
       }
     }
@@ -393,16 +393,16 @@ class views_handler_filter_numeric extends views_handler_filter {
     if (empty($this->options['expose']['required'])) {
       // We have to do some of our own checking for non-required filters.
       $info = $this->operators();
-      if (!empty($info[$this->operator]['values'])) {
+      if (!empty($info[$this->operator]['values']) && is_array($value)) {
         switch ($info[$this->operator]['values']) {
           case 1:
-            if ($value['value'] === '') {
+            if (array_key_exists('value', $value) && $value['value'] === '') {
               return FALSE;
             }
             break;
 
           case 2:
-            if ($value['min'] === '' && $value['max'] === '') {
+            if (array_key_exists('min', $value) && $value['min'] === '' && array_key_exists('max', $value) && $value['max'] === '') {
               return FALSE;
             }
             break;

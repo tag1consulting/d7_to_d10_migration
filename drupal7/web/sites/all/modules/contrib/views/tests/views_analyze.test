@@ -9,6 +9,10 @@
  * Tests the views analyze system.
  */
 class ViewsAnalyzeTest extends ViewsSqlTest {
+
+  /**
+   *
+   */
   public static function getInfo() {
     return array(
       'name' => 'Views Analyze',
@@ -28,14 +32,14 @@ class ViewsAnalyzeTest extends ViewsSqlTest {
     views_get_all_views(TRUE);
     menu_rebuild();
 
-    // Add an admin user will full rights;
+    // Add an admin user will full rights.
     $this->admin = $this->drupalCreateUser(array('administer views'));
   }
 
   /**
    * Tests that analyze works in general.
    */
-  function testAnalyzeBasic() {
+  public function testAnalyzeBasic() {
     $this->drupalLogin($this->admin);
     // Enable the frontpage view and click the analyse button.
     $view = views_get_view('frontpage');

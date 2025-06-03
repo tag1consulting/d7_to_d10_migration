@@ -11,6 +11,10 @@
  * @see CommonXssUnitTest
  */
 class ViewsHandlerTestXss extends ViewsSqlTest {
+
+  /**
+   *
+   */
   public static function getInfo() {
     return array(
       'name' => 'Field: Xss',
@@ -19,7 +23,10 @@ class ViewsHandlerTestXss extends ViewsSqlTest {
     );
   }
 
-  function dataHelper() {
+  /**
+   *
+   */
+  public function dataHelper() {
     $map = array(
       'John' => 'John',
       "Foo\xC0barbaz" => '',
@@ -29,13 +36,19 @@ class ViewsHandlerTestXss extends ViewsSqlTest {
     return $map;
   }
 
-  function viewsData() {
+  /**
+   *
+   */
+  public function viewsData() {
     $data = parent::viewsData();
     $data['views_test']['name']['field']['handler'] = 'views_handler_field_xss';
 
     return $data;
   }
 
+  /**
+   *
+   */
   public function testFieldXss() {
     $view = $this->getBasicView();
 

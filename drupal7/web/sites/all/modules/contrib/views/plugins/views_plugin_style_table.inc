@@ -14,12 +14,14 @@ class views_plugin_style_table extends views_plugin_style {
 
   /**
    * Contains the current active sort column.
+   *
    * @var string
    */
   public $active;
 
   /**
    * Contains the current active sort order, either desc or asc.
+   *
    * @var string
    */
   public $order;
@@ -45,7 +47,7 @@ class views_plugin_style_table extends views_plugin_style {
   }
 
   /**
-   * Determine if we should provide sorting based upon $_GET inputs
+   * Determine if we should provide sorting based upon $_GET inputs.
    *
    * @return bool
    */
@@ -64,11 +66,11 @@ class views_plugin_style_table extends views_plugin_style {
   }
 
   /**
-   * Add our actual sort criteria
+   * Add our actual sort criteria.
    */
   public function build_sort_post() {
     if (!isset($_GET['order'])) {
-      // check for a 'default' clicksort. If there isn't one, exit gracefully.
+      // Check for a 'default' clicksort. If there isn't one, exit gracefully.
       if (empty($this->options['default'])) {
         return;
       }
@@ -125,7 +127,7 @@ class views_plugin_style_table extends views_plugin_style {
    *   display has listed due to access control or other changes.
    *
    * @return array
-   *    An array of all the sanitized columns.
+   *   An array of all the sanitized columns.
    */
   public function sanitize_columns($columns, $fields = NULL) {
     $sanitized = array();
@@ -146,7 +148,7 @@ class views_plugin_style_table extends views_plugin_style {
       }
 
       // If the field is the column, mark it so, or the column
-      // it's set to is a column, that's ok
+      // it's set to is a column, that's ok.
       if ($field == $column || $columns[$column] == $column && !empty($sanitized[$column])) {
         $sanitized[$field] = $column;
       }
@@ -199,7 +201,7 @@ class views_plugin_style_table extends views_plugin_style {
       '#default_value' => $this->options['summary'],
       '#maxlength' => 255,
     );
-    
+
     $form['class'] = array(
       '#type' => 'textfield',
       '#title' => t('CSS classes'),
@@ -229,7 +231,7 @@ class views_plugin_style_table extends views_plugin_style {
 
     foreach ($columns as $field => $column) {
       $safe = str_replace(array('][', '_', ' '), '-', $field);
-      // the $id of the column for dependency checking.
+      // The $id of the column for dependency checking.
       $id = 'edit-style-options-columns-' . $safe;
 
       $form['columns'][$field] = array(
@@ -257,7 +259,7 @@ class views_plugin_style_table extends views_plugin_style {
           '#return_value' => $field,
           '#parents' => array('style_options', 'default'),
           '#id' => $radio_id,
-          // because 'radio' doesn't fully support '#id' =(
+          // Because 'radio' doesn't fully support '#id' =(.
           '#attributes' => array('id' => $radio_id),
           '#default_value' => $default,
           '#dependency' => array($id => array($field)),
@@ -271,7 +273,7 @@ class views_plugin_style_table extends views_plugin_style {
           'views-align-left' => t('Left'),
           'views-align-center' => t('Center'),
           'views-align-right' => t('Right'),
-          ),
+        ),
         '#dependency' => array($id => array($field)),
       );
       $form['info'][$field]['separator'] = array(
@@ -286,13 +288,13 @@ class views_plugin_style_table extends views_plugin_style {
         '#dependency' => array($id => array($field)),
       );
 
-      // markup for the field name
+      // Markup for the field name.
       $form['info'][$field]['name'] = array(
         '#markup' => $field_names[$field],
       );
     }
 
-    // Provide a radio for no default sort
+    // Provide a radio for no default sort.
     $form['default'][-1] = array(
       '#type' => 'radio',
       '#return_value' => -1,
@@ -319,4 +321,5 @@ class views_plugin_style_table extends views_plugin_style {
   public function even_empty() {
     return parent::even_empty() || !empty($this->options['empty_table']);
   }
+
 }

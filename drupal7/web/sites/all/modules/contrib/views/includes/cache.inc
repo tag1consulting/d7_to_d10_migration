@@ -56,7 +56,7 @@ function _views_fetch_data($table = NULL, $move = TRUE, $reset = FALSE) {
       if (isset($cache[$table]['moved to']) && $move) {
         $moved_table = $cache[$table]['moved to'];
         if (!empty($recursion_protection[$table])) {
-          // recursion detected!
+          // Recursion detected!
           return NULL;
         }
         $recursion_protection[$table] = TRUE;

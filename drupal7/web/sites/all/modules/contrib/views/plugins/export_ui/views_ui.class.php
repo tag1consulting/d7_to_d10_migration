@@ -16,7 +16,7 @@ class views_ui extends ctools_export_ui {
   /**
    *
    */
-  function init($plugin) {
+  public function init($plugin) {
     // We modify the plugin info here so that we take the defaults and twiddle,
     // rather than completely override them.
     // Reset the edit path to match what we're really using.
@@ -50,7 +50,7 @@ class views_ui extends ctools_export_ui {
   /**
    *
    */
-  function hook_menu(&$items) {
+  public function hook_menu(&$items) {
     // We are using our own 'edit' still, rather than having edit on this
     // object (maybe in the future) so unset the edit callbacks. Store this so
     // we can put them back as sometimes they're needed again laster.
@@ -70,14 +70,14 @@ class views_ui extends ctools_export_ui {
   /**
    *
    */
-  function load_item($item_name) {
+  public function load_item($item_name) {
     return views_ui_cache_load($item_name);
   }
 
   /**
    *
    */
-  function list_form(&$form, &$form_state) {
+  public function list_form(&$form, &$form_state) {
     $row_class = 'container-inline';
     if (!variable_get('views_ui_show_listing_filters', FALSE)) {
       $row_class .= " element-invisible";
@@ -139,7 +139,7 @@ class views_ui extends ctools_export_ui {
 
     $tags = array();
     if (isset($form_state['object']->items)) {
-      foreach ($form_state['object']->items as $name => $view) {
+      foreach ($form_state['object']->items as $view) {
         if (!empty($view->tag)) {
           $view_tags = drupal_explode_tags($view->tag);
           foreach ($view_tags as $tag) {
@@ -177,7 +177,7 @@ class views_ui extends ctools_export_ui {
   /**
    *
    */
-  function list_filter($form_state, $view) {
+  public function list_filter($form_state, $view) {
     // Don't filter by tags if all is set up.
     if ($form_state['values']['tag'] != 'all') {
       // If none is selected check whether the view has a tag.
@@ -207,7 +207,7 @@ class views_ui extends ctools_export_ui {
   /**
    *
    */
-  function list_sort_options() {
+  public function list_sort_options() {
     return array(
       'disabled' => t('Enabled, name'),
       'name' => t('Name'),
@@ -220,7 +220,7 @@ class views_ui extends ctools_export_ui {
   /**
    *
    */
-  function list_build_row($view, &$form_state, $operations) {
+  public function list_build_row($view, &$form_state, $operations) {
     if (!empty($view->human_name)) {
       $title = $view->human_name;
     }
@@ -311,7 +311,7 @@ class views_ui extends ctools_export_ui {
   /**
    *
    */
-  function list_render(&$form_state) {
+  public function list_render(&$form_state) {
     views_include('admin');
     views_ui_add_admin_css();
     if (empty($_REQUEST['js'])) {
@@ -322,8 +322,6 @@ class views_ui extends ctools_export_ui {
 
     $this->active = $form_state['values']['order'];
     $this->order = $form_state['values']['sort'];
-
-    $query = tablesort_get_query_parameters();
 
     $header = array(
       $this->tablesort_link(t('View name'), 'name', 'views-ui-name'),
@@ -345,7 +343,7 @@ class views_ui extends ctools_export_ui {
   /**
    *
    */
-  function tablesort_link($label, $field, $class) {
+  public function tablesort_link($label, $field, $class) {
     $title = t('sort by @s', array('@s' => $label));
     $initial = 'asc';
 
@@ -372,7 +370,7 @@ class views_ui extends ctools_export_ui {
   /**
    *
    */
-  function clone_page($js, $input, $item, $step = NULL) {
+  public function clone_page($js, $input, $item, $step = NULL) {
     $args = func_get_args();
 
     drupal_set_title($this->get_page_title('clone', $item));
@@ -410,7 +408,7 @@ class views_ui extends ctools_export_ui {
   /**
    *
    */
-  function add_template_page($js, $input, $name, $step = NULL) {
+  public function add_template_page($js, $input, $name, $step = NULL) {
     $templates = views_get_all_templates();
 
     if (empty($templates[$name])) {
@@ -436,7 +434,7 @@ class views_ui extends ctools_export_ui {
   /**
    *
    */
-  function set_item_state($state, $js, $input, $item) {
+  public function set_item_state($state, $js, $input, $item) {
     ctools_export_set_object_status($item, $state);
     menu_rebuild();
 
@@ -451,7 +449,7 @@ class views_ui extends ctools_export_ui {
   /**
    *
    */
-  function list_page($js, $input) {
+  public function list_page($js, $input) {
     // Remove filters values from session if filters are hidden.
     if (!variable_get('views_ui_show_listing_filters', FALSE) && isset($_SESSION['ctools_export_ui'][$this->plugin['name']])) {
       unset($_SESSION['ctools_export_ui'][$this->plugin['name']]);

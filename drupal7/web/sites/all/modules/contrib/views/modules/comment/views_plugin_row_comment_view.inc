@@ -59,7 +59,7 @@ class views_plugin_row_comment_view extends views_plugin_row {
       '#options' => $options,
       '#title' => t('View mode'),
       '#default_value' => $this->options['view_mode'],
-     );
+    );
 
     $form['links'] = array(
       '#type' => 'checkbox',
@@ -81,7 +81,7 @@ class views_plugin_row_comment_view extends views_plugin_row {
     }
     if (empty($options)) {
       $options = array(
-        'full' => t('Full content')
+        'full' => t('Full content'),
       );
     }
 

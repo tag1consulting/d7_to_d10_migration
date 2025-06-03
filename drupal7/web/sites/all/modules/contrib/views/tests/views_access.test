@@ -10,11 +10,15 @@
  */
 #[\AllowDynamicProperties]
 class ViewsAccessTest extends ViewsSqlTest {
+
+  /**
+   *
+   */
   public static function getInfo() {
     return array(
       'name' => 'Access',
       'description' => 'Tests pluggable access for views.',
-      'group' => 'Views Plugins'
+      'group' => 'Views Plugins',
     );
   }
 
@@ -35,9 +39,12 @@ class ViewsAccessTest extends ViewsSqlTest {
     views_fetch_plugin_data(NULL, NULL, TRUE);
   }
 
-  function viewsPlugins() {
+  /**
+   *
+   */
+  public function viewsPlugins() {
     $plugins = array(
-      'access' =>  array(
+      'access' => array(
         'test_static' => array(
           'title' => t('Static test access plugin'),
           'help' => t('Provides a static test access plugin.'),
@@ -59,7 +66,7 @@ class ViewsAccessTest extends ViewsSqlTest {
   /**
    * Tests none access plugin.
    */
-  function testAccessNone() {
+  public function testAccessNone() {
     $view = $this->view_access_none();
 
     $view->set_display('default');
@@ -72,11 +79,10 @@ class ViewsAccessTest extends ViewsSqlTest {
   /**
    * Tests perm access plugin.
    */
-  function testAccessPerm() {
+  public function testAccessPerm() {
     $view = $this->view_access_perm();
 
     $view->set_display('default');
-    $access_plugin = $view->display_handler->get_plugin('access');
 
     $this->assertTrue($view->display_handler->access($this->admin_user), t('Admin-Account should be able to access the view everytime'));
     $this->assertFalse($view->display_handler->access($this->web_user));
@@ -86,11 +92,10 @@ class ViewsAccessTest extends ViewsSqlTest {
   /**
    * Tests role access plugin.
    */
-  function testAccessRole() {
+  public function testAccessRole() {
     $view = $this->view_access_role();
 
     $view->set_display('default');
-    $access_plugin = $view->display_handler->get_plugin('access');
 
     $this->assertTrue($view->display_handler->access($this->admin_user), t('Admin-Account should be able to access the view everytime'));
     $this->assertFalse($view->display_handler->access($this->web_user));
@@ -104,7 +109,7 @@ class ViewsAccessTest extends ViewsSqlTest {
   /**
    * Tests static access check.
    */
-  function testStaticAccessPlugin() {
+  public function testStaticAccessPlugin() {
     $view = $this->view_access_static();
 
     $view->set_display('default');
@@ -117,13 +122,13 @@ class ViewsAccessTest extends ViewsSqlTest {
 
     // FALSE comes from hook_menu caching.
     $expected_hook_menu = array(
-      'views_test_test_static_access_callback', array(FALSE)
+      'views_test_test_static_access_callback', array(FALSE),
     );
     $hook_menu = $view->execute_hook_menu('page_1');
     $this->assertEqual($expected_hook_menu, $hook_menu['test_access_static']['access arguments'][0]);
 
     $expected_hook_menu = array(
-      'views_test_test_static_access_callback', array(TRUE)
+      'views_test_test_static_access_callback', array(TRUE),
     );
     $this->assertTrue(views_access($expected_hook_menu));
   }
@@ -131,7 +136,7 @@ class ViewsAccessTest extends ViewsSqlTest {
   /**
    * Tests dynamic access plugin.
    */
-  function testDynamicAccessPlugin() {
+  public function testDynamicAccessPlugin() {
     $view = $this->view_access_dynamic();
     $argument1 = $this->randomName();
     $argument2 = $this->randomName();
@@ -151,13 +156,13 @@ class ViewsAccessTest extends ViewsSqlTest {
 
     // FALSE comes from hook_menu caching.
     $expected_hook_menu = array(
-      'views_test_test_dynamic_access_callback', array(FALSE, 1, 2)
+      'views_test_test_dynamic_access_callback', array(FALSE, 1, 2),
     );
     $hook_menu = $view->execute_hook_menu('page_1');
     $this->assertEqual($expected_hook_menu, $hook_menu['test_access_dynamic']['access arguments'][0]);
 
     $expected_hook_menu = array(
-      'views_test_test_dynamic_access_callback', array(TRUE, 1, 2)
+      'views_test_test_dynamic_access_callback', array(TRUE, 1, 2),
     );
     $this->assertTrue(views_access($expected_hook_menu, $argument1, $argument2));
   }
@@ -182,8 +187,11 @@ class ViewsAccessTest extends ViewsSqlTest {
     $this->assertTrue(views_access(TRUE));
   }
 
-  function view_access_none() {
-    $view = new view;
+  /**
+   *
+   */
+  public function view_access_none() {
+    $view = new view();
     $view->name = 'test_access_none';
     $view->description = '';
     $view->tag = '';
@@ -205,8 +213,11 @@ class ViewsAccessTest extends ViewsSqlTest {
     return $view;
   }
 
-  function view_access_perm() {
-    $view = new view;
+  /**
+   *
+   */
+  public function view_access_perm() {
+    $view = new view();
     $view->name = 'test_access_perm';
     $view->description = '';
     $view->tag = '';
@@ -229,8 +240,11 @@ class ViewsAccessTest extends ViewsSqlTest {
     return $view;
   }
 
-  function view_access_role() {
-    $view = new view;
+  /**
+   *
+   */
+  public function view_access_role() {
+    $view = new view();
     $view->name = 'test_access_role';
     $view->description = '';
     $view->tag = '';
@@ -255,8 +269,11 @@ class ViewsAccessTest extends ViewsSqlTest {
     return $view;
   }
 
-  function view_access_dynamic() {
-    $view = new view;
+  /**
+   *
+   */
+  public function view_access_dynamic() {
+    $view = new view();
     $view->name = 'test_access_dynamic';
     $view->description = '';
     $view->tag = '';
@@ -281,8 +298,11 @@ class ViewsAccessTest extends ViewsSqlTest {
     return $view;
   }
 
-  function view_access_static() {
-    $view = new view;
+  /**
+   *
+   */
+  public function view_access_static() {
+    $view = new view();
     $view->name = 'test_access_static';
     $view->description = '';
     $view->tag = '';
