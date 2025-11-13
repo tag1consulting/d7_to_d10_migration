@@ -7,8 +7,3 @@ files[] = search.extender.inc
 files[] = search.test
 configure = admin/config/search/settings
 stylesheets[all][] = search.css
-
-; Information added by Drupal.org packaging script on 2024-12-04
-version = "7.103"
-project = "drupal"
-datestamp = "1733324608"
