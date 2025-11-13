@@ -13,6 +13,7 @@ Execute these commands to get a fully populated Drupal 7 site. It will be availa
 cd drupal7
 ddev start
 ddev import-db --file ../assets/drupal7_db.sql.gz
+ddev drush --yes updatedb
 ddev import-files --source ../assets/drupal7_files.tar.gz
 ddev restart
 ddev launch
